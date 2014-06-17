@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<openbox_menu xmlns="http://openbox.org/"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://openbox.org/
+                                  file:///usr/share/openbox/menu.xsd">
+
+    <menu id="root-menu" label="Openbox 3">
+        <!-- <item label="Terminal emulator"> -->
+        <!--     <action name="Execute"> -->
+        <!--         <execute>x-terminal-emulator</execute> -->
+        <!--     </action> -->
+        <!-- </item> -->
+        <!-- <item label="Web browser"> -->
+        <!--     <action name="Execute"> -->
+        <!--         <execute>x-www-browser</execute> -->
+        <!--     </action> -->
+        <!-- </item> -->
+        <!-- This requires the presence of the 'menu' package to work -->
+        <menu id="/Debian" />
+        <!-- This requires the presence of openbox-xdgmenu currently just in ubuntu repos -->
+        <!-- <menu id="app_list" label="Apps" execute="openbox-xdgmenu /etc/xdg/menus/lxde-applications.menu" /> -->
+        <menu id="client-list-menu" />
+        <separator />
+        <item label="Ro keymap">
+            <action name="Execute">
+                <execute>setxkbmap ro -variant std</execute>
+            </action>
+        </item>
+        <item label="Ro keymap prog">
+            <action name="Execute">
+                <execute>setxkbmap ro</execute>
+            </action>
+        </item>
+        <item label="En keymap">
+            <action name="Execute">
+                <execute>setxkbmap us</execute>
+            </action>
+        </item>
+        <separator/>
+        <menu id="scrot-menu" label="Scrot">
+            <item label="Scrot now">
+                <action name="Execute">
+                    <execute>
+                        scrot '%Y-%m-%d--%s_scrot.png'
+                    </execute>
+                </action>
+            </item>
+            <item label="or in 5 secs...">
+                <action name="Execute">
+                    <execute>
+                        scrot -d 5 '%Y-%m-%d--%s_scrot.png'
+                    </execute>
+                </action>
+            </item>
+            <item label="or in 10 secs...">
+                <action name="Execute">
+                    <execute>
+                        scrot -d 10 '%Y-%m-%d--%s_scrot.png'
+                    </execute>
+                </action>
+            </item>
+            <item label="or selected area...">
+                <action name="Execute">
+                    <execute>
+                        scrot -s '%Y-%m-%d--%s_scrot.png'
+                    </execute>
+                </action>
+            </item>
+        </menu>
+        <separator />
+        <item label="Reconfigure">
+            <action name="Reconfigure" />
+        </item>
+        <item label="Restart">
+            <action name="Restart" />
+        </item>
+        <item label="Lock screen">
+            <action name="Execute">
+                <execute>xscreensaver-command -lock</execute>
+            </action>
+        </item>
+        <separator />
+        <item label="Exit openbox">
+            <action name="Exit" />
+        </item>
+        <item label="Logout">
+            <action name="Execute">
+                <execute>lxsession-logout</execute>
+            </action>
+        </item>
+    </menu>
+
+</openbox_menu>
