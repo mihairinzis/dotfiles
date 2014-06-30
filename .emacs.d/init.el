@@ -5,11 +5,13 @@
 
 ;;; Code:
 
-(let ((default-directory "~/projects/dotfiles/.emacs.d/"))
-  (load-file (expand-file-name "configs/packages.el"))
-  (load-file (expand-file-name "configs/misc.el"))
-  (load-file (expand-file-name "configs/dired.el"))
-  (load-file (expand-file-name "configs/erc.el"))
-  )
+(defvar emacsd-dir (file-name-directory "~/projects/dotfiles/.emacs.d/" )
+  "Emacs.d directory path.")
+(defvar emacsd-configs-dir (expand-file-name "configs" emacsd-dir)
+  "Emacs.d configuration directory path.")
+
+(load-file (expand-file-name "packages.el" emacsd-configs-dir))
+(load-file (expand-file-name "misc.el" emacsd-configs-dir))
+(load-file (expand-file-name "dired.el" emacsd-configs-dir))
 
 ;;; init.el ends here
