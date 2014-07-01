@@ -1,0 +1,107 @@
+# add no-install-recommends option
+# remove comments?
+
+# x and openbox
+xorg openbox
+
+# file manager
+ranger atool poppler-utils highlight mediainfo caca-utils w3m
+# nautilus spacefm mc
+
+# archive
+rar unrar zip unzip p7zip-full p7zip-rar bzip2 arj lzma ntfs-3g 
+# file-roller unace
+
+# appearance
+conky-all lm-sensors unclutter arandr lxappearance
+# redshift libgl1-mesa-dri-experimental
+
+# term
+rxvt-unicode zsh-beta command-not-found 
+# fortune-mod fortunes cowsay
+
+# misc
+dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted laptop-mode-tools clipit 
+# pmount bleachbit nautilus-dropbox wine gcalctooal
+
+# browser
+# luakit conkeror iceweasel opera flashplugin-nonfree
+
+# im
+# pidgin pidgin-plugin-pack irssi xchat weechat
+
+# torrent
+# transmission-gtk rtorrent aria2
+
+# office
+libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au mythes-ro hyphen-ro hyphen-en-us libreoffice-gtk libreoffice-pdfimport 
+# pstoedit abiword gnumeric openclipart
+
+# latex
+# texlive-full texlive-lang-european latex-beamer
+
+# pdf
+# evince zathura
+
+# publishing
+# gucharmap pdfshuffler scribus
+
+# font
+fonts-inconsolata xfonts-terminus fonts-vlgothic ttf-liberation fonts-droid ttf-anonymous-pro
+
+# sound
+alsa-base alsa-utils
+
+# image viewer/wallpaper
+gpicview nitrogen scrot
+# sxiv eog eog-plugins feh shutter
+
+# image editor
+# inkscape gimp shotwell
+
+# network manager
+# wicd-curses pppoeconf
+# network-manager-gnome network-manager-pptp-gnome network-manager-vpnc-gnome network-manager-openvpn-gnome
+
+# printing
+cups cups-pdf system-config-printer printer-driver-hpijs
+
+# scanner
+# libsane simple-scan
+
+# ide/editor
+emacs geany
+# codeblocks eclipse netbeans qtcreator
+
+# compiler/lib
+build-essential ipython pyflakes ack-grep
+
+# version control
+git 
+# git-gui gitk git-cvs git-svn git-email mercurial subversion subversion-tools bzr bzrtools cvs
+
+# video player
+mplayer
+# vlc miro
+
+# music player
+moc
+# mpd nmpcpp clementine 
+
+# video editor
+# kdenlive cheese avidemux openshot
+
+# audio editor
+# soundconverter audacity oggconvert lmms kid3-qt picard easytag 
+
+# games
+# zaz nexuiz openarena frozen-bubble hedgewars armagetronad gnubg glest
+
+# redundant
+# brasero sox twolame vorbis-tools libcrystalhd3 lame faad gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-alsa gstreamer0.10-plugins-base gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly 
+
+
+
+
+
+
