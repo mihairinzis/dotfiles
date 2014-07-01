@@ -65,8 +65,10 @@
 ;; set font size 100 = 10pt (1/10)
 ;; set font for all windows
 ;; (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
-(set-face-font 'menu "DejaVu Sans Mono-10")
-(set-face-font 'default "DejaVu Sans Mono-10")
+(when (member "DejaVu Sans Mono-10" (font-family-list))
+  (set-face-font 'menu "DejaVu Sans Mono-10")
+  (set-face-font 'default "DejaVu Sans Mono-10")
+)
 ;; (set-face-attribute 'mode-line nil :height 60)
 ;; (set-face-attribute 'default nil :height 100)
 
