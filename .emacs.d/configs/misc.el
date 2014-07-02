@@ -41,7 +41,7 @@
  ((executable-find "aspell")
   (setq ispell-program-name "aspell")
   (setq ispell-extra-args
-  '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
+        '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
  ;; ((executable-find "hunspell")
  ;;  (setq ispell-program-name "hunspell")
  ;;  (setq ispell-extra-args '("-d en_US")))
@@ -65,10 +65,18 @@
 ;; set font size 100 = 10pt (1/10)
 ;; set font for all windows
 ;; (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
-(when (member "DejaVu Sans Mono-10" (font-family-list))
-  (set-face-font 'menu "DejaVu Sans Mono-10")
-  (set-face-font 'default "DejaVu Sans Mono-10")
-)
+(cond
+ ((find-font (font-spec :name "DejaVu Sans Mono"))
+  (set-frame-font "DejaVu Sans Mono-10"))
+ ((find-font (font-spec :name "inconsolata"))
+  (set-frame-font "inconsolata-10"))
+ ((find-font (font-spec :name "Consolas"))
+  (set-frame-font "Consolas-10"))
+ ((find-font (font-spec :name "Lucida Console"))
+  (set-frame-font "Lucida Console-10"))
+ ((find-font (font-spec :name "courier"))
+  (set-frame-font "courier-10")))
+
 ;; (set-face-attribute 'mode-line nil :height 60)
 ;; (set-face-attribute 'default nil :height 100)
 
@@ -216,19 +224,18 @@
 ;; set bookmarks files
 (defvar emacsd-bookmarks-dir (expand-file-name "bookmarks" emacsd-dir)
   "Emacs.d bookmarks directory path.")
-(setq-default
- ;; find-name-arg "-iname"
- ;; Set bookmarks path
- bookmark-default-file (expand-file-name "gnu-bookmarks.gpg"
-                                         emacsd-bookmarks-dir)
- bookmark-save-flag t)
+(setq-default bookmark-save-flag t
+              ;; find-name-arg "-iname"
+              ;; Set bookmarks path
+              bookmark-save-flag t)
 
 ;; platform specific settings
 (cond
  ((string-equal system-type "windows-nt")
   (progn
     (message "You're screwed")
-    ;; (setq exec-path (append exec-path '("C:/Program Files (x86)/Git/bin")))
+    (setq-default bookmark-default-file (expand-file-name "win-bookmarks.gpg"
+                                                          emacsd-bookmarks-dir))
     )
   )
  ((string-equal system-type "gnu/linux")
@@ -240,6 +247,9 @@
         (setq exec-path (split-string path-from-shell path-separator))))
     (when window-system (set-exec-path-from-shell-PATH))
 
+    ;; set bookmarks file
+    (setq-default bookmark-default-file (expand-file-name "gnu-bookmarks.gpg"
+                                                          emacsd-bookmarks-dir))
     ;; visual-regexp
     (require 'visual-regexp-steroids)
     (global-set-key (kbd "C-z r r") 'vr/replace)
@@ -286,16 +296,16 @@
 ;; (define-key global-map (kbd "M-x") 'helm-M-x)
 
 ;; (progn
-  ;; (require 'helm-config)
-  ;; (setq helm-candidate-number-limit 10)
-  ;; From https://gist.github.com/antifuchs/9238468
-  ;; (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
-  ;;       helm-input-idle-delay 0.01  ; this actually updates things
-  ;;                                       ; reeeelatively quickly.
-  ;;       helm-quick-update t
-  ;;       helm-M-x-requires-pattern nil
-  ;;       helm-ff-skip-boring-files t)
-  ;; (helm-mode))
+;; (require 'helm-config)
+;; (setq helm-candidate-number-limit 10)
+;; From https://gist.github.com/antifuchs/9238468
+;; (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
+;;       helm-input-idle-delay 0.01  ; this actually updates things
+;;                                       ; reeeelatively quickly.
+;;       helm-quick-update t
+;;       helm-M-x-requires-pattern nil
+;;       helm-ff-skip-boring-files t)
+;; (helm-mode))
 
 ;; undo-tree
 ;; (setq undo-tree-visualizer-timestamps t)
