@@ -224,16 +224,14 @@
 ;; set bookmarks files
 (defvar emacsd-bookmarks-dir (expand-file-name "bookmarks" emacsd-dir)
   "Emacs.d bookmarks directory path.")
-(setq-default bookmark-save-flag t
-              ;; find-name-arg "-iname"
-              ;; Set bookmarks path
-              bookmark-save-flag t)
+(setq-default bookmark-save-flag t)
 
 ;; platform specific settings
 (cond
  ((string-equal system-type "windows-nt")
   (progn
     (message "You're screwed")
+    ;; set bookmarks file
     (setq-default bookmark-default-file (expand-file-name "win-bookmarks.gpg"
                                                           emacsd-bookmarks-dir))
     )
