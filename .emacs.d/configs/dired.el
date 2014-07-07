@@ -43,8 +43,8 @@
 ;; (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 ;; remove dotfiles in dired-omit-mode
 (require 'dired-x)
-(setq-default dired-omit-mode t
-              dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
+;; (setq-default dired-omit-mode t
+;;               dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\.")
 ;; toggle omit mode C-o
 (define-key dired-mode-map (kbd "C-'") 'dired-omit-mode)
 ;; make dired-omit-mode default
