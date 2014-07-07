@@ -117,7 +117,7 @@
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; Set file registers
-(set-register ?m '(file . "~/"))
+(set-register ?m '(file . "~/projects/dotfiles/.emacs.d/configs/misc.el"))
 
 ;; nxml tab width
 (setq nxml-child-indent 2)
