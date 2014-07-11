@@ -20,6 +20,7 @@
 
 ;; default settings
 (setq-default
+ user-full-name "Mihai Rinzis"
  tab-width 2
  icomplete-mode t
  ;; Disable guru mode (comes with prelude)
