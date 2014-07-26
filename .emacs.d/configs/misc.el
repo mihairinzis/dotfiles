@@ -317,4 +317,5 @@
 ;; regex tool
 (setq-default regex-tool-backend 'perl)
 
+(setq initial-scratch-message nil)
 ;;; misc.el ends here
