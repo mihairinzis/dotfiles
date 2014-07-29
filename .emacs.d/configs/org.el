@@ -5,6 +5,10 @@
 
 ;;; Code:
 
+(setq org-directory "~/Dropbox/Privat/org")
+(setq org-agenda-files (list (concat org-directory "/tasks.org")))
+(setq org-default-notes-file (concat org-directory "/notes.org"))
+
 ;; display images
 (setq org-startup-with-inline-images (display-graphic-p))
 
