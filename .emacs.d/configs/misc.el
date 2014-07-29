@@ -53,34 +53,6 @@
 ;; move through camel case words
 (global-subword-mode 1)
 
-;; Turn off the scroll-bar
-(scroll-bar-mode -1)
-;; ;; Linum (line numbering)
-;; (require 'linum)
-;; (global-linum-mode)
-;; Push the mouse out of the way on cursor approach
-(mouse-avoidance-mode 'cat-and-mouse)
-;; Enable electric indent mode
-;; (electric-indent-mode +1)
-;; Set font for current winbdow
-;; set font size 100 = 10pt (1/10)
-;; set font for all windows
-;; (add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-10"))
-(cond
- ((find-font (font-spec :name "DejaVu Sans Mono"))
-  (set-frame-font "DejaVu Sans Mono-10"))
- ((find-font (font-spec :name "inconsolata"))
-  (set-frame-font "inconsolata-10"))
- ((find-font (font-spec :name "Consolas"))
-  (set-frame-font "Consolas-10"))
- ((find-font (font-spec :name "Lucida Console"))
-  (set-frame-font "Lucida Console-10"))
- ((find-font (font-spec :name "courier"))
-  (set-frame-font "courier-10")))
-
-;; (set-face-attribute 'mode-line nil :height 60)
-;; (set-face-attribute 'default nil :height 100)
-
 ;; Key bindings
 ;; Unset C-z suspend
 (global-unset-key "\C-z")
@@ -150,10 +122,6 @@
 (add-hook 'web-mode-hook  'web-mode-hook)
 
 ;; (require 'reftex)
-
-;; make shell colorful
-(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
 ;; icicles
 ;; (require 'icicles)
@@ -238,31 +206,6 @@
   )
  )
 
-;; modeline
-;; (progn
-;;   (setq-default
-;;    mode-line-format
-;;    '("%e"
-;;      mode-line-front-space
-;;      mode-line-mule-info
-;;      mode-line-client
-;;      mode-line-modified
-;;      mode-line-remote
-;;      mode-line-frame-identification
-;;      mode-line-buffer-identification
-;;      "   "
-;;      mode-line-position
-;;      (vc-mode vc-mode)
-;;      "  "
-;;      mode-line-modes
-;;      mode-line-misc-info
-;;      mode-line-end-spaces)))
-
-;; powerline
-(require 'powerline)
-(powerline-default-theme)
-
-
 ;; helm
 ;; (setq-default ido-mode nil)
 ;; (helm-mode 1)
@@ -293,4 +236,5 @@
 (setq-default regex-tool-backend 'perl)
 
 (setq initial-scratch-message nil)
+
 ;;; misc.el ends here
