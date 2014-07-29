@@ -134,31 +134,6 @@
 ;; (require 'zone)
 ;; (zone-when-idle 120)
 
-
-(require 'ibuffer)
-(setq ibuffer-saved-filter-groups
-      (quote (("default"
-               ("Dired" (mode . dired-mode))
-               ("Erc" (mode . erc-mode))
-               ("C++" (mode . cpp-mode))
-               ("Java" (mode . java-mode))
-               ("Org" (mode . org-mode))
-               ("SQL" (mode . sql-mode))
-               ("Xml" (mode . nxml-mode))
-               ("Python" (mode . elpy-mode))
-               ("Web" (mode . web-mode))
-               ("Web" (mode . html-mode))
-               ("Web" (mode . css-mode))
-               ))
-             ))
-
-(setq ibuffer-show-empty-filter-groups nil)
-
-(add-hook 'ibuffer-mode-hook
-          (lambda ()
-            (ibuffer-switch-to-saved-filter-groups "default")
-            )) ;; to show only dired and files buffers
-
 ;; yasnippet
 (yas-global-mode 1)
 ;; (yas/load-directory "~/.emacs.d/snippets")

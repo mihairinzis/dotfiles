@@ -35,6 +35,7 @@
    powerline
    visual-regexp
    visual-regexp-steroids
+   ibuffer-vc
    ))
 
 ;;; packages.el ends here
