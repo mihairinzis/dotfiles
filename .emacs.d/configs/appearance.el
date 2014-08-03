@@ -15,15 +15,15 @@
 
 (cond
  ((find-font (font-spec :name "DejaVu Sans Mono"))
-  (set-frame-font "DejaVu Sans Mono-9"))
+  (set-frame-font "DejaVu Sans Mono-10"))
  ((find-font (font-spec :name "inconsolata"))
-  (set-frame-font "inconsolata-9"))
+  (set-frame-font "inconsolata-10"))
  ((find-font (font-spec :name "Consolas"))
-  (set-frame-font "Consolas-9"))
+  (set-frame-font "Consolas-10"))
  ((find-font (font-spec :name "Lucida Console"))
-  (set-frame-font "Lucida Console-9"))
+  (set-frame-font "Lucida Console-10"))
  ((find-font (font-spec :name "courier"))
-  (set-frame-font "courier-9")))
+  (set-frame-font "courier-10")))
 
 ;; (set-face-attribute 'mode-line nil :height 60)
 ;; (set-face-attribute 'default nil :height 100)
