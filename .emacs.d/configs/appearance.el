@@ -15,7 +15,7 @@
 
 (cond
  ((find-font (font-spec :name "DejaVu Sans Mono"))
-  (set-frame-font "DejaVu Sans Mono-10"))
+  (set-frame-font "DejaVu Sans Mono-11"))
  ((find-font (font-spec :name "inconsolata"))
   (set-frame-font "inconsolata-10"))
  ((find-font (font-spec :name "Consolas"))
