@@ -64,7 +64,8 @@ URxvt*urlLauncher:                    google-chrome
 !---- Default color scheme is one from below ( currently zenburn )
 !URxvt*font:           xft:inconsolata-12
 !URxvt*font:          terminus-14
-URxvt*font:           xft:monospace-14
+!URxvt*font:           xft:monospace-15
+URxvt.font:           xft:Monospace:pixelsize=14
 URxvt*cursorColor:    #DCDCCC
 URxvt*.colorUL:       #ffffff
 URxvt*background:     #3f3f3f
@@ -135,9 +136,10 @@ solarized-dark*color7:                         #eee8d5
 solarized-dark*color15:                        #fdf6e3
 
 !---- Grey URxvt (Zenburn)
-zenburn*font:           xft:monospace-10
-! zenburn*font:           xft:inconsolata-12
+!zenburn*font:           xft:monospace-10
+!zenburn*font:           xft:inconsolata-12
 !zenburn*font:          terminus-14
+URxvt.font:             xft:Monospace:pixelsize=14
 zenburn*cursorColor:    #DCDCCC
 zenburn*.colorUL:       #ffffff
 zenburn*background:     #3f3f3f
