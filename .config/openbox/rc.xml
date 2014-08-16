@@ -58,7 +58,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     <animateIconify>yes</animateIconify>
     <font place="ActiveWindow">
       <name>DejaVu Sans Mono</name>
-      <size>10</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -67,7 +67,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     </font>
     <font place="InactiveWindow">
       <name>DejaVu Sans Mono</name>
-      <size>10</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -76,7 +76,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     </font>
     <font place="MenuHeader">
       <name>DejaVu Sans Mono</name>
-      <size>10</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
@@ -85,7 +85,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     </font>
     <font place="MenuItem">
       <name>DejaVu Sans Mono</name>
-      <size>10</size>
+      <size>11</size>
       <!-- font size in points -->
       <weight>Normal</weight>
       <!-- 'bold' or 'normal' -->
