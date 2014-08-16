@@ -36,7 +36,7 @@ double_buffer yes
 # Xft font to use.
 # Use Xft (anti-aliased font and stuff)
 use_xft yes
-xftfont sans:size=8
+xftfont sans:size=9
 # xftfont Open Sans Light:size=10
 
 # Update interval in seconds
