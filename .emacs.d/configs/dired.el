@@ -34,7 +34,6 @@
 (global-set-key (kbd "C-z o") 'open-external)
 
 (require 'dired+)
-;; ;; Dired
 ;; make sizes human-readable by default, sort version numbers
 ;; correctly, and put dotfiles and capital-letters first.
 ;; (setq-default dired-listing-switches "-aGghlv --group-directories-first --time-style=+ ")
