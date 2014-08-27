@@ -627,15 +627,6 @@ Copy the file to $HOME/.config/openbox/ instead. -->
           </startupnotify>
         </action>
       </keybind>
-      <keybind key="s">
-        <action name="Execute">
-          <command>spacefm</command>
-          <startupnotify>
-            <enabled>yes</enabled>
-            <name>File Manager</name>
-          </startupnotify>
-        </action>
-      </keybind>
     </keybind>
     <keybind key="W-w">
       <action name="Execute">
