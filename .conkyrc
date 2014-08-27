@@ -111,4 +111,3 @@ ${execpi 3600 sh ~/.config/scripts/conky/misc.sh 869897} | \
 #
 # Also show top consuming processes when there is not internet
 ${execpi 2 sh ~/.config/scripts/conky/top-processes.sh} \
-
