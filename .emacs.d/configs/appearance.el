@@ -13,6 +13,16 @@
 ;; Push the mouse out of the way on cursor approach
 (mouse-avoidance-mode 'cat-and-mouse)
 
+;; make cursor slimmer
+(setq-default cursor-type 'bar)
+;; blink instead of beeping
+(setq visible-bell t)
+;; show pics
+(setq auto-image-file-mode 1)
+;; auto switch doc page when scrolling
+(setq doc-view-continuous t)
+
+;; set font
 (cond
  ((find-font (font-spec :name "DejaVu Sans Mono"))
   (set-frame-font "DejaVu Sans Mono-11"))

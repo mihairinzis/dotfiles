@@ -18,6 +18,7 @@
 
 ;; curate this
 (setq org-hide-leading-stars t
+      ;; highlight src code
       org-src-fontify-natively t
       org-startup-indented t
       org-completion-use-iswitchb t

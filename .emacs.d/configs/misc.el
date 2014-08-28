@@ -31,10 +31,25 @@
  ;; auto-save-default nil
  ;; Enable hungry delete
  c-hungry-delete-key t
- ;; Allow pasting selection outside of Emacs
- x-select-enable-clipboard t
  auto-revert-verbose nil
  )
+
+;; merge kill ring with clipboard
+(setq
+ interprogram-cut-function 'x-select-text
+ interprogram-paste-function 'x-selection-value
+ save-interprogram-paste-before-kill t
+ select-active-regions t
+ x-select-enable-clipboard t
+ x-select-enable-primary t)
+
+;; utf everywhere
+(set-language-environment 'UTF-8)
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(setq default-buffer-file-coding-system 'utf-8-unix)
 
 ;; ispell
 ;; find aspell and hunspell automatically
