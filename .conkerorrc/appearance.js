@@ -1,3 +1,6 @@
+// set theme
+theme_load("conkeror-theme-zenburn");
+
 // default zoom level
 function my_zoom_set (buffer) {
     browser_zoom_set(buffer, false, 120);
