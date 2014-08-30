@@ -1,17 +1,12 @@
 ! font settings --------------------------------------------------------------
 
-Xft.hinting: true 
-Xft.hintstyle: hintfull 
-Xft.antialias: rgba 
+Xft.dpi: 96
+Xft.antialias: true
 Xft.rgba: rgb
-
-Xft.autohint: true
-! Xft.antialias: true
-! Xft.hinting: true
-! Xft.hintstyle: hintslight
-! Xft.dpi: 96
-! Xft.rgba: rgb
-! Xft.lcdfilter: lcddefault
+Xft.hinting: true
+Xft.hintstyle: hintfull
+Xft.autohint: 0
+Xft.lcdfilter: lcddefault
 
 ! xscreensaver ---------------------------------------------------------------
 
@@ -48,7 +43,7 @@ xscreensaver.passwd.thermometer.width:       8
 !---- URxvt - General settings
 !URxvt*font:                          xft:inconsolata-12
 ! URxvt*font:                          terminus-16
-URxvt*loginShell:                     false
+URxvt*loginShell:                     true
 URxvt*borderLess:                     true
 URxvt*cursorBlink:                    true
 URxvt*jumpScroll:                     true
@@ -66,26 +61,62 @@ URxvt*urlLauncher:                    google-chrome
 !URxvt*font:          terminus-14
 !URxvt*font:           xft:monospace-15
 URxvt.font:           xft:Monospace:pixelsize=14
-URxvt*cursorColor:    #DCDCCC
-URxvt*.colorUL:       #ffffff
-URxvt*background:     #3f3f3f
-URxvt*foreground:     #dcdccc
-URxvt*color0:         #1E2320
-URxvt*color1:         #705050
-URxvt*color2:         #60b48a
-URxvt*color3:         #dfaf8f
-URxvt*color4:         #506070
-URxvt*color5:         #dc8cc3
-URxvt*color6:         #8cd0d3
-URxvt*color7:         #dcdccc
-URxvt*color8:         #709080
-URxvt*color9:         #dca3a3
-URxvt*color10:        #c3bf9f
-URxvt*color11:        #f0dfaf
-URxvt*color12:        #94bff3
-URxvt*color13:        #ec93d3
-URxvt*color14:        #93e0e3
-URxvt*color15:        #ffffff
+
+URxvt*background: #3F3F3F
+URxvt*foreground: #DCDCCC
+URxvt*cursorColor: #DCDCCC
+URxvt*cursorColor2: #3F3F3F
+URxvt*colorUL: #8CD0D3
+URxvt*underlineColor: #F0DFAF
+URxvt*colorBD: #E0CF9F
+URxvt*colorIT: #656555
+
+!! black dark/light
+URxvt*color0: #3F3F3F
+URxvt*color8: #5F5F5F
+!! red dark/light
+URxvt*color1: #BC8383
+URxvt*color9: #CC9393
+!! green dark/light
+URxvt*color2: #5F7F5F
+URxvt*color10: #7F9F7F
+!! yellow dark/light
+URxvt*color3: #E0CF9F
+URxvt*color11: #F0DFAF
+!! blue dark/light
+URxvt*color4: #7CB8BB
+URxvt*color12: #8CD0D3
+!! magenta dark/light
+URxvt*color5: #DC8CC3
+URxvt*color13: #DC8CC3
+!! cyan dark/light
+URxvt*color6: #93E0E3
+URxvt*color14: #93E0E3
+!! white dark/light
+URxvt*color7: #DCDCCC
+URxvt*color15: #FFFFFF
+
+! URxvt*cursorColor:    #DCDCCC
+! URxvt*.colorUL:       #ffffff
+! URxvt*background:     #3f3f3f
+! URxvt*foreground:     #dcdccc
+! URxvt*color0:         #1E2320
+! URxvt*color1:         #705050
+! URxvt*color2:         #60b48a
+! URxvt*color3:         #dfaf8f
+! URxvt*color4:         #506070
+! URxvt*color5:         #dc8cc3
+! URxvt*color6:         #8cd0d3
+! URxvt*color7:         #dcdccc
+! URxvt*color8:         #709080
+! URxvt*color9:         #dca3a3
+! URxvt*color10:        #c3bf9f
+! URxvt*color11:        #f0dfaf
+! URxvt*color12:        #94bff3
+! URxvt*color13:        #ec93d3
+! URxvt*color14:        #93e0e3
+! URxvt*color15:        #ffffff
+
 
 !---- Light URxvt (Solarized Light)
 solarized-light*font:                   xft:inconsolata-12
