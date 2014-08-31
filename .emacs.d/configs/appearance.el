@@ -14,7 +14,7 @@
 (mouse-avoidance-mode 'cat-and-mouse)
 
 ;; make cursor slimmer
-(setq-default cursor-type 'bar)
+;; (setq-default cursor-type 'bar)
 ;; blink instead of beeping
 (setq visible-bell t)
 ;; show pics
