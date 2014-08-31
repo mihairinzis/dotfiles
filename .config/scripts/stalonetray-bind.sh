@@ -4,5 +4,6 @@ if [ "$(pidof stalonetray)" ]
 then
     killall stalonetray
 else
-    stalonetray --background '#3f3f3f' --icon-size 18 --transparent --sticky &
+    stalonetray
+    # stalonetray --background '#3f3f3f' --icon-size 18 --transparent --sticky &
 fi
