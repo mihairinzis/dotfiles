@@ -1,0 +1,3 @@
+[submodule ".themes/Numix"]
+	path = .themes/Numix
+	url = https://github.com/shimmerproject/Numix
