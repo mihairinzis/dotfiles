@@ -81,6 +81,11 @@
       </action>
     </item>
     <separator />
+    <item label="Suspend">
+      <action name="Execute">
+        <execute>systemctl suspend</execute>
+      </action>
+    </item>
     <item label="Exit openbox">
       <action name="Exit" />
     </item>
