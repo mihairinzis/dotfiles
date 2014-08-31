@@ -574,7 +574,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     <!-- Keybindings for running applications -->
     <keybind key="W-p">
       <action name="Execute">
-        <command>sh ~/.config/scripts/dmenu-bind.sh</command>
+        <command>sh ~/.config/scripts/dmenu-run.sh</command>
         <startupnotify>
           <enabled>yes</enabled>
           <name>dmenu</name>
