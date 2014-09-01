@@ -244,8 +244,11 @@
 (setq undo-tree-visualizer-diff t)
 
 ;; anzu stuff
-(global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
-(global-set-key [remap query-replace] 'anzu-query-replace)
+;; (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
+;; (global-set-key [remap query-replace] 'anzu-query-replace)
+
+;; replace find bookmarks with helm bookmarks
+(global-set-key [remap bookmark-jump] 'helm-bookmarks)
 
 ;; regex tool
 (setq-default regex-tool-backend 'perl)
