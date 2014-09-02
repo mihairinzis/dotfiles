@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Credits go to moljac024 (https://github.com/moljac024)
-# I added zenburn2 and below option
+# I added zenburn2, below option and terminu font
 
 #-------------------------\
 # Dmenu run launcher, by moljac024
@@ -62,5 +62,5 @@ dmenu_run -i -b -p "Run:" \
     -nf $NORMAL_FOREGROUND \
     -sb $SELECTED_BACKGROUND \
     -sf $SELECTED_FOREGROUND \
-    -fn '-*-*-*-r-*-*-18-*-*-*-*-*-*-*'
-# -fn '-xos4-terminus-medium-r-*-*-18-*'
+    -fn '-xos4-terminus-medium-r-*-*-18-*'
+# -fn '-*-*-*-r-*-*-18-*-*-*-*-*-*-*'
