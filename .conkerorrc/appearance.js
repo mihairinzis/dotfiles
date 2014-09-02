@@ -1,4 +1,10 @@
+// fonts
+session_pref("font.minimum-size.x-western", 18);
+session_pref("font.name.serif.x-western", "DejaVU Sans Mono");
+
 // set theme
+theme_load_paths.unshift("~/.themes/");
+theme_unload("default");
 theme_load("conkeror-theme-zenburn");
 
 // default zoom level
