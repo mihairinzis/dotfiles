@@ -34,6 +34,7 @@
                                 (mode . web-mode)
                                 (mode . lisp-mode)
                                 (mode . js2-mode)
+                                (mode . js-mode)
                                 (mode . c++-mode)
                                 (mode . lua-mode)
                                 (mode . cmake-mode)

@@ -16,6 +16,6 @@
 (load-file (expand-file-name "ibuffer.el" emacsd-configs-dir))
 (load-file (expand-file-name "appearance.el" emacsd-configs-dir))
 (load-file (expand-file-name "org.el" emacsd-configs-dir))
-
+(load-file (expand-file-name "erc.el" emacsd-configs-dir))
 
 ;;; init.el ends here
