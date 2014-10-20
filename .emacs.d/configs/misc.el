@@ -187,14 +187,6 @@
 
 ;; platform specific settings
 (cond
- ((string-equal system-type "windows-nt")
-  (progn
-    (message "You're screwed")
-    ;; set bookmarks file
-    (setq-default bookmark-default-file (expand-file-name "win-bookmarks.gpg"
-                                                          emacsd-bookmarks-dir))
-    )
-  )
  ((string-equal system-type "gnu/linux")
   (progn
     ;; set path from shell
@@ -219,7 +211,21 @@
     ;; (global-set-key (kbd "C-s") 'vr/isearch-forward)
     )
   )
+ ((string-equal system-type "windows-nt")
+  (progn
+    (message "You're screwed")
+    ;; set bookmarks file
+    (setq-default bookmark-default-file (expand-file-name "win-bookmarks.gpg"
+                                                          emacsd-bookmarks-dir))
+    (setenv "PATH"
+            (concat
+             "~/apps/cygwin/bin" path-separator
+             (getenv "PATH"))
+            )
+    (setq projectile-indexing-method 'alien)
+    ))
  )
+
 
 ;; helm
 ;; (setq-default ido-mode nil)
