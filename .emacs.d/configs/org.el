@@ -21,7 +21,7 @@
       ;; highlight src code
       org-src-fontify-natively t
       org-startup-indented t
-      org-completion-use-iswitchb t
+      org-completion-use-ido t
       org-log-done t
       org-email-link-description-format "Email %c (%d): %s"
       org-agenda-include-diary t
