@@ -7,4 +7,7 @@ rsync --exclude ".git/" \
     --exclude ".emacs.d" \
     --exclude "packages" \
     --exclude "README.md"  \
-    -avh --no-perms . ~;
+    --compress --archive --hard-links \
+    --verbose --progress --human-readable \
+    --no-perms --one-file-system \
+    . ~;
