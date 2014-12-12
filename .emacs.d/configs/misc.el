@@ -233,6 +233,7 @@
 ;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
 ;; (define-key global-map (kbd "M-x") 'helm-M-x)
 (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
+(define-key global-map (kbd "C-x C-f") 'ido-find-file)
 
 ;; (progn
 ;; (require 'helm-config)
