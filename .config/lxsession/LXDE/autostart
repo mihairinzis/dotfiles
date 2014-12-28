@@ -3,7 +3,7 @@
 #@pcmanfm --desktop --profile lubuntu
 #@/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 #@compton -c -r 16 -l -24 -t -12 -G -b
-@xscreensaver -no-splash
+# @xscreensaver -no-splash
 # make caps lock an aditional control
 @/usr/bin/setxkbmap -option caps:ctrl_modifier
 # make menu an aditional super
