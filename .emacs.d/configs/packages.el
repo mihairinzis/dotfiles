@@ -36,6 +36,8 @@
    visual-regexp
    visual-regexp-steroids
    ibuffer-vc
+   quickrun
+   auto-compile
    ))
 
 ;;; packages.el ends here
