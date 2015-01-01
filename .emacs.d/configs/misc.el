@@ -25,13 +25,10 @@
  icomplete-mode t
  ;; Disable guru mode (comes with prelude)
  prelude-guru nil
- ;; Disable backup
- ;; backup-inhibited t
- ;; Disable auto-save
- ;; auto-save-default nil
  ;; Enable hungry delete
  c-hungry-delete-key t
  auto-revert-verbose nil
+ sentence-end-double-space nil
  )
 
 ;; merge kill ring with clipboard
@@ -229,12 +226,9 @@
     ))
  )
 
-
-;; helm
-;; (setq-default ido-mode nil)
-;; (helm-mode 1)
-;; (define-key global-map (kbd "C-x C-f") 'helm-find-files)
-;; (define-key global-map (kbd "M-x") 'helm-M-x)
+;; try helm-swoop
+(define-key global-map (kbd "C-S-s") 'helm-swoop)
+;; use ido for finding files and switching buffers
 (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
 (define-key global-map (kbd "C-x C-f") 'ido-find-file)
 
