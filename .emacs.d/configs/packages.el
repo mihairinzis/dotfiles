@@ -14,30 +14,33 @@
 
 ;; Packages to install
 ;; (package-initialize)
-(mapc
- (lambda (package)
-   (or (package-installed-p package)
-       (if (y-or-n-p (format "Package %s is missing.  Install it? " package))
-           (package-install package))))
- '(
-   multiple-cursors
-   yasnippet
-   ;; icicles
-   ;; auto-complete
-   ;; company ; added to prelude
-   ;; switch-window
-   elpy
-   regex-tool
-   dired+
-   js2-mode
-   emmet-mode
-   ;; smart-mode-line
-   powerline
-   visual-regexp
-   visual-regexp-steroids
-   ibuffer-vc
-   quickrun
-   auto-compile
-   ))
+(defvar my-packages
+  '(
+    multiple-cursors
+    yasnippet
+    ;; icicles
+    ;; auto-complete
+    ;; company ; added to prelude
+    ;; switch-window
+    elpy
+    regex-tool
+    dired+
+    js2-mode
+    emmet-mode
+    ;; smart-mode-line
+    powerline
+    visual-regexp
+    visual-regexp-steroids
+    ibuffer-vc
+    quickrun
+    auto-compile
+    jabber
+    helm-swoop
+    )
+  "A list of packages to ensure are installed at launch.")
+
+(dolist (p my-packages)
+  (when (not (package-installed-p p))
+    (package-install p)))
 
 ;;; packages.el ends here
