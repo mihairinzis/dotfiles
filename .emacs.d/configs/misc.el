@@ -111,11 +111,14 @@
 (setq nxml-child-indent 2)
 (setq nxml-attribute-indent 2)
 
-;; Set backup/auto-save di1rectory
-;; (setq backup-directory-alist
-;;       `((".*" . ,"~/temp/emacs-bak")))
-;; (setq auto-save-file-name-transforms
-;; `((".*" ,"~/temp/emacs-bak" t)))
+;; Setup backup/auto-save
+(setq backup-directory-alist
+      `((".*" . ,"~/temp/emacs-bak")))
+(setq auto-save-file-name-transforms
+      `((".*" ,"~/temp/emacs-bak" t)))
+(setq delete-old-versions -1)
+(setq version-control t)
+(setq vc-make-backup-files t)
 
 ;; enable zone after a minute
 ;; (require 'zone)
