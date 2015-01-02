@@ -261,9 +261,31 @@
 
 (setq initial-scratch-message nil)
 
-;; auto-cmpile
-(require 'auto-compile)
-(auto-compile-on-load-mode 1)
-(auto-compile-on-save-mode 1)
+;; jabber - gtalk
+;; (defun start-gtalk()
+;;   (interactive)
+;;   (load-library "~/secrets/jabber.el.gpg")
+;;   (setq jabber-account-list
+;;         '(('gmail-jabber-user
+;;            (:network-server . "talk.google.com")
+;;            (:connection-type . ssl)
+;;            (:port . 443)
+;;            (:password . 'gmail-jabber-password))))
+;;   (jabber-connect gmail-jabber-user)
+;;   )
+
+;; (setq jabber-account-list
+;;       '(("user.com"
+;;          (:network-server . "talk.google.com")
+;;          (:connection-type . ssl)
+;;          (:password . gmail-jabber-password))))
+
+;; Roster Options
+(setq jabber-vcard-avatars-retrieve nil)
+(setq jabber-roster-show-title nil)
+(setq jabber-roster-show-bindings nil)
+(setq jabber-show-offline-contacts nil)
+(setq jabber-show-resources nil)
+(setq jabber-sort-order nil)
 
 ;;; misc.el ends here

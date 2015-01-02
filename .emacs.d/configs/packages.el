@@ -33,7 +33,6 @@
     visual-regexp-steroids
     ibuffer-vc
     quickrun
-    auto-compile
     jabber
     helm-swoop
     )
