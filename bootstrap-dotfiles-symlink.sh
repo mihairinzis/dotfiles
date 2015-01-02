@@ -1,11 +1,9 @@
 #!/bin/bash
 
-ignore=('..' '.' '.git' '.config' '.emacs.d')
+ignore=('..' '.' '.git' '.config' '.emacs.d' '.gnupg')
+home_dirs=('.config' '.gnupg')
 
 function symfile {
-    if [[ ${ignore[*]} =~ $file ]]; then
-        continue
-    fi
     if [ -d "$LINK" ]; then
         rm -rf "$LINK"
     fi
@@ -13,13 +11,22 @@ function symfile {
 }
 
 for file in .*; do
+    if [[ ${ignore[*]} =~ $file ]]; then
+        continue
+    fi
     ACTUAL="$(pwd)/$file"
     LINK="$HOME/$file"
     symfile $ACTUAL $LINK
 done
 
-for file in .config/*; do
-    ACTUAL="$(pwd)/$file"
-    LINK="$HOME/$file"
-    symfile $ACTUAL $LINK
+
+for dir in "${home_dirs[@]}"; do
+    if [ ! -d "$HOME/$dir" ]; then
+        mkdir -v "$HOME/$dir"
+    fi
+    for file in $dir/*; do
+        ACTUAL="$(pwd)/$file"
+        LINK="$HOME/$file"
+        symfile $ACTUAL $LINK
+    done
 done
