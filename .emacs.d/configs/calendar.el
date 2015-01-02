@@ -31,6 +31,20 @@
 (setq calendar-date-style 'european
       calendar-mark-holidays-flag t
       calendar-week-start-day 1
-      calendar-mark-diary-entries-flag nil)
+      calendar-mark-diary-entries-flag nil
+      calendar-day-name-array
+      ["luni" "marți" "miercuri" "joi"
+       "vineri" "sâmbătă" "duminică"]
+      calendar-month-name-array
+      ["ianuarie" "februarie" "martie" "aprilie" "mai"
+       "iunie" "iulie" "august" "septembrie"
+       "octombie" "noiembrie" "decembrie"])
+
+(setq diary-file "~/.diary.gpg"
+      view-diary-entries-initially t
+      mark-diary-entries-in-calendar t
+      number-of-diary-entries 7)
+(add-hook 'diary-display-hook 'fancy-diary-display)
+(add-hook 'today-visible-calendar-hook 'calendar-mark-today)
 
 ;;; calendar.el ends here
