@@ -39,6 +39,7 @@
  select-active-regions t
  x-select-enable-clipboard t
  x-select-enable-primary t)
+ ;; initial-major-mode 'org-mode)
 
 ;; utf everywhere
 (set-language-environment 'UTF-8)
