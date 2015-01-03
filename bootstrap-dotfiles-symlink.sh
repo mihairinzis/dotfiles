@@ -4,6 +4,8 @@ ignore=('..' '.' '.git' '.config' '.emacs.d' '.gnupg')
 home_dirs=('.config' '.gnupg')
 
 function symfile {
+    ACTUAL="$(pwd)/$file"
+    LINK="$HOME/$file"
     if [ -d "$LINK" ]; then
         rm -rf "$LINK"
     fi
@@ -14,9 +16,7 @@ for file in .*; do
     if [[ ${ignore[*]} =~ $file ]]; then
         continue
     fi
-    ACTUAL="$(pwd)/$file"
-    LINK="$HOME/$file"
-    symfile $ACTUAL $LINK
+    symfile $file
 done
 
 
@@ -25,8 +25,6 @@ for dir in "${home_dirs[@]}"; do
         mkdir -v "$HOME/$dir"
     fi
     for file in $dir/*; do
-        ACTUAL="$(pwd)/$file"
-        LINK="$HOME/$file"
-        symfile $ACTUAL $LINK
+        symfile $file
     done
 done
