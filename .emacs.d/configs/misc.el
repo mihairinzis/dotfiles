@@ -51,15 +51,15 @@
 
 ;; ispell
 ;; find aspell and hunspell automatically
-(cond
- ((executable-find "aspell")
-  (setq ispell-program-name "aspell")
-  (setq ispell-extra-args
-        '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
+;; (cond
+;;  ((executable-find "aspell")
+;;   (setq ispell-program-name "aspell")
+;;   (setq ispell-extra-args
+;;         '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
  ;; ((executable-find "hunspell")
  ;;  (setq ispell-program-name "hunspell")
  ;;  (setq ispell-extra-args '("-d en_US")))
- )
+ ;;)
 (setq-default ispell-list-command "list")
 ;; (setq-default ispell-dictionary "romanian")
 
