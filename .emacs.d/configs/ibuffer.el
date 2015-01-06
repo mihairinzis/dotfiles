@@ -67,6 +67,10 @@
                     ("emacs" (or
                               (name . "^\\*scratch\\*$")
                               (name . "^\\*Messages\\*$")))
+                    ("jabber" (or
+                               (mode . jabber-chat-mode)
+                               (mode . jabber-roster-mode)
+                               ))
                     ("gnus" (or
                              (mode . message-mode)
                              (mode . bbdb-mode)
