@@ -67,6 +67,10 @@
                     ("emacs" (or
                               (name . "^\\*scratch\\*$")
                               (name . "^\\*Messages\\*$")))
+                    ("jabber" (or
+                               (mode . jabber-chat-mode)
+                               (mode . jabber-roster-mode)
+                               ))
                     ("gnus" (or
                              (mode . message-mode)
                              (mode . bbdb-mode)
@@ -84,19 +88,6 @@
                                     ))
      ))
 
-
-;; Modify the default ibuffer-formats
-(setq ibuffer-formats
-      '((mark modified read-only vc-status-mini " "
-              (name 18 18 :left :elide)
-              " "
-              (size-h 9 -1 :right)
-              " "
-              (mode 16 16 :left :elide)
-              " "
-              (vc-status 16 16 :left)
-              " "
-              filename-and-process)))
 
 (setq ibuffer-filter-group-name-face 'font-lock-doc-face)
 

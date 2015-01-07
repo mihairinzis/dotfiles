@@ -43,23 +43,23 @@
 
 ;; utf everywhere
 (set-language-environment 'UTF-8)
-(setq locale-coding-system 'utf-8)
+(setq locale-coding-system 'utf-8
+      buffer-file-coding-system 'utf-8-unix)
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-(setq buffer-file-coding-system 'utf-8-unix)
 
 ;; ispell
 ;; find aspell and hunspell automatically
-(cond
- ((executable-find "aspell")
-  (setq ispell-program-name "aspell")
-  (setq ispell-extra-args
-        '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
+;; (cond
+;;  ((executable-find "aspell")
+;;   (setq ispell-program-name "aspell")
+;;   (setq ispell-extra-args
+;;         '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
  ;; ((executable-find "hunspell")
  ;;  (setq ispell-program-name "hunspell")
  ;;  (setq ispell-extra-args '("-d en_US")))
- )
+ ;;)
 (setq-default ispell-list-command "list")
 ;; (setq-default ispell-dictionary "romanian")
 
