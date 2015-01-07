@@ -23,6 +23,7 @@
 
 (setq calendar-holidays
       (append romanian-holidays
+              holiday-solar-holidays
               ;; holiday-general-holidays
               ;; holiday-other-holidays
               ;; holiday-local-holidays
@@ -43,7 +44,8 @@
 (setq diary-file "~/.diary.gpg"
       view-diary-entries-initially t
       mark-diary-entries-in-calendar t
-      number-of-diary-entries 7)
+      number-of-diary-entries 28
+      diary-date-forms diary-european-date-forms)
 (add-hook 'diary-display-hook 'fancy-diary-display)
 (add-hook 'today-visible-calendar-hook 'calendar-mark-today)
 
