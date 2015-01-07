@@ -47,7 +47,7 @@
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8-unix)
+(setq buffer-file-coding-system 'utf-8-unix)
 
 ;; ispell
 ;; find aspell and hunspell automatically
@@ -233,18 +233,6 @@
 (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
 (define-key global-map (kbd "C-x C-f") 'ido-find-file)
 
-;; (progn
-;; (require 'helm-config)
-;; (setq helm-candidate-number-limit 10)
-;; From https://gist.github.com/antifuchs/9238468
-;; (setq helm-idle-delay 0.0 ; update fast sources immediately (doesn't).
-;;       helm-input-idle-delay 0.01  ; this actually updates things
-;;                                       ; reeeelatively quickly.
-;;       helm-quick-update t
-;;       helm-M-x-requires-pattern nil
-;;       helm-ff-skip-boring-files t)
-;; (helm-mode))
-
 ;; undo-tree
 ;; (setq undo-tree-visualizer-timestamps t)
 (setq undo-tree-visualizer-diff t)
@@ -261,25 +249,6 @@
 
 (setq initial-scratch-message nil)
 
-;; jabber - gtalk
-;; (defun start-gtalk()
-;;   (interactive)
-;;   (load-library "~/secrets/jabber.el.gpg")
-;;   (setq jabber-account-list
-;;         '(('gmail-jabber-user
-;;            (:network-server . "talk.google.com")
-;;            (:connection-type . ssl)
-;;            (:port . 443)
-;;            (:password . 'gmail-jabber-password))))
-;;   (jabber-connect gmail-jabber-user)
-;;   )
-
-;; (setq jabber-account-list
-;;       '(("user.com"
-;;          (:network-server . "talk.google.com")
-;;          (:connection-type . ssl)
-;;          (:password . gmail-jabber-password))))
-
 ;; Roster Options
 (setq jabber-vcard-avatars-retrieve nil)
 (setq jabber-roster-show-title nil)
@@ -287,5 +256,6 @@
 (setq jabber-show-offline-contacts nil)
 (setq jabber-show-resources nil)
 (setq jabber-sort-order nil)
+;; (add-hook 'jabber-alert-message-hooks 'jabber-message-xmessage)
 
 ;;; misc.el ends here
