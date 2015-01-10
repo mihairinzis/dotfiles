@@ -1,0 +1,8 @@
+[user]
+	name = Mihai Rinzis
+[credential]
+	helper = cache --timeout=3600
+[core]
+	editor = emacs
+[merge]
+	tool = emerge
