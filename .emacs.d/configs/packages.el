@@ -29,8 +29,6 @@
     emmet-mode
     ;; smart-mode-line
     powerline
-    visual-regexp
-    visual-regexp-steroids
     ibuffer-vc
     quickrun
     jabber

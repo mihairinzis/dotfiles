@@ -200,16 +200,6 @@
     ;; set bookmarks file
     (setq-default bookmark-default-file (expand-file-name "gnu-bookmarks.gpg"
                                                           emacsd-bookmarks-dir))
-    ;; visual-regexp
-    (require 'visual-regexp-steroids)
-    (global-set-key (kbd "C-z r r") 'vr/replace)
-    (global-set-key (kbd "C-z r q") 'vr/query-replace)
-    ;; if you use multiple-cursors, this is for you:
-    (global-set-key (kbd "C-z r m") 'vr/mc-mark)
-    ;; to use visual-regexp-steroids's isearch instead of the built-in
-    ;; regexp isearch, also include the following lines:
-    ;; (global-set-key (kbd "C-r") 'vr/isearch-backward)
-    ;; (global-set-key (kbd "C-s") 'vr/isearch-forward)
     )
   )
  ((string-equal system-type "windows-nt")
