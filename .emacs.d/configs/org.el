@@ -1,9 +1,9 @@
-;; ;;; org.el --- Org-mode config
+;;; org.el --- Org-mode config
 
-;; ;;; Commentary:
-;; ;;;
+;;; Commentary:
+;;;
 
-;; ;;; Code:
+;;; Code:
 
 (setq org-directory "~/Dropbox/Privat/org")
 (setq org-agenda-files (list (concat org-directory "/tasks.org")))
@@ -39,4 +39,4 @@
       (quote ((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d!/!)")
               (sequence "WAITING(w@/!)" "SOMEDAY(S)" "|" "CANCELLED(c@/!)"))))
 
-;; ;;; org.el ends here
+;;; org.el ends here
