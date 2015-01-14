@@ -90,9 +90,12 @@
   )
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-line-or-region)
 
-;; Use control-arrow keys for window resizing
-(global-set-key (kbd "<M-right>") 'enlarge-window-horizontally)
-(global-set-key (kbd "<M-left>") 'shrink-window-horizontally)
+;; Window resizing
+(global-set-key (kbd "C->") 'enlarge-window-horizontally)
+(global-set-key (kbd "C-<") 'shrink-window-horizontally)
+(global-set-key (kbd "C-.") 'enlarge-window)
+(global-set-key (kbd "C-,") 'shrink-window)
+
 
 ;; recompile with f5
 ;; (global-set-key (kbd "<f5>") 'recompile)
