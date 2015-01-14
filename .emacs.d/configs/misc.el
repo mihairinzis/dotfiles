@@ -193,13 +193,6 @@
 (cond
  ((string-equal system-type "gnu/linux")
   (progn
-    ;; set path from shell
-    (defun set-exec-path-from-shell-PATH ()
-      (let ((path-from-shell (shell-command-to-string "$SHELL -c 'echo $PATH'")))
-        (setenv "PATH" path-from-shell)
-        (setq exec-path (split-string path-from-shell path-separator))))
-    (when window-system (set-exec-path-from-shell-PATH))
-
     ;; set bookmarks file
     (setq-default bookmark-default-file (expand-file-name "gnu-bookmarks.gpg"
                                                           emacsd-bookmarks-dir))
@@ -211,11 +204,6 @@
     ;; set bookmarks file
     (setq-default bookmark-default-file (expand-file-name "win-bookmarks.gpg"
                                                           emacsd-bookmarks-dir))
-    (setenv "PATH"
-            (concat
-             "~/apps/cygwin/bin" path-separator
-             (getenv "PATH"))
-            )
     (setq projectile-indexing-method 'alien)
     ))
  )
@@ -225,6 +213,7 @@
 ;; use ido for finding files and switching buffers
 (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
 (define-key global-map (kbd "C-x C-f") 'ido-find-file)
+
 
 ;; undo-tree
 ;; (setq undo-tree-visualizer-timestamps t)
