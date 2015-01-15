@@ -1,2 +1,24 @@
 softvol=yes
+# softvol=true
 softvol-max=1000
+
+# Find subtitle files. (1: load all subs containing movie name)
+sub-fuzziness=1
+
+# Set font encoding.
+subfont-encoding=unicode
+
+# outline/blur range: 0-8
+subfont-outline=6
+subfont-blur=4
+
+# proporcional a 1:altura 2:ancho 3:diagonal
+subfont-autoscale=3
+subfont-osd-scale=0.6
+subfont-text-scale=3
+
+# mouse for dvd menus
+mouse-movements=1
+
+# rebuild index if not found (fixes incomplete files)
+idx=true
