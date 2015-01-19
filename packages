@@ -6,14 +6,14 @@ xorg openbox
 
 # file manager
 ranger atool poppler-utils highlight mediainfo caca-utils w3m
-# nautilus spacefm mc
+# nautilus seahorse-nautilus spacefm mc
 
 # archive
 rar unrar zip unzip p7zip-full p7zip-rar bzip2 arj lzma ntfs-3g 
 # file-roller unace
 
 # appearance
-conky lm-sensors unclutter arandr lxappearance gtk2-engines-murrine
+conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine
 # redshift libgl1-mesa-dri-experimental
 
 # term
