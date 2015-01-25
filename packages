@@ -18,11 +18,11 @@ conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine
 
 # term
 rxvt-unicode zsh-beta command-not-found 
-# fortune-mod fortunes cowsay
 
 # misc
-dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted laptop-mode-tools clipit 
-# pmount bleachbit nautilus-dropbox wine gcalctooal
+dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted laptop-mode-tools clipit fortune-mod fortunes
+
+# pmount bleachbit nautilus-dropbox wine gcalctool
 
 # browser
 # luakit conkeror iceweasel opera flashplugin-nonfree
