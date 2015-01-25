@@ -240,4 +240,8 @@
 (setq jabber-sort-order nil)
 ;; (add-hook 'jabber-alert-message-hooks 'jabber-message-xmessage)
 
+;; proced
+(setq proced-tree-flag t)
+(setq proced-auto-update-flag t)
+
 ;;; misc.el ends here
