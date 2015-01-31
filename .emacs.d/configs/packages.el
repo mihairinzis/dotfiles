@@ -33,6 +33,7 @@
     quickrun
     jabber
     helm-swoop
+    wgrep
     )
   "A list of packages to ensure are installed at launch.")
 
