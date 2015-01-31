@@ -244,4 +244,9 @@
 (setq proced-tree-flag t)
 (setq proced-auto-update-flag t)
 
+(define-key dired-mode-map "a"
+  (lambda ()
+    (interactive)
+    (find-alternate-file "..")))
+
 ;;; misc.el ends here
