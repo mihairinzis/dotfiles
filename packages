@@ -47,7 +47,7 @@ libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au
 # gucharmap pdfshuffler scribus
 
 # font
-fonts-inconsolata xfonts-terminus fonts-vlgothic ttf-liberation fonts-droid ttf-anonymous-pro fonts-comfortaa
+fonts-inconsolata xfonts-terminus fonts-vlgothic ttf-liberation fonts-droid ttf-anonymous-pro fonts-comfortaa ttf-ancient-fonts
 
 # sound
 alsa-base alsa-utils
