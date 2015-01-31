@@ -64,4 +64,9 @@
                  (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
                  (match-string 1))))))
 
+(define-key dired-mode-map "a"
+  (lambda ()
+    (interactive)
+    (find-alternate-file "..")))
+
 ;;; dired.el ends here

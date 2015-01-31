@@ -104,6 +104,7 @@
 (setq ediff-diff-options "-w")
 (setq ediff-split-window-function 'split-window-horizontally)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(add-hook 'ediff-after-quit-hook-internal 'winner-undo)
 
 ;; Set file registers
 (set-register ?m '(file . "~/projects/dotfiles/.emacs.d/configs/misc.el"))
@@ -243,10 +244,5 @@
 ;; proced
 (setq proced-tree-flag t)
 (setq proced-auto-update-flag t)
-
-(define-key dired-mode-map "a"
-  (lambda ()
-    (interactive)
-    (find-alternate-file "..")))
 
 ;;; misc.el ends here
