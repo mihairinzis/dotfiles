@@ -74,7 +74,7 @@ emacs24 geany
 # codeblocks eclipse netbeans qtcreator
 
 # compiler/lib
-build-essential ipython pyflakes
+build-essential ipython ipython3 pyflakes
 
 # version control
 git 
