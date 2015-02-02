@@ -245,7 +245,4 @@
 (setq proced-tree-flag t)
 (setq proced-auto-update-flag t)
 
-;; sr-speedbar
-(sr-speedbar-toggle)
-
 ;;; misc.el ends here
