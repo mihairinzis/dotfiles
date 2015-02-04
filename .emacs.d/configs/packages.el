@@ -34,6 +34,7 @@
     jabber
     helm-swoop
     wgrep
+    hydra
     )
   "A list of packages to ensure are installed at launch.")
 

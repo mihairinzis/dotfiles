@@ -28,8 +28,7 @@
  ;; Enable hungry delete
  c-hungry-delete-key t
  auto-revert-verbose nil
- sentence-end-double-space nil
- )
+ sentence-end-double-space nil)
 
 ;; merge kill ring with clipboard
 (setq
@@ -39,7 +38,7 @@
  select-active-regions t
  x-select-enable-clipboard t
  x-select-enable-primary t)
- ;; initial-major-mode 'org-mode)
+;; initial-major-mode 'org-mode)
 
 ;; utf everywhere
 (set-language-environment 'UTF-8)
@@ -56,10 +55,10 @@
 ;;   (setq ispell-program-name "aspell")
 ;;   (setq ispell-extra-args
 ;;         '("--sug-mode=ultra" "--lang=en_US" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
- ;; ((executable-find "hunspell")
- ;;  (setq ispell-program-name "hunspell")
- ;;  (setq ispell-extra-args '("-d en_US")))
- ;;)
+;; ((executable-find "hunspell")
+;;  (setq ispell-program-name "hunspell")
+;;  (setq ispell-extra-args '("-d en_US")))
+;;)
 (setq-default ispell-list-command "list")
 ;; (setq-default ispell-dictionary "romanian")
 
@@ -89,13 +88,6 @@
     )
   )
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-line-or-region)
-
-;; Window resizing
-(global-set-key (kbd "C->") 'enlarge-window-horizontally)
-(global-set-key (kbd "C-<") 'shrink-window-horizontally)
-(global-set-key (kbd "C-.") 'enlarge-window)
-(global-set-key (kbd "C-,") 'shrink-window)
-
 
 ;; recompile with f5
 ;; (global-set-key (kbd "<f5>") 'recompile)
@@ -244,5 +236,22 @@
 ;; proced
 (setq proced-tree-flag t)
 (setq proced-auto-update-flag t)
+
+;; hydras
+(key-chord-define-global
+ "zz"
+ (defhydra hydra-zoom ()
+   "zoom"
+   ("=" text-scale-increase "in")
+   ("-" text-scale-decrease "out")))
+
+(key-chord-define-global
+ "rr"
+ (defhydra hydra-window-resize ()
+   "resizer"
+   ("l" enlarge-window-horizontally "horiz-enlarge")
+   ("h" shrink-window-horizontally "horiz-shrink")
+   ("k" enlarge-window "vert-enlarge")
+   ("j" shrink-window "vert-shrink")))
 
 ;;; misc.el ends here
