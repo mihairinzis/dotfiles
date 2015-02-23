@@ -35,6 +35,7 @@
     helm-swoop
     wgrep
     hydra
+    golden-ratio
     )
   "A list of packages to ensure are installed at launch.")
 

@@ -48,4 +48,7 @@
 (require 'powerline)
 (powerline-default-theme)
 
+;; golden-ratio
+(golden-ratio-mode t)
+
 ;;; appearance.el ends here
