@@ -176,6 +176,7 @@ lines"
 
 ;; yasnippet
 (use-package yasnippet
+  :ensure t
   :init
   (yas-global-mode 1)
   (define-key yas-minor-mode-map (kbd "C-c C-s") 'yas-insert-snippet))
@@ -270,6 +271,7 @@ lines"
           helm-move-to-line-cycle-in-source nil)
     ;; try helm-swoop
     (use-package helm-swoop
+      :ensure t
       :init
       (global-set-key (kbd "M-i") 'helm-swoop)
       )
@@ -305,7 +307,7 @@ lines"
          ("M-%" . vr/query-replace)))
 
 (use-package linum-relative
-  :ensure t
+  ;; :ensure t
   :init
   (setq linum-format 'linum-relative)
   :config
@@ -337,6 +339,7 @@ lines"
 
 ;; guide-key
 (use-package guide-key
+  :ensure t
   :init
   (setq guide-key/guide-key-sequence t
         guide-key/recursive-key-sequence-flag t
@@ -348,25 +351,21 @@ lines"
   )
 
 ;; winner
-(use-package winner-mode
-  :config
-
-  (setq winner-boring-buffers '("*helm mini*"
-                                "*helm projectile*"
-                                "*helm M-x*"
-                                "*helm resume*"
-                                "*Completions*"
-                                "*Compile-Log*"
-                                "*inferior-lisp*"
-                                "*Fuzzy Completions*"
-                                "*Apropos*"
-                                "*Help*"
-                                "*cvs*"
-                                "*Buffer List*"
-                                "*Ibuffer*"
-                                "*esh command on file*"
-                                ))
-  )
+(setq winner-boring-buffers '("*helm mini*"
+                              "*helm projectile*"
+                              "*helm M-x*"
+                              "*helm resume*"
+                              "*Completions*"
+                              "*Compile-Log*"
+                              "*inferior-lisp*"
+                              "*Fuzzy Completions*"
+                              "*Apropos*"
+                              "*Help*"
+                              "*cvs*"
+                              "*Buffer List*"
+                              "*Ibuffer*"
+                              "*esh command on file*"
+                              ))
 
 ;; aggressive-indent-mode
 (use-package aggressive-indent
@@ -406,7 +405,14 @@ lines"
    ("-" text-scale-decrease "out")))
 
 (use-package vlf
+  :ensure t
   :defer t)
+
+(use-package sunshine
+  :ensure t
+  :config
+  (setq sunshine-location "Cluj-Napoca,RO"
+        sunshine-show-icons t))
 
 
 ;; (key-chord-define-global

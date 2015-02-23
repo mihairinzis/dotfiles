@@ -46,6 +46,7 @@
 
 ;; make identifier colorful
 (use-package color-identifiers-mode
+  :ensure t
   :config
   (progn
     (add-hook 'after-init-hook 'global-color-identifiers-mode)))
