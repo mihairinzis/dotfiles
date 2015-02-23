@@ -30,14 +30,23 @@
  auto-revert-verbose nil
  sentence-end-double-space nil)
 
-;; merge kill ring with clipboard
+(use-package async
+  :ensure t)
+
+(use-package paradox
+  :ensure t
+  :config
+  (setq paradox-execute-asynchronously t))
+
 (setq
  interprogram-cut-function 'x-select-text
  interprogram-paste-function 'x-selection-value
  save-interprogram-paste-before-kill t
  select-active-regions t
  x-select-enable-clipboard t
- x-select-enable-primary t)
+ x-select-enable-primary t
+ initial-scratch-message nil
+ apropos-do-all t)
 ;; initial-major-mode 'org-mode)
 
 ;; utf everywhere
@@ -68,14 +77,61 @@
 ;; Key bindings
 ;; Unset C-z suspend
 (global-unset-key "\C-z")
+(bind-keys ("C-s" . isearch-forward-regexp)
+           ("C-r" . isearch-backward-regexp)
+           ("C-M-s" . isearch-forward)
+           ("C-M-r" . isearch-backward))
+
+;; q kills
+(bind-keys :map dired-mode-map
+           ("q" . kill-this-buffer))
+
+(bind-keys :map package-menu-mode-map
+           ("q" . kill-this-buffer))
+
+(defun kill-and-join-forward (&optional arg)
+  "If at end of line, join with following; otherwise kill line.
+Deletes whitespace at join. With prefix ARG kills that many
+lines"
+  (interactive "P")
+  (if (and (eolp) (not (bolp)))
+      (delete-indentation t)
+    (kill-line arg)))
+
+(global-set-key (kbd "C-k") 'kill-and-join-forward)
+
+
+(use-package wgrep
+  :ensure t)
+
+(use-package god-mode
+  :ensure t
+  :init
+  (defun update-cursor ()
+    (setq cursor-type (if (or god-local-mode buffer-read-only)
+                          'bar
+                        'box)))
+  (add-hook 'god-mode-enabled-hook 'update-cursor)
+  (add-hook 'god-mode-disabled-hook 'update-cursor)
+  :config
+  ;; (bind-keys :map launcher-map
+  ;;            ("g" . god-local-mode))
+  (bind-keys :map god-local-mode-map
+             ("z" . repeat)
+             ("." . repeat)
+             ("i" . god-local-mode))
+  (add-to-list 'god-exempt-major-modes 'org-agenda-mode))
 
 ;; Multiple cursors
-(require 'multiple-cursors)
-(global-set-key (kbd "C-c m l") 'mc/edit-lines)
-(global-set-key (kbd "C-c m n") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-c m p") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c m a") 'mc/mark-all-like-this)
-(global-set-key (kbd "C-S-<mouse-1>") 'mc/add-cursor-on-click)
+(use-package multiple-cursors
+  :ensure t
+  :bind
+  (("C-c m n" . mc/mark-next-like-this)
+   ("C-c m p" . mc/mark-previous-like-this)
+   ("C-c m a" . mc/mark-all-like-this)
+   ("C-c m l" . mc/edit-lines)
+   ("C-S-<mouse-1>" . mc/add-cursor-on-click)
+   ))
 ;; (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
 ;; Comment or uncomment region or line
@@ -93,9 +149,9 @@
 ;; (global-set-key (kbd "<f5>") 'recompile)
 
 ;; A saner ediff
-(setq ediff-diff-options "-w")
-(setq ediff-split-window-function 'split-window-horizontally)
-(setq ediff-window-setup-function 'ediff-setup-windows-plain)
+(setq ediff-diff-options "-w"
+      ediff-split-window-function 'split-window-horizontally
+      ediff-window-setup-function 'ediff-setup-windows-plain)
 (add-hook 'ediff-after-quit-hook-internal 'winner-undo)
 
 ;; Set file registers
@@ -119,9 +175,12 @@
 ;; (zone-when-idle 120)
 
 ;; yasnippet
-(yas-global-mode 1)
+(use-package yasnippet
+  :init
+  (yas-global-mode 1)
+  (define-key yas-minor-mode-map (kbd "C-c C-s") 'yas-insert-snippet))
 ;; (yas/load-directory "~/.emacs.d/snippets")
-(define-key yas-minor-mode-map (kbd "C-c C-s") 'yas-insert-snippet)
+
 
 ;; web-mode
 (defun web-mode-hook ()
@@ -202,19 +261,33 @@
  )
 
 ;; helm
-(setq helm-split-window-in-side-p nil
-      helm-always-two-windows t)
+(use-package helm
+  :ensure t
+  :init
+  (progn
+    (setq helm-split-window-in-side-p nil
+          helm-always-two-windows t
+          helm-move-to-line-cycle-in-source nil)
+    ;; try helm-swoop
+    (use-package helm-swoop
+      :init
+      (global-set-key (kbd "M-i") 'helm-swoop)
+      )
+    ;; replace find bookmarks with helm bookmarks
+    (global-set-key [remap bookmark-jump] 'helm-bookmarks)
+    (global-set-key [remap prelude-goto-symbol] 'helm-semantic-or-imenu)
+    ))
 
-;; try helm-swoop
-(define-key global-map (kbd "C-S-s") 'helm-swoop)
-
-;; replace find bookmarks with helm bookmarks
-(global-set-key [remap bookmark-jump] 'helm-bookmarks)
-
+(use-package eww-lnum
+  :ensure t
+  :init
+  (eval-after-load "eww"
+    '(progn (define-key eww-mode-map "f" 'eww-lnum-follow)
+            (define-key eww-mode-map "F" 'eww-lnum-universal))))
 
 ;; use ido for finding files and switching buffers
-(define-key global-map (kbd "C-x b") 'ido-switch-buffer)
-;; (define-key global-map (kbd "C-x C-f") 'ido-find-file)
+;; (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
+(define-key global-map (kbd "C-x C-f") 'ido-find-file)
 
 ;; undo-tree
 ;; (setq undo-tree-visualizer-timestamps t)
@@ -224,26 +297,105 @@
 ;; (global-set-key [remap query-replace-regexp] 'anzu-query-replace-regexp)
 ;; (global-set-key [remap query-replace] 'anzu-query-replace)
 
-;; replace find bookmarks with helm bookmarks
-(global-set-key [remap bookmark-jump] 'helm-bookmarks)
-
 ;; regex tool
 (setq-default regex-tool-backend 'perl)
+(use-package visual-regexp
+  :ensure t
+  :bind (("M-5" . vr/replace)
+         ("M-%" . vr/query-replace)))
 
-(setq initial-scratch-message nil)
+(use-package linum-relative
+  :ensure t
+  :init
+  (setq linum-format 'linum-relative)
+  :config
+  (setq linum-relative-current-symbol ""))
 
 ;; Roster Options
-(setq jabber-vcard-avatars-retrieve nil)
-(setq jabber-roster-show-title nil)
-(setq jabber-roster-show-bindings nil)
-(setq jabber-show-offline-contacts nil)
-(setq jabber-show-resources nil)
-(setq jabber-sort-order nil)
+(use-package jabber
+  :ensure t
+  :init
+  (setq  jabber-vcard-avatars-retrieve nil
+         jabber-roster-show-title nil
+         jabber-roster-show-bindings nil
+         jabber-show-offline-contacts nil
+         jabber-show-resources nil
+         jabber-sort-order nil))
+
+(use-package twittering-mode
+  :disabled t
+  :ensure t
+  :config
+  (setq twittering-use-master-password t
+        twittering-icon-mode t
+        twittering-use-icon-storage t))
 ;; (add-hook 'jabber-alert-message-hooks 'jabber-message-xmessage)
 
 ;; proced
 (setq proced-tree-flag t)
 (setq proced-auto-update-flag t)
+
+;; guide-key
+(use-package guide-key
+  :init
+  (setq guide-key/guide-key-sequence t
+        guide-key/recursive-key-sequence-flag t
+        guide-key/popup-window-position 'left)
+  (guide-key-mode 1)
+  (use-package guide-key-tip
+    :init
+    (guide-key-tip/toggle-enable))
+  )
+
+;; winner
+(use-package winner-mode
+  :config
+
+  (setq winner-boring-buffers '("*helm mini*"
+                                "*helm projectile*"
+                                "*helm M-x*"
+                                "*helm resume*"
+                                "*Completions*"
+                                "*Compile-Log*"
+                                "*inferior-lisp*"
+                                "*Fuzzy Completions*"
+                                "*Apropos*"
+                                "*Help*"
+                                "*cvs*"
+                                "*Buffer List*"
+                                "*Ibuffer*"
+                                "*esh command on file*"
+                                ))
+  )
+
+;; aggressive-indent-mode
+(use-package aggressive-indent
+  :ensure t
+  :diminish aggressive-indent-mode
+  :init
+  (global-aggressive-indent-mode 1)
+  (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
+
+(use-package number
+  :ensure t
+  :bind
+  (("C-c C-+" . number/add)
+   ("C-c C--" . number/sub)
+   ("C-c C-*" . number/multiply)
+   ("C-c C-/" . number/divide)))
+
+(use-package ag
+  :ensure t
+  :init
+  (use-package wgrep
+    :ensure t)
+  (use-package wgrep-ag
+    :ensure t)
+  :config
+  (bind-keys :map ag-mode-map
+             ("q" . kill-this-buffer))
+  (setq ag-highlight-search t))
+
 
 ;; hydras
 (key-chord-define-global
@@ -253,13 +405,72 @@
    ("=" text-scale-increase "in")
    ("-" text-scale-decrease "out")))
 
-(key-chord-define-global
- "rr"
- (defhydra hydra-window-resize ()
-   "resizer"
-   ("l" enlarge-window-horizontally "horiz-enlarge")
-   ("h" shrink-window-horizontally "horiz-shrink")
-   ("k" enlarge-window "vert-enlarge")
-   ("j" shrink-window "vert-shrink")))
+(use-package vlf
+  :defer t)
+
+
+;; (key-chord-define-global
+;;  "rr"
+;;  (defhydra hydra-window-resize ()
+;;    "resizer"
+;;    ("l" enlarge-window-horizontally "horiz-enlarge")
+;;    ("h" shrink-window-horizontally "horiz-shrink")
+;;    ("k" enlarge-window "vert-enlarge")
+;;    ("j" shrink-window "vert-shrink")))
+
+;; (require 'hydra-examples)
+;; (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
+;; (defhydra hydra-ibuffer-menu (:color pink)
+;;   "
+;;   Mark               Unmark             Actions            Search
+;; -------------------------------------------------------------------------
+;; _m_: mark          _u_: unmark        _x_: execute       _R_: re-isearch
+;; _s_: save          _U_: unmark up     _b_: bury          _I_: isearch
+;; _d_: delete                           _g_: refresh       _O_: multi-occur
+;; _D_: delete up                        _T_: files only: %`Buffer-menu-files-only
+;; _~_: modified
+;; "
+;;   ("m" ibuffer-mark-forward nil)
+;;   ("u" Buffer-menu-unmark nil)
+;;   ("U" Buffer-menu-backup-unmark nil)
+;;   ("d" Buffer-menu-delete nil)
+;;   ("D" Buffer-menu-delete-backwards nil)
+;;   ("s" Buffer-menu-save nil)
+;;   ("~" Buffer-menu-not-modified nil)
+;;   ("x" Buffer-menu-execute nil)
+;;   ("b" Buffer-menu-bury nil)
+;;   ("g" revert-buffer nil)
+;;   ("T" Buffer-menu-toggle-files-only nil)
+;;   ("O" Buffer-menu-multi-occur nil :color blue)
+;;   ("I" Buffer-menu-isearch-buffers nil :color blue)
+;;   ("R" Buffer-menu-isearch-buffers-regexp nil :color blue)
+;;   ("c" nil "cancel")
+;;   ("v" Buffer-menu-select "select" :color blue)
+;;   ("o" Buffer-menu-other-window "other-window" :color blue)
+;;   ("q" quit-window "quit" :color blue))
+
+;; (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
+
+;; (defun hydra-god/pre ()
+;;   (set-cursor-color "#e52b50"))
+
+;; (defun hydra-god/post ()
+;;   (set-cursor-color "#ffffff"))
+
+;; (global-set-key
+;;  (kbd "C-c v")
+;;  (defhydra hydra-god (:pre hydra-god/pre :post hydra-fod/post)
+;;    "god"
+;;    ("f" forward-char)
+;;    ("b" backward-char)
+;;    ("n" next-line)
+;;    ("p" previous-line)
+;;    ("m" set-mark-command "mark")
+;;    ("a" move-beginning-of-line "beg")
+;;    ("e" move-end-of-line "end")
+;;    ("w" delete-region "del" :color blue)
+;;    ("y" kill-ring-save "yank" :color blue)
+;;    ("q" nil "quit")))
+
 
 ;;; misc.el ends here

@@ -16,8 +16,6 @@
 ;; (package-initialize)
 (defvar my-packages
   '(
-    multiple-cursors
-    yasnippet
     ;; icicles
     ;; auto-complete
     ;; company ; added to prelude
@@ -28,19 +26,19 @@
     js2-mode
     emmet-mode
     ;; smart-mode-line
-    powerline
     ibuffer-vc
     quickrun
-    jabber
-    helm-swoop
-    wgrep
     hydra
-    golden-ratio
     )
   "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
   (when (not (package-installed-p p))
     (package-install p)))
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
 
 ;;; packages.el ends here

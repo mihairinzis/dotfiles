@@ -18,5 +18,6 @@
 (load-file (expand-file-name "org.el" emacsd-configs-dir))
 (load-file (expand-file-name "erc.el" emacsd-configs-dir))
 (load-file (expand-file-name "calendar.el" emacsd-configs-dir))
+;; (load-file (expand-file-name "semantic.el" emacsd-configs-dir))
 
 ;;; init.el ends here

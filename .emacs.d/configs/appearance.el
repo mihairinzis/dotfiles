@@ -44,11 +44,28 @@
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
+;; make identifier colorful
+(use-package color-identifiers-mode
+  :config
+  (progn
+    (add-hook 'after-init-hook 'global-color-identifiers-mode)))
+
 ;; powerline
-(require 'powerline)
-(powerline-default-theme)
+(use-package powerline
+  :init
+  (powerline-default-theme))
 
 ;; golden-ratio
-(golden-ratio-mode t)
+(use-package golden-ratio
+  :ensure t
+  :diminish golden-ratio-mode
+  :init
+  (golden-ratio-mode 1)
+  (setq golden-ratio-exclude-modes '("ediff-mode"
+                                     "calendar-mode"
+                                     "guide-key-mode")
+        golden-ratio-exclude-buffer-names'(" *guide-key*"
+                                           " *popwin-dummy*"))
+  )
 
 ;;; appearance.el ends here
