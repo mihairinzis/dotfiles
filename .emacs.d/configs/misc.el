@@ -201,12 +201,20 @@
     ))
  )
 
+;; helm
+(setq helm-split-window-in-side-p nil
+      helm-always-two-windows t)
+
 ;; try helm-swoop
 (define-key global-map (kbd "C-S-s") 'helm-swoop)
+
+;; replace find bookmarks with helm bookmarks
+(global-set-key [remap bookmark-jump] 'helm-bookmarks)
+
+
 ;; use ido for finding files and switching buffers
 (define-key global-map (kbd "C-x b") 'ido-switch-buffer)
-(define-key global-map (kbd "C-x C-f") 'ido-find-file)
-
+;; (define-key global-map (kbd "C-x C-f") 'ido-find-file)
 
 ;; undo-tree
 ;; (setq undo-tree-visualizer-timestamps t)
