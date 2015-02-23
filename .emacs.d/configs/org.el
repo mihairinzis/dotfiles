@@ -32,6 +32,7 @@
         org-clock-persistence-insinuate t
         org-clock-persist t
         org-clock-in-resume t
+        org-clock-out-when-done t
         org-clock-in-switch-to-state "STARTED"
         org-time-clocksum-format
         '(:hours "%d" :require-hours t :minutes ":%02d" :require-minutes t))

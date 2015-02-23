@@ -100,6 +100,8 @@ lines"
 
 (global-set-key (kbd "C-k") 'kill-and-join-forward)
 
+(use-package alert
+  :ensure t)
 
 (use-package wgrep
   :ensure t)

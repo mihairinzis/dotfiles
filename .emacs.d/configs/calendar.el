@@ -4,7 +4,6 @@
 ;;;
 
 ;;; Code:
-
 (setq romanian-holidays
       '((holiday-fixed 1 1 "Anul nou")
         (holiday-fixed 1 2 "A doua zi de anul nou")
@@ -29,7 +28,10 @@
               ;; holiday-local-holidays
               ))
 
-(setq calendar-date-style 'european
+(setq calendar-location-name "Cluj-Napca, RO"
+      calendar-latitude 46
+      calendar-longitude 23
+      calendar-date-style 'european
       calendar-mark-holidays-flag t
       calendar-week-start-day 1
       calendar-mark-diary-entries-flag nil

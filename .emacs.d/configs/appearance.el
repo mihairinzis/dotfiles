@@ -69,4 +69,10 @@
                                            " *popwin-dummy*"))
   )
 
+;; (use-package theme-changer
+;; :ensure t
+;; :init
+;; (change-theme 'leuven 'zenburn)
+;; )
+
 ;;; appearance.el ends here
