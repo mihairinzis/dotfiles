@@ -348,6 +348,7 @@ lines"
         guide-key/popup-window-position 'left)
   (guide-key-mode 1)
   (use-package guide-key-tip
+    :ensure t
     :init
     (guide-key-tip/toggle-enable))
   )

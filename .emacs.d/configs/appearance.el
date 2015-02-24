@@ -64,12 +64,14 @@
   (golden-ratio-mode 1)
   (setq golden-ratio-exclude-modes '("ediff-mode"
                                      "calendar-mode"
-                                     "guide-key-mode")
+                                     "guide-key-mode"
+                                     "sunshine-mode"
+                                     "hydra-mode")
         golden-ratio-exclude-buffer-names'(" *guide-key*"
-                                           " *popwin-dummy*"))
-  )
+                                           " *popwin-dummy*"
+                                           " *Sunshine*")))
 
-;; (use-package theme-changer
+
 ;; :ensure t
 ;; :init
 ;; (change-theme 'leuven 'zenburn)
