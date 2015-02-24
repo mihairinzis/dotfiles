@@ -70,4 +70,38 @@
     (interactive)
     (find-alternate-file "..")))
 
+;; borrowed from http://endlessparentheses.com
+
+(defcustom favorite-directories
+  '("~/Dropbox/Privat/" "~/projects/" "~")
+  "List of favorite directories.
+Used in `endless/visit-favorite-dir'.  The order here
+affects the order that completions will be offered."
+  :type '(repeat directory)
+  :group 'endless)
+
+(defun visit-favorite-dir (files-too)
+  "Offer all directories inside a set of directories.
+Compile a list of all directories inside each element of
+`endless/favorite-directories', and visit one of them with
+`ido-completing-read'.
+With prefix argument FILES-TOO also offer to find files."
+  (interactive "P")
+  (let ((completions
+         (mapcar #'abbreviate-file-name
+                 (cl-remove-if-not
+                  (if files-too #'file-readable-p
+                    #'file-directory-p)
+                  (apply #'append
+                         (mapcar (lambda (x)
+                                   (directory-files
+                                    (expand-file-name x)
+                                    t "^[^\.].*" t))
+                                 favorite-directories))))))
+    (dired
+     (ido-completing-read "Open favorite: "
+                          completions 'ignored nil ""))))
+
+(define-key ctl-x-map "f" #'visit-favorite-dir)
+
 ;;; dired.el ends here
