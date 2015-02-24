@@ -47,6 +47,7 @@
 ;; make identifier colorful
 (use-package color-identifiers-mode
   :ensure t
+  :defer t
   :config
   (progn
     (add-hook 'after-init-hook 'global-color-identifiers-mode)))
@@ -66,11 +67,11 @@
                                      "calendar-mode"
                                      "guide-key-mode"
                                      "sunshine-mode"
-                                     "hydra-mode")
+                                     "hydra-mode"
+                                     "fundamental-mode")
         golden-ratio-exclude-buffer-names'(" *guide-key*"
                                            " *popwin-dummy*"
                                            " *Sunshine*")))
-
 
 ;; :ensure t
 ;; :init

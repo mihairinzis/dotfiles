@@ -31,11 +31,12 @@
  sentence-end-double-space nil)
 
 (use-package async
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package paradox
   :ensure t
-  :config
+  :idle
   (setq paradox-execute-asynchronously t))
 
 (setq
@@ -91,8 +92,7 @@
 
 (defun kill-and-join-forward (&optional arg)
   "If at end of line, join with following; otherwise kill line.
-Deletes whitespace at join. With prefix ARG kills that many
-lines"
+Deletes whitespace at join. With prefix ARG kills that many lines"
   (interactive "P")
   (if (and (eolp) (not (bolp)))
       (delete-indentation t)
@@ -101,13 +101,16 @@ lines"
 (global-set-key (kbd "C-k") 'kill-and-join-forward)
 
 (use-package alert
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package wgrep
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (use-package god-mode
   :ensure t
+  :defer t
   :init
   (defun update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only)
@@ -127,6 +130,7 @@ lines"
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
+  :defer t
   :bind
   (("C-c m n" . mc/mark-next-like-this)
    ("C-c m p" . mc/mark-previous-like-this)
@@ -151,13 +155,16 @@ lines"
 ;; (global-set-key (kbd "<f5>") 'recompile)
 
 ;; A saner ediff
-(setq ediff-diff-options "-w"
-      ediff-split-window-function 'split-window-horizontally
-      ediff-window-setup-function 'ediff-setup-windows-plain)
-(add-hook 'ediff-after-quit-hook-internal 'winner-undo)
+(use-package ediff
+  :idle
+  (setq ediff-diff-options "-w"
+        ediff-split-window-function 'split-window-horizontally
+        ediff-window-setup-function 'ediff-setup-windows-plain)
+  (add-hook 'ediff-after-quit-hook-internal 'winner-undo))
 
 ;; Set file registers
 (set-register ?m '(file . "~/projects/dotfiles/.emacs.d/configs/misc.el"))
+(set-register ?t '(file . "~/Dropbox/Privat/org/tasks.org"))
 
 ;; nxml tab width
 (setq nxml-child-indent 2)
@@ -179,33 +186,31 @@ lines"
 ;; yasnippet
 (use-package yasnippet
   :ensure t
-  :init
+  :idle
   (yas-global-mode 1)
   (define-key yas-minor-mode-map (kbd "C-c C-s") 'yas-insert-snippet))
 ;; (yas/load-directory "~/.emacs.d/snippets")
 
 
 ;; web-mode
-(defun web-mode-hook ()
-  "Hooks for Web mode."
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
-  (setq web-mode-indent-style 2)
-  )
-(add-hook 'web-mode-hook  'web-mode-hook)
+(use-package web-mode
+  :ensure t
+  :defer t
+  :config
+  (defun web-mode-hook ()
+    "Hooks for Web mode."
+    (setq web-mode-markup-indent-offset 2)
+    (setq web-mode-css-indent-offset 2)
+    (setq web-mode-code-indent-offset 2)
+    (setq web-mode-indent-style 2)
+    )
+  (add-hook 'web-mode-hook  'web-mode-hook))
 
 ;; (require 'reftex)
 
 ;; icicles
 ;; (require 'icicles)
 ;; (setq-default icicle-show-Completions-initially-flag t)
-
-;; (defun quit-window ()
-;;   "modified quit window"
-;;   (interactive)
-;;   (kill-buffer-and-window)
-;;   )
 
 ;; setup elpy-mode
 ;; (package-initialize)
@@ -284,6 +289,7 @@ lines"
 
 (use-package eww-lnum
   :ensure t
+  :defer t
   :init
   (eval-after-load "eww"
     '(progn (define-key eww-mode-map "f" 'eww-lnum-follow)
@@ -305,18 +311,22 @@ lines"
 (setq-default regex-tool-backend 'perl)
 (use-package visual-regexp
   :ensure t
+  :defer t
   :bind (("M-5" . vr/replace)
          ("M-%" . vr/query-replace)))
 
 (use-package linum-relative
   ;; :ensure t
   :init
+  :defer t
   (setq linum-format 'linum-relative)
   :config
   (setq linum-relative-current-symbol ""))
 
 ;; Roster Options
 (use-package jabber
+  :disabled t
+  :defer t
   :ensure t
   :init
   (setq  jabber-vcard-avatars-retrieve nil
@@ -329,6 +339,7 @@ lines"
 (use-package twittering-mode
   :disabled t
   :ensure t
+  :defer t
   :config
   (setq twittering-use-master-password t
         twittering-icon-mode t
@@ -342,6 +353,7 @@ lines"
 ;; guide-key
 (use-package guide-key
   :ensure t
+  :defer t
   :init
   (setq guide-key/guide-key-sequence t
         guide-key/recursive-key-sequence-flag t
@@ -349,6 +361,7 @@ lines"
   (guide-key-mode 1)
   (use-package guide-key-tip
     :ensure t
+    :defer t
     :init
     (guide-key-tip/toggle-enable))
   )
@@ -374,12 +387,13 @@ lines"
 (use-package aggressive-indent
   :ensure t
   :diminish aggressive-indent-mode
-  :init
+  :idle
   (global-aggressive-indent-mode 1)
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
 
 (use-package number
   :ensure t
+  :defer t
   :bind
   (("C-c C-+" . number/add)
    ("C-c C--" . number/sub)
@@ -388,6 +402,7 @@ lines"
 
 (use-package ag
   :ensure t
+  :defer t
   :init
   (use-package wgrep
     :ensure t)
@@ -413,6 +428,7 @@ lines"
 
 (use-package sunshine
   :ensure t
+  :defer t
   :config
   (setq sunshine-location "Cluj-Napoca,RO"
         sunshine-show-icons t))
