@@ -30,15 +30,6 @@
  auto-revert-verbose nil
  sentence-end-double-space nil)
 
-(use-package async
-  :ensure t
-  :defer t)
-
-(use-package paradox
-  :ensure t
-  :idle
-  (setq paradox-execute-asynchronously t))
-
 (setq
  interprogram-cut-function 'x-select-text
  interprogram-paste-function 'x-selection-value
@@ -100,6 +91,15 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 (global-set-key (kbd "C-k") 'kill-and-join-forward)
 
+(use-package async
+  :ensure t
+  :defer t)
+
+(use-package paradox
+  :ensure t
+  :idle
+  (setq paradox-execute-asynchronously t))
+
 (use-package alert
   :ensure t
   :defer t)
@@ -111,7 +111,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package god-mode
   :ensure t
   :defer t
-  :init
+  :idle
   (defun update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only)
                           'bar
@@ -119,8 +119,6 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   (add-hook 'god-mode-enabled-hook 'update-cursor)
   (add-hook 'god-mode-disabled-hook 'update-cursor)
   :config
-  ;; (bind-keys :map launcher-map
-  ;;            ("g" . god-local-mode))
   (bind-keys :map god-local-mode-map
              ("z" . repeat)
              ("." . repeat)
