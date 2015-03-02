@@ -13,7 +13,7 @@ rar unrar zip unzip p7zip-full p7zip-rar bzip2 arj lzma ntfs-3g
 # file-roller unace
 
 # appearance
-conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine
+conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklight
 # redshift libgl1-mesa-dri-experimental
 
 # term
