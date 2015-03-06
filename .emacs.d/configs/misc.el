@@ -97,7 +97,8 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 (use-package paradox
   :ensure t
-  :idle
+  :commands (paradox-upgrade-packages paradox-list-packages)
+  :config
   (setq paradox-execute-asynchronously t))
 
 (use-package alert
@@ -109,6 +110,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :defer t)
 
 (use-package god-mode
+  :disabled t
   :ensure t
   :defer t
   :idle
@@ -125,6 +127,15 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
              ("i" . god-local-mode))
   (add-to-list 'god-exempt-major-modes 'org-agenda-mode))
 
+(use-package key-chord
+  :ensure t
+  :config
+  (setq key-chord-two-keys-delay 0.05)
+  (key-chord-define-global "x1" 'delete-other-windows)
+  (key-chord-define-global "0o" 'delete-window)
+  (key-chord-define-global "xg" 'magit-status)
+  (key-chord-mode +1))
+
 ;; Multiple cursors
 (use-package multiple-cursors
   :ensure t
@@ -134,8 +145,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
    ("C-c m p" . mc/mark-previous-like-this)
    ("C-c m a" . mc/mark-all-like-this)
    ("C-c m l" . mc/edit-lines)
-   ("C-S-<mouse-1>" . mc/add-cursor-on-click)
-   ))
+   ("C-S-<mouse-1>" . mc/add-cursor-on-click)))
 ;; (global-set-key (kbd "C-x r t") 'inline-string-rectangle)
 
 ;; Comment or uncomment region or line
@@ -277,11 +287,14 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
     ;; try helm-swoop
     (use-package helm-swoop
       :ensure t
-      :init
-      (global-set-key (kbd "M-i") 'helm-swoop)
-      )
+      :bind ("M-i" . helm-swoop)
+      :config
+      ;; When doing isearch, hand the word over to helm-swoop
+      (bind-key "M-i" 'helm-swoop-from-isearch isearch-mode-map)
+      ;; From helm-swoop to helm-multi-swoop-all
+      (bind-key "M-i" 'helm-multi-swoop-all-from-helm-swoop helm-swoop-map))
     ;; replace find bookmarks with helm bookmarks
-    (global-set-key [remap bookmark-jump] 'helm-bookmarks)
+    ;; (global-set-key [remap bookmark-jump] 'helm-bookmarks)
     (global-set-key [remap prelude-goto-symbol] 'helm-semantic-or-imenu)
     ))
 
@@ -355,9 +368,13 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :init
   (setq guide-key/guide-key-sequence t
         guide-key/recursive-key-sequence-flag t
-        guide-key/popup-window-position 'left)
+        guide-key/popup-window-position 'left
+        guide-key/highlight-command-regexp
+        '(("rectangle" . font-lock-warning-face)
+          ("register"  . font-lock-type-face)))
   (guide-key-mode 1)
   (use-package guide-key-tip
+    :disabled t
     :ensure t
     :defer t
     :init
@@ -431,6 +448,13 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   (setq sunshine-location "Cluj-Napoca,RO"
         sunshine-show-icons t))
 
+(use-package impatient-mode
+  :ensure t
+  :defer t)
+
+(use-package pretty-mode
+  :ensure t
+  :idle (global-pretty-mode t))
 
 ;; (key-chord-define-global
 ;;  "rr"

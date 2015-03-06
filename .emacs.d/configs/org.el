@@ -5,6 +5,7 @@
 
 ;;; Code:
 (use-package org
+  :defer t
   :idle
   (setq org-directory "~/Dropbox/Privat/org")
   (setq org-agenda-files (list (concat org-directory "/tasks.org")))
