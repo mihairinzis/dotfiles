@@ -53,9 +53,9 @@
     (add-hook 'after-init-hook 'global-color-identifiers-mode)))
 
 ;; powerline
-(use-package powerline
-  :init
-  (powerline-default-theme))
+;; (use-package powerline
+;;   :init
+;;   (powerline-default-theme))
 
 ;; golden-ratio
 (use-package golden-ratio
