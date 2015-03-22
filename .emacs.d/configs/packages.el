@@ -18,7 +18,6 @@
   '(
     ;; icicles
     ;; auto-complete
-    ;; company ; added to prelude
     ;; switch-window
     elpy
     regex-tool
@@ -39,6 +38,10 @@
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-(require 'use-package)
+
+(eval-when-compile
+  (require 'use-package))
+(require 'bind-key)
+(require 'diminish)
 
 ;;; packages.el ends here

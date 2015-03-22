@@ -47,8 +47,8 @@
 ;; make identifier colorful
 (use-package color-identifiers-mode
   :ensure t
-  :defer t
-  :config
+  :defer 5
+  :init
   (progn
     (add-hook 'after-init-hook 'global-color-identifiers-mode)))
 
@@ -59,11 +59,12 @@
 
 ;; golden-ratio
 (use-package golden-ratio
-  :disabled t
+  ;; :disabled t
   :ensure t
   :diminish golden-ratio-mode
   :init
   (golden-ratio-mode 1)
+  :config
   (setq golden-ratio-exclude-modes '("ediff-mode"
                                      "calendar-mode"
                                      "guide-key-mode"

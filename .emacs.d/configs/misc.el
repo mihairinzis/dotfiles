@@ -98,8 +98,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package paradox
   :ensure t
   :commands (paradox-upgrade-packages paradox-list-packages)
-  :config
-  (setq paradox-execute-asynchronously t))
+  :config (setq paradox-execute-asynchronously t))
 
 (use-package alert
   :ensure t
@@ -113,11 +112,9 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :disabled t
   :ensure t
   :defer t
-  :idle
+  :init
   (defun update-cursor ()
-    (setq cursor-type (if (or god-local-mode buffer-read-only)
-                          'bar
-                        'box)))
+    (setq cursor-type (if (or god-local-mode buffer-read-only) 'bar 'box)))
   (add-hook 'god-mode-enabled-hook 'update-cursor)
   (add-hook 'god-mode-disabled-hook 'update-cursor)
   :config
@@ -129,12 +126,12 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 (use-package key-chord
   :ensure t
+  :init (key-chord-mode +1)
   :config
   (setq key-chord-two-keys-delay 0.05)
   (key-chord-define-global "x1" 'delete-other-windows)
   (key-chord-define-global "0o" 'delete-window)
-  (key-chord-define-global "xg" 'magit-status)
-  (key-chord-mode +1))
+  (key-chord-define-global "xg" 'magit-status))
 
 ;; Multiple cursors
 (use-package multiple-cursors
@@ -164,7 +161,8 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 ;; A saner ediff
 (use-package ediff
-  :idle
+  :defer t
+  :config
   (setq ediff-diff-options "-w"
         ediff-split-window-function 'split-window-horizontally
         ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -194,9 +192,10 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 ;; yasnippet
 (use-package yasnippet
   :ensure t
-  :idle
-  (yas-global-mode 1)
-  (define-key yas-minor-mode-map (kbd "C-c C-s") 'yas-insert-snippet))
+  :defer 10
+  :config
+  (define-key yas-minor-mode-map (kbd "C-c C-s") 'yas-insert-snippet)
+  :init (yas-global-mode 1))
 ;; (yas/load-directory "~/.emacs.d/snippets")
 
 
@@ -212,7 +211,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
     (setq web-mode-code-indent-offset 2)
     (setq web-mode-indent-style 2)
     )
-  (add-hook 'web-mode-hook  'web-mode-hook))
+  (add-hook 'web-mode-hook 'web-mode-hook))
 
 ;; (require 'reftex)
 
@@ -279,7 +278,8 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 ;; helm
 (use-package helm
   :ensure t
-  :init
+  :init (global-set-key [remap prelude-goto-symbol] 'helm-semantic-or-imenu)
+  :config
   (progn
     (setq helm-split-window-in-side-p nil
           helm-always-two-windows t
@@ -295,13 +295,12 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
       (bind-key "M-i" 'helm-multi-swoop-all-from-helm-swoop helm-swoop-map))
     ;; replace find bookmarks with helm bookmarks
     ;; (global-set-key [remap bookmark-jump] 'helm-bookmarks)
-    (global-set-key [remap prelude-goto-symbol] 'helm-semantic-or-imenu)
     ))
 
 (use-package eww-lnum
   :ensure t
-  :defer t
-  :init
+  :defer 15
+  :config
   (eval-after-load "eww"
     '(progn (define-key eww-mode-map "f" 'eww-lnum-follow)
             (define-key eww-mode-map "F" 'eww-lnum-universal))))
@@ -328,24 +327,22 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 (use-package linum-relative
   ;; :ensure t
-  :init
   :defer t
-  (setq linum-format 'linum-relative)
-  :config
-  (setq linum-relative-current-symbol ""))
+  :init (setq linum-format 'linum-relative)
+  :config (setq linum-relative-current-symbol ""))
 
 ;; Roster Options
 (use-package jabber
   :disabled t
-  :defer t
   :ensure t
-  :init
-  (setq  jabber-vcard-avatars-retrieve nil
-         jabber-roster-show-title nil
-         jabber-roster-show-bindings nil
-         jabber-show-offline-contacts nil
-         jabber-show-resources nil
-         jabber-sort-order nil))
+  :defer t
+  :config
+  (setq jabber-vcard-avatars-retrieve nil
+        jabber-roster-show-title nil
+        jabber-roster-show-bindings nil
+        jabber-show-offline-contacts nil
+        jabber-show-resources nil
+        jabber-sort-order nil))
 
 (use-package twittering-mode
   :disabled t
@@ -364,22 +361,21 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 ;; guide-key
 (use-package guide-key
   :ensure t
-  :defer t
-  :init
+  :defer 5
+  :init (guide-key-mode 1)
+  :config
   (setq guide-key/guide-key-sequence t
         guide-key/recursive-key-sequence-flag t
         guide-key/popup-window-position 'left
         guide-key/highlight-command-regexp
         '(("rectangle" . font-lock-warning-face)
           ("register"  . font-lock-type-face)))
-  (guide-key-mode 1)
   (use-package guide-key-tip
     :disabled t
     :ensure t
     :defer t
     :init
-    (guide-key-tip/toggle-enable))
-  )
+    (guide-key-tip/toggle-enable)))
 
 ;; winner
 (setq winner-boring-buffers '("*helm mini*"
@@ -402,18 +398,18 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package aggressive-indent
   :ensure t
   :diminish aggressive-indent-mode
-  :idle
+  :defer t
+  :init
   (global-aggressive-indent-mode 1)
   (add-to-list 'aggressive-indent-excluded-modes 'html-mode))
 
 (use-package number
   :ensure t
   :defer t
-  :bind
-  (("C-c C-+" . number/add)
-   ("C-c C--" . number/sub)
-   ("C-c C-*" . number/multiply)
-   ("C-c C-/" . number/divide)))
+  :bind (("C-c C-+" . number/add)
+         ("C-c C--" . number/sub)
+         ("C-c C-*" . number/multiply)
+         ("C-c C-/" . number/divide)))
 
 (use-package ag
   :ensure t
@@ -454,7 +450,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 (use-package pretty-mode
   :ensure t
-  :idle (global-pretty-mode t))
+  :init (global-pretty-mode t))
 
 ;; (key-chord-define-global
 ;;  "rr"
