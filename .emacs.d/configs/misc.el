@@ -442,7 +442,8 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :defer t
   :config
   (setq sunshine-location "Cluj-Napoca,RO"
-        sunshine-show-icons t))
+        sunshine-show-icons t
+        sunshine-units 'metric))
 
 (use-package impatient-mode
   :ensure t
