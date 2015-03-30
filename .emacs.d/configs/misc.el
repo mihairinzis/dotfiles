@@ -109,10 +109,11 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :defer t)
 
 (use-package god-mode
-  :disabled t
+  ;; :disabled t
   :ensure t
   :defer t
   :init
+  (god-mode-all)
   (defun update-cursor ()
     (setq cursor-type (if (or god-local-mode buffer-read-only) 'bar 'box)))
   (add-hook 'god-mode-enabled-hook 'update-cursor)
@@ -121,8 +122,22 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   (bind-keys :map god-local-mode-map
              ("z" . repeat)
              ("." . repeat)
-             ("i" . god-local-mode))
-  (add-to-list 'god-exempt-major-modes 'org-agenda-mode))
+             ("i" . god-local-mode)
+             ("C-x C-1" . delete-other-windows)
+             ("C-x C-2" . split-window-below)
+             ("C-x C-3" . split-window-right)
+             ("C-x C-0" . delete-window)
+             ("f" . forward-word)
+             ("b" . backward-word))
+(defun god-toggle-on-overwrite ()
+  "Toggle god-mode on overwrite-mode."
+  (if (bound-and-true-p overwrite-mode)
+      (god-local-mode-pause)
+    (god-local-mode-resume)))
+(add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
+(add-to-list 'god-exempt-major-modes 'org-agenda-mode)
+(key-chord-define-global "gg" 'god-mode-all))
+
 
 (use-package key-chord
   :ensure t
