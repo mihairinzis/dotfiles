@@ -376,12 +376,12 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 ;; guide-key
 (use-package guide-key
   :ensure t
-  :defer 5
+  :defer 15
   :init (guide-key-mode 1)
   :config
   (setq guide-key/guide-key-sequence t
         guide-key/recursive-key-sequence-flag t
-        guide-key/popup-window-position 'left
+        guide-key/popup-window-position 'bottom
         guide-key/highlight-command-regexp
         '(("rectangle" . font-lock-warning-face)
           ("register"  . font-lock-type-face)))
@@ -467,6 +467,21 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package pretty-mode
   :ensure t
   :init (global-pretty-mode t))
+
+(use-package diff-hl
+  :config
+  (progn
+    (defhydra hydra-diff-hl (:color red)
+      "diff-hl"
+      ("="     diff-hl-diff-goto-hunk "goto hunk")
+      ("<RET>" diff-hl-diff-goto-hunk "goto hunk")
+      ("u"     diff-hl-revert-hunk    "revert hunk")
+      ("["     diff-hl-previous-hunk  "prev hunk")
+      ("p"     diff-hl-previous-hunk  "prev hunk")
+      ("]"     diff-hl-next-hunk      "next hunk")
+      ("n"     diff-hl-next-hunk      "next hunk")
+      ("q" nil                    "cancel"))
+    (add-hook 'dired-mode-hook #'diff-hl-dired-mode)))
 
 ;; (key-chord-define-global
 ;;  "rr"
