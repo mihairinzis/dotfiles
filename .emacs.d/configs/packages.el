@@ -27,7 +27,7 @@
     ;; smart-mode-line
     ibuffer-vc
     quickrun
-    hydra
+    ;; hydra
     )
   "A list of packages to ensure are installed at launch.")
 

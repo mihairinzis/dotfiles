@@ -129,14 +129,14 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
              ("C-x C-0" . delete-window)
              ("f" . forward-word)
              ("b" . backward-word))
-(defun god-toggle-on-overwrite ()
-  "Toggle god-mode on overwrite-mode."
-  (if (bound-and-true-p overwrite-mode)
-      (god-local-mode-pause)
-    (god-local-mode-resume)))
-(add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
-(add-to-list 'god-exempt-major-modes 'org-agenda-mode)
-(key-chord-define-global "gg" 'god-mode-all))
+  (defun god-toggle-on-overwrite ()
+    "Toggle god-mode on overwrite-mode."
+    (if (bound-and-true-p overwrite-mode)
+        (god-local-mode-pause)
+      (god-local-mode-resume)))
+  (add-hook 'overwrite-mode-hook 'god-toggle-on-overwrite)
+  (add-to-list 'god-exempt-major-modes 'org-agenda-mode)
+  (key-chord-define-global "gg" 'god-mode-all))
 
 
 (use-package key-chord
@@ -438,15 +438,6 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   (bind-keys :map ag-mode-map
              ("q" . kill-this-buffer))
   (setq ag-highlight-search t))
-
-
-;; hydras
-(key-chord-define-global
- "zz"
- (defhydra hydra-zoom ()
-   "zoom"
-   ("=" text-scale-increase "in")
-   ("-" text-scale-decrease "out")))
 
 (use-package vlf
   :ensure t
