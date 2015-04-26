@@ -128,7 +128,8 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
              ("C-x C-3" . split-window-right)
              ("C-x C-0" . delete-window)
              ("f" . forward-word)
-             ("b" . backward-word))
+             ("b" . backward-word)
+             ("q" . kill-this-buffer))
   (defun god-toggle-on-overwrite ()
     "Toggle god-mode on overwrite-mode."
     (if (bound-and-true-p overwrite-mode)
