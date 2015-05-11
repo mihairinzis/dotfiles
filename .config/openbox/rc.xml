@@ -672,6 +672,15 @@ Copy the file to $HOME/.config/openbox/ instead. -->
         </startupnotify>
       </action>
     </keybind>
+    <keybind key="W-n">
+      <action name="Execute">
+        <command>lxterminal</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+          <name>lxterminal</name>
+        </startupnotify>
+      </action>
+    </keybind>
     <keybind key="W-S-t">
       <keybind key="l">
         <action name="Execute">
