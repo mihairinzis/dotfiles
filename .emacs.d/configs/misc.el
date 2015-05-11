@@ -350,7 +350,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 ;; Roster Options
 (use-package jabber
-  :disabled t
+  ;; :disabled t
   :ensure t
   :defer t
   :config
@@ -452,6 +452,39 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   (setq sunshine-location "Cluj-Napoca,RO"
         sunshine-show-icons t
         sunshine-units 'metric))
+
+(use-package emms
+  :ensure t
+  :defer t
+  :init
+  (emms-standard)
+  (emms-default-players)
+  (defun emms-toggle ()
+    "Emms: toggle playing the current track"
+    (interactive)
+    (if emms-player-playing-p (emms-pause) (emms-start)))
+  :config
+  (require 'emms-source-file)
+  (require 'emms-source-playlist)
+  (require 'emms-player-mplayer)
+  (require 'emms-info)
+  (require 'emms-playlist-mode)
+  (require 'emms-mark)
+  (require 'emms-streams)
+  (require 'emms-playlist-sort)
+  (require 'emms-browser)
+  (require 'emms-bookmarks)
+  (require 'emms-last-played)
+  (require 'emms-metaplaylist-mode)
+  (require 'emms-stream-info)
+  (require 'emms-history)
+  (require 'emms-i18n)
+  (require 'emms-cache)
+  (add-hook 'emms-player-started-hook 'emms-show)
+  (setq emms-show-format "Playing: %s")
+  (setq emms-source-file-default-directory "~/Music/")
+  :bind
+  (("C-z e t" . emms-toggle)))
 
 (use-package impatient-mode
   :ensure t
