@@ -463,6 +463,11 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
     "Emms: toggle playing the current track"
     (interactive)
     (if emms-player-playing-p (emms-pause) (emms-start)))
+  (defun emms-add-dired-dir ()
+    "Emms: add a new directory-tree to the browser"
+    (interactive)
+    (call-interactively 'emms-add-directory-tree)
+    (emms-playlist-mode-go))
   :config
   (require 'emms-source-file)
   (require 'emms-source-playlist)
@@ -484,7 +489,8 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   (setq emms-show-format "Playing: %s")
   (setq emms-source-file-default-directory "~/Music/")
   :bind
-  (("C-z e t" . emms-toggle)))
+  (("C-z e t" . emms-toggle)
+   ("C-z e a" . emms-add-dired-dir)))
 
 (use-package impatient-mode
   :ensure t
