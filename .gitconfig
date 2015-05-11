@@ -6,3 +6,6 @@
 	editor = emacs
 [merge]
 	tool = emerge
+[alias]
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
