@@ -477,9 +477,8 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   (add-hook 'emms-player-started-hook 'emms-show)
   (setq emms-show-format "Playing: %s")
   (setq emms-source-file-default-directory "~/Music/")
-  :bind
-  (("C-z e t" . emms-toggle)
-   ("C-z e a" . emms-add-dired-dir)))
+  :bind (("C-z e t" . emms-toggle)
+         ("C-z e a" . emms-add-dired-dir)))
 
 (use-package impatient-mode
   :ensure t
@@ -488,6 +487,11 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package pretty-mode
   :ensure t
   :init (global-pretty-mode t))
+
+(use-package neotree
+  :ensure t
+  :init (neotree)
+  :bind ("C-z n" . neotree-toggle))
 
 (use-package diff-hl
   :config
