@@ -72,7 +72,8 @@
 (bind-keys ("C-s" . isearch-forward-regexp)
            ("C-r" . isearch-backward-regexp)
            ("C-M-s" . isearch-forward)
-           ("C-M-r" . isearch-backward))
+           ("C-M-r" . isearch-backward)
+           ("M-SPC" . cycle-spacing))
 
 ;; q kills
 (bind-keys :map dired-mode-map
