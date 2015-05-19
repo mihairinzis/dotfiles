@@ -490,6 +490,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :init (global-pretty-mode t))
 
 (use-package neotree
+  :disabled t
   :ensure t
   :init (neotree)
   :bind ("C-z n" . neotree-toggle))
