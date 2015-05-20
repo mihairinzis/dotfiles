@@ -72,7 +72,8 @@
 (bind-keys ("C-s" . isearch-forward-regexp)
            ("C-r" . isearch-backward-regexp)
            ("C-M-s" . isearch-forward)
-           ("C-M-r" . isearch-backward))
+           ("C-M-r" . isearch-backward)
+           ("M-SPC" . cycle-spacing))
 
 ;; q kills
 (bind-keys :map dired-mode-map
@@ -489,6 +490,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :init (global-pretty-mode t))
 
 (use-package neotree
+  :disabled t
   :ensure t
   :init (neotree)
   :bind ("C-z n" . neotree-toggle))
