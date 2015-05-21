@@ -510,6 +510,10 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
       ("q" nil                    "cancel"))
     (add-hook 'dired-mode-hook #'diff-hl-dired-mode)))
 
+(use-package totd
+  :ensure t
+  :init (totd-start))
+
 ;; (key-chord-define-global
 ;;  "rr"
 ;;  (defhydra hydra-window-resize ()
