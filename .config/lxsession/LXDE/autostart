@@ -2,7 +2,7 @@
 #@xfce4-power-manager
 #@pcmanfm --desktop --profile lubuntu
 #@/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
-@compton -CG -b
+#@compton -CG -b
 # @xscreensaver -no-splash
 # make caps lock an aditional control
 @/usr/bin/setxkbmap -option caps:ctrl_modifier
@@ -16,3 +16,8 @@
 @xset -b
 #@compton -cCGfF -o 0.38 -O 200 -I 200 -t 0 -l 0 -r 3 -D2 -m 0.88 &
 #@emacs --daemon
+# touchpad
+@synclient HorizTwoFingerScroll=1
+@synclient TapButton1=1
+@synclient CoastingSpeed=0
+@syndaemon -d -t -k

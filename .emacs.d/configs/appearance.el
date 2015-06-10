@@ -52,12 +52,11 @@
   (progn
     (add-hook 'after-init-hook 'global-color-identifiers-mode)))
 
-;; powerline
-;; (use-package powerline
-;;   :init
-;;   (powerline-default-theme))
+(use-package powerline
+  :ensure t
+  :init
+  (powerline-default-theme))
 
-;; golden-ratio
 (use-package golden-ratio
   ;; :disabled t
   :ensure t
@@ -65,19 +64,10 @@
   :init
   (golden-ratio-mode 1)
   :config
-  (setq golden-ratio-exclude-modes '("ediff-mode"
-                                     "calendar-mode"
-                                     "guide-key-mode"
-                                     "sunshine-mode"
-                                     "hydra-mode"
-                                     "fundamental-mode")
-        golden-ratio-exclude-buffer-names'(" *guide-key*"
-                                           " *popwin-dummy*"
-                                           " *Sunshine*")))
-
-;; :ensure t
-;; :init
-;; (change-theme 'leuven 'zenburn)
-;; )
+  (setq golden-ratio-exclude-modes
+        '("ediff-mode" "calendar-mode" "guide-key-mode"
+          "sunshine-mode" "hydra-mode" "fundamental-mode")
+        golden-ratio-exclude-buffer-names
+        '(" *guide-key*" " *popwin-dummy*" " *Sunshine*" " *NeoTree*")))
 
 ;;; appearance.el ends here

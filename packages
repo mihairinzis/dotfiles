@@ -20,11 +20,12 @@ conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklig
 rxvt-unicode zsh-beta command-not-found 
 
 # misc
-dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted laptop-mode-tools clipit fortune-mod fortunes compton
+firmware-linux dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted laptop-mode-tools clipit fortune-mod fortunes compton bleachbit nautilus-dropbox
 
-# pmount bleachbit nautilus-dropbox wine gcalctool
+# pmount wine gcalctool
 
 # browser
+icedtea-plugin
 # luakit conkeror iceweasel opera flashplugin-nonfree
 
 # im
@@ -47,7 +48,7 @@ libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au
 # gucharmap pdfshuffler scribus
 
 # font
-fonts-inconsolata xfonts-terminus fonts-vlgothic ttf-liberation fonts-droid ttf-anonymous-pro fonts-comfortaa ttf-ancient-fonts
+fonts-inconsolata xfonts-terminus fonts-vlgothic ttf-liberation fonts-droid ttf-anonymous-pro fonts-comfortaa ttf-freefont ttf-mscorefonts-installer ttf-bitstream-vera ttf-dejavu
 
 # sound
 alsa-base alsa-utils

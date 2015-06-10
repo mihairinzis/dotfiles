@@ -72,7 +72,8 @@
 (bind-keys ("C-s" . isearch-forward-regexp)
            ("C-r" . isearch-backward-regexp)
            ("C-M-s" . isearch-forward)
-           ("C-M-r" . isearch-backward))
+           ("C-M-r" . isearch-backward)
+           ("M-SPC" . cycle-spacing))
 
 ;; q kills
 (bind-keys :map dired-mode-map
@@ -123,12 +124,14 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
              ("z" . repeat)
              ("." . repeat)
              ("i" . god-local-mode)
-             ("C-x C-1" . delete-other-windows)
-             ("C-x C-2" . split-window-below)
-             ("C-x C-3" . split-window-right)
-             ("C-x C-0" . delete-window)
+             ("C-1" . delete-other-windows)
+             ("C-2" . split-window-below)
+             ("C-3" . split-window-right)
+             ("C-0" . delete-window)
              ("f" . forward-word)
-             ("b" . backward-word))
+             ("b" . backward-word)
+             ("q" . kill-this-buffer)
+             ("C-c C-f" . helm-recentf))
   (defun god-toggle-on-overwrite ()
     "Toggle god-mode on overwrite-mode."
     (if (bound-and-true-p overwrite-mode)
@@ -144,8 +147,6 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :init (key-chord-mode +1)
   :config
   (setq key-chord-two-keys-delay 0.05)
-  (key-chord-define-global "x1" 'delete-other-windows)
-  (key-chord-define-global "0o" 'delete-window)
   (key-chord-define-global "xg" 'magit-status))
 
 ;; Multiple cursors
@@ -348,7 +349,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 
 ;; Roster Options
 (use-package jabber
-  :disabled t
+  ;; :disabled t
   :ensure t
   :defer t
   :config
@@ -377,6 +378,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package guide-key
   :ensure t
   :defer 15
+  :diminish guide-key-mode
   :init (guide-key-mode 1)
   :config
   (setq guide-key/guide-key-sequence t
@@ -393,21 +395,11 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
     (guide-key-tip/toggle-enable)))
 
 ;; winner
-(setq winner-boring-buffers '("*helm mini*"
-                              "*helm projectile*"
-                              "*helm M-x*"
-                              "*helm resume*"
-                              "*Completions*"
-                              "*Compile-Log*"
-                              "*inferior-lisp*"
-                              "*Fuzzy Completions*"
-                              "*Apropos*"
-                              "*Help*"
-                              "*cvs*"
-                              "*Buffer List*"
-                              "*Ibuffer*"
-                              "*esh command on file*"
-                              ))
+(setq winner-boring-buffers
+      '("*helm mini*" "*helm projectile*" "*helm M-x*" "*helm resume*"
+        "*Completions*" "*Compile-Log*" "*inferior-lisp*" "*Fuzzy Completions*"
+        "*Apropos*" "*Help*" "*cvs*" "*Buffer List*" "*Ibuffer*"
+        "*esh command on file*"))
 
 ;; aggressive-indent-mode
 (use-package aggressive-indent
@@ -451,6 +443,44 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
         sunshine-show-icons t
         sunshine-units 'metric))
 
+(use-package emms
+  :ensure t
+  :defer t
+  :init
+  (emms-standard)
+  (emms-default-players)
+  (defun emms-toggle ()
+    "Emms: toggle playing the current track"
+    (interactive)
+    (if emms-player-playing-p (emms-pause) (emms-start)))
+  (defun emms-add-dired-dir ()
+    "Emms: add a new directory-tree to the browser"
+    (interactive)
+    (call-interactively 'emms-add-directory-tree)
+    (emms-playlist-mode-go))
+  :config
+  (require 'emms-source-file)
+  (require 'emms-source-playlist)
+  (require 'emms-player-mplayer)
+  (require 'emms-info)
+  (require 'emms-playlist-mode)
+  (require 'emms-mark)
+  (require 'emms-streams)
+  (require 'emms-playlist-sort)
+  (require 'emms-browser)
+  (require 'emms-bookmarks)
+  (require 'emms-last-played)
+  (require 'emms-metaplaylist-mode)
+  (require 'emms-stream-info)
+  (require 'emms-history)
+  (require 'emms-i18n)
+  (require 'emms-cache)
+  (add-hook 'emms-player-started-hook 'emms-show)
+  (setq emms-show-format "Playing: %s")
+  (setq emms-source-file-default-directory "~/Music/")
+  :bind (("C-z e t" . emms-toggle)
+         ("C-z e a" . emms-add-dired-dir)))
+
 (use-package impatient-mode
   :ensure t
   :defer t)
@@ -458,6 +488,12 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package pretty-mode
   :ensure t
   :init (global-pretty-mode t))
+
+(use-package neotree
+  :disabled t
+  :ensure t
+  :init (neotree)
+  :bind ("C-z n" . neotree-toggle))
 
 (use-package diff-hl
   :config
@@ -474,6 +510,10 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
       ("q" nil                    "cancel"))
     (add-hook 'dired-mode-hook #'diff-hl-dired-mode)))
 
+(use-package totd
+  :ensure t
+  :init (totd-start))
+
 ;; (key-chord-define-global
 ;;  "rr"
 ;;  (defhydra hydra-window-resize ()
@@ -482,60 +522,5 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 ;;    ("h" shrink-window-horizontally "horiz-shrink")
 ;;    ("k" enlarge-window "vert-enlarge")
 ;;    ("j" shrink-window "vert-shrink")))
-
-;; (require 'hydra-examples)
-;; (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
-;; (defhydra hydra-ibuffer-menu (:color pink)
-;;   "
-;;   Mark               Unmark             Actions            Search
-;; -------------------------------------------------------------------------
-;; _m_: mark          _u_: unmark        _x_: execute       _R_: re-isearch
-;; _s_: save          _U_: unmark up     _b_: bury          _I_: isearch
-;; _d_: delete                           _g_: refresh       _O_: multi-occur
-;; _D_: delete up                        _T_: files only: %`Buffer-menu-files-only
-;; _~_: modified
-;; "
-;;   ("m" ibuffer-mark-forward nil)
-;;   ("u" Buffer-menu-unmark nil)
-;;   ("U" Buffer-menu-backup-unmark nil)
-;;   ("d" Buffer-menu-delete nil)
-;;   ("D" Buffer-menu-delete-backwards nil)
-;;   ("s" Buffer-menu-save nil)
-;;   ("~" Buffer-menu-not-modified nil)
-;;   ("x" Buffer-menu-execute nil)
-;;   ("b" Buffer-menu-bury nil)
-;;   ("g" revert-buffer nil)
-;;   ("T" Buffer-menu-toggle-files-only nil)
-;;   ("O" Buffer-menu-multi-occur nil :color blue)
-;;   ("I" Buffer-menu-isearch-buffers nil :color blue)
-;;   ("R" Buffer-menu-isearch-buffers-regexp nil :color blue)
-;;   ("c" nil "cancel")
-;;   ("v" Buffer-menu-select "select" :color blue)
-;;   ("o" Buffer-menu-other-window "other-window" :color blue)
-;;   ("q" quit-window "quit" :color blue))
-
-;; (define-key Buffer-menu-mode-map "." 'hydra-buffer-menu/body)
-
-;; (defun hydra-god/pre ()
-;;   (set-cursor-color "#e52b50"))
-
-;; (defun hydra-god/post ()
-;;   (set-cursor-color "#ffffff"))
-
-;; (global-set-key
-;;  (kbd "C-c v")
-;;  (defhydra hydra-god (:pre hydra-god/pre :post hydra-fod/post)
-;;    "god"
-;;    ("f" forward-char)
-;;    ("b" backward-char)
-;;    ("n" next-line)
-;;    ("p" previous-line)
-;;    ("m" set-mark-command "mark")
-;;    ("a" move-beginning-of-line "beg")
-;;    ("e" move-end-of-line "end")
-;;    ("w" delete-region "del" :color blue)
-;;    ("y" kill-ring-save "yank" :color blue)
-;;    ("q" nil "quit")))
-
 
 ;;; misc.el ends here

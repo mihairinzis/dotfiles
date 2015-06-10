@@ -33,7 +33,6 @@
 
 (global-set-key (kbd "C-z o") 'open-external)
 
-(require 'dired+)
 ;; make sizes human-readable by default, sort version numbers
 ;; correctly, and put dotfiles and capital-letters first.
 ;; (setq-default dired-listing-switches "-aGghlv --group-directories-first --time-style=+ ")
@@ -65,10 +64,7 @@
                  (re-search-backward "\\(^[0-9.,]+[A-Za-z]+\\).*total$")
                  (match-string 1))))))
 
-(define-key dired-mode-map "a"
-  (lambda ()
-    (interactive)
-    (find-alternate-file "..")))
+(define-key dired-mode-map "a" 'dired-up-directory)
 
 ;; borrowed from http://endlessparentheses.com
 

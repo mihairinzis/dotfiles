@@ -10,19 +10,9 @@
       (let ((path-from-shell (shell-command-to-string "$SHELL -c 'echo $PATH'")))
         (setenv "PATH" path-from-shell)
         (setq exec-path (split-string path-from-shell path-separator))))
-    (when window-system (set-exec-path-from-shell-PATH))
-
-    )
-  )
+    (when window-system (set-exec-path-from-shell-PATH))))
  ((string-equal system-type "windows-nt")
-  (progn
-    (setenv "PATH"
-            (concat
-             "~/apps/cygwin/bin" path-separator (getenv "PATH")
-             )
-            )
-    ))
- )
+  (progn (setenv "PATH" (concat "~/apps/cygwin/bin" path-separator (getenv "PATH"))))))
 
 ;;; Code:
 
