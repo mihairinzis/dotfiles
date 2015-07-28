@@ -25,7 +25,7 @@
     js2-mode
     emmet-mode
     ;; smart-mode-line
-    ibuffer-vc
+    ;; ibuffer-vc
     quickrun
     ;; hydra
     )
