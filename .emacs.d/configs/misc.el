@@ -514,6 +514,18 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :ensure t
   :init (totd-start))
 
+(use-package google-translate
+  :ensure t
+  :defer t
+  :config
+  (setq google-translate-translation-directions-alist
+        '(("de" . "en") ("en" . "de") ("de" . "ro") ("ro" . "de"))))
+
+(use-package shrink-whitespace
+  :ensure t
+  :defer t
+  :bind ("M-SPC" . shrink-whitespace))
+
 ;; (key-chord-define-global
 ;;  "rr"
 ;;  (defhydra hydra-window-resize ()

@@ -97,6 +97,12 @@ _p_rint
    (defhydra hydra-zoom ()
      "zoom"
      ("=" text-scale-increase "in")
-     ("-" text-scale-decrease "out"))))
+     ("-" text-scale-decrease "out")))
+
+  (defhydra hydra-german (global-map "C-c w")
+    "german"
+    ("g" google-translate-at-point)
+    ("l" text-scale-decrease "out")))
+
 
 ;;; hydras.el ends here
