@@ -2,7 +2,11 @@
 
 ;;; Commentary:
 ;;;
-
+;; nxml-mode
+(setq
+ nxml-child-indent 3
+ nxml-attribute-indent 3
+ nxml-slash-auto-complete-flag t)
 ;;; Code:
 
 ;; el-get initialization
@@ -525,6 +529,18 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :ensure t
   :defer t
   :bind ("M-SPC" . shrink-whitespace))
+
+(use-package helm-flycheck
+  :ensure t
+  :config
+  (define-key flycheck-mode-map (kbd "C-c ! h") 'helm-flycheck)
+  (key-chord-define-global
+   "QF" (defhydra flycheck-hydra ()
+          "errors"
+          ("n" flycheck-next-error "next")
+          ("p" flycheck-previous-error "previous")
+          ("h" helm-flycheck "helm" :color blue)
+          ("q" nil "quit"))))
 
 ;; (key-chord-define-global
 ;;  "rr"

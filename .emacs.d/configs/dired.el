@@ -50,7 +50,8 @@
 ;; auto refresh dired, but be quiet about it
 (setq-default global-auto-revert-non-file-buffers t)
 (setq directory-free-space-args "-Pkh")
-(setq dired-listing-switches "-laGh1v --group-directories-first")
+;; (setq dired-listing-switches "-laGh1v --group-directories-first")
+(setq-default dired-listing-switches "-alhv")
 
 ;; get total size of marked files/dirs in dired
 (defun dired-get-size ()
