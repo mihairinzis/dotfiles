@@ -2,6 +2,12 @@
 
 ;;; Commentary:
 ;;;
+
+(custom-set-variables
+ '(js2-basic-offset 2)
+ '(js2-bounce-indent-p t)
+ )
+
 ;; nxml-mode
 (setq
  nxml-child-indent 3
@@ -114,7 +120,7 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
   :defer t)
 
 (use-package god-mode
-  ;; :disabled t
+  :disabled t
   :ensure t
   :defer t
   :init
@@ -488,10 +494,6 @@ Deletes whitespace at join. With prefix ARG kills that many lines"
 (use-package impatient-mode
   :ensure t
   :defer t)
-
-(use-package pretty-mode
-  :ensure t
-  :init (global-pretty-mode t))
 
 (use-package neotree
   :disabled t
