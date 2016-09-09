@@ -16,9 +16,8 @@ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 own_window_transparent no
 
 # Minimum size of text area
-minimum_size 1360
-#maximum_width 1360
-minimum_width 2800
+minimum_size 1920
+maximum_height 20
 
 # If own_window_transparent no, set a specified background colour (defaults to black). Takes either a hex value (e.g. ffffff, note the lack of '#') or a valid RGB name (see /usr/lib/X11/rgb.txt)
 own_window_colour 3f3f3f
@@ -62,7 +61,7 @@ format_human_readable yes
 short_units yes
 
 # Desired output unit of all objects displaying a temperature. Parameters are either "fahrenheit" or "celsius". The default unit is degree Celsius.
-temperature_unit celsius	
+temperature_unit celsius
 
 # How strict should if_up be when testing an interface for being up? The value is one of up, link or address, to check for the interface being solely up, being up and having link or being up, having link and an assigned IP address.
 if_up_strictness address
@@ -70,14 +69,9 @@ if_up_strictness address
 # Width for $top name value (defaults to 15 characters).
 top_name_width 7
 
-# temp stuff
-# cluj:${color0}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/LRCL cloud_cover 60}${color}, \
-# ${color0}${weather http://weather.noaa.gov/pub/data/observations/metar/stations/ LRCL temperature 60}°C${color} \
-
-
 #After this begins text to be formatted on screen. Backslash (\) escapes newlines in the text section. This can be useful for cleaning up config files where conky is used to pipe input to dzen2.
 TEXT
-#${if_match ${desktop}==1}${color1}${endif}null${color}${offset 10}${if_match ${desktop}==2}${color1}${endif}art${color}${offset 10}${if_match ${desktop}==3}${color1}${endif}www${color}${offset 10}${if_match ${desktop}==4}${color1}${endif}im${color} | \ 
+#${if_match ${desktop}==1}${color1}${endif}null${color}${offset 10}${if_match ${desktop}==2}${color1}${endif}art${color}${offset 10}${if_match ${desktop}==3}${color1}${endif}www${color}${offset 10}${if_match ${desktop}==4}${color1}${endif}im${color} | \
 #
 # CPU usage and most consuming process
 cpu:${if_match ${cpu cpu0}>30}${color1}${else}${color0}$endif\
@@ -85,7 +79,7 @@ ${cpu cpu0}%${color}, \
 temp:${if_match ${acpitemp}>50}${color1}${else}${color0}$endif\
 ${acpitemp}C${color}, hog:${color0}${top name 1}${top cpu 1}%${color} | \
 #
-# RAM usage and most consuming process 
+# RAM usage and most consuming process
 ram:${color0}$memperc%${color}, \
 hog:${color0}${top_mem name 1}${top_mem mem 1}%${color} | \
 #
@@ -98,16 +92,14 @@ down:${color0}${downspeed eth0}/s${color} \
 up:${color0}${upspeed eth0}/s${color} | $endif\
 #
 # Volume
-${execpi 5 sh ~/.config/scripts/conky/volume.sh } | \
+vol: ${execpi 5 amixer -c 0 get Master | grep Mono: | cut -d " " -f6} | \
 #
 # Time/Date
 time:${color0}${time %d/%m/%y}, ${time %H:%M}${color} | \
-#
-# Dropbox status
-${execpi 2 sh ~/.config/scripts/conky/dropboxstatus.sh} | \
-#
-# Show stuff according to internet availability
-${execpi 3600 sh ~/.config/scripts/conky/misc.sh 869897} | \
-#
-# Also show top consuming processes when there is not internet
-${execpi 2 sh ~/.config/scripts/conky/top-processes.sh} \
+# Battery
+bat:${if_match ${battery_percent}<10}${color1}${else}${color0}$endif${battery_percent}%${color} | \
+# Weather cluj
+cluj: ${color0}${execpi 3600 python3 ~/.config/scripts/conky/openweathermap.py}${color} | \
+# Uptime
+up: ${color0}${uptime}${color} | \
+${execi 300 fortune -a -n 50 -s | fold -w66 | tr '\n' ' '}
