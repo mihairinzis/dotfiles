@@ -71,7 +71,6 @@ top_name_width 7
 
 #After this begins text to be formatted on screen. Backslash (\) escapes newlines in the text section. This can be useful for cleaning up config files where conky is used to pipe input to dzen2.
 TEXT
-#${if_match ${desktop}==1}${color1}${endif}null${color}${offset 10}${if_match ${desktop}==2}${color1}${endif}art${color}${offset 10}${if_match ${desktop}==3}${color1}${endif}www${color}${offset 10}${if_match ${desktop}==4}${color1}${endif}im${color} | \
 #
 # CPU usage and most consuming process
 cpu:${if_match ${cpu cpu0}>30}${color1}${else}${color0}$endif\
@@ -102,4 +101,4 @@ bat:${if_match ${battery_percent}<10}${color1}${else}${color0}$endif${battery_pe
 cluj: ${color0}${execpi 3600 python3 ~/.config/scripts/conky/openweathermap.py}${color} | \
 # Uptime
 up: ${color0}${uptime}${color} | \
-${execi 300 fortune -a -n 50 -s | fold -w66 | tr '\n' ' '}
+${execi 50 fortune -a -n 50 -s | fold -w66 | tr '\n' ' '}

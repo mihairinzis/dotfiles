@@ -18,6 +18,7 @@ values."
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers
    '(
+     typescript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
@@ -39,12 +40,14 @@ values."
      html
      javascript
      jabber
-     python
+     ;; python
      shell-scripts
      latex
      sql
-     java
-     (ranger :variables ranger-show-preview t))
+     ivy
+     ;; java
+     (ranger :variables ranger-show-preview t)
+     spacemacs-ivy)
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
@@ -310,6 +313,7 @@ layers configuration. You are free to put any user code."
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (global-set-key (kbd "C-c c") 'comment-or-uncomment-line-or-region)
   (global-set-key (kbd "C-x C-b") 'ibuffer)
+
   ;; Dired keys
   (define-key dired-mode-map (kbd "q") 'kill-this-buffer)
   (define-key dired-mode-map "a" 'dired-up-directory)
@@ -317,8 +321,8 @@ layers configuration. You are free to put any user code."
   ;; Set file registers
   (set-register ?m '(file . "~/projects/dotfiles/.emacs.d/configs/misc.el"))
   (set-register ?t '(file . "~/Dropbox/Privat/org/tasks.org"))
-
   )
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
