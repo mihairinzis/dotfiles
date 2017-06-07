@@ -8,8 +8,6 @@
       '((holiday-fixed 1 1 "Anul nou")
         (holiday-fixed 1 2 "A doua zi de anul nou")
         (holiday-greek-orthodox-easter)
-        ;; (holiday-fixed 4 12 "Prima zi de Pasti")
-        ;; (holiday-fixed 4 13 "A doua zi de Pasti")
         (holiday-fixed 5 1 "Ziua muncii")
         (holiday-fixed 5 31 "Prima zi de Rusalii")
         (holiday-fixed 6 1 "A doua zi de Rusalii")
@@ -22,7 +20,6 @@
 
 (setq calendar-holidays
       (append romanian-holidays
-              holiday-solar-holidays
               ;; holiday-general-holidays
               ;; holiday-other-holidays
               ;; holiday-local-holidays

@@ -665,7 +665,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     </keybind>
     <keybind key="W-t">
       <action name="Execute">
-        <command>sh ~/.config/scripts/urxvt-bind.sh zenburn</command>
+        <command>gnome-terminal</command>
         <startupnotify>
           <enabled>yes</enabled>
           <name>urxvt</name>

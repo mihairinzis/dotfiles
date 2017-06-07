@@ -1,11 +1,14 @@
 [user]
 	name = Mihai Rinzis
 [credential]
-	helper = cache --timeout=3600
+	helper = cache --timeout=99999
 [core]
 	editor = emacs
+	autocrlf = false
 [merge]
 	tool = emerge
 [alias]
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+[push]
+	default = simple
