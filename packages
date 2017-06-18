@@ -1,8 +1,8 @@
 # add no-install-recommends option
 # remove comments?
 
-# x and openbox
-xorg openbox
+# x, openbox and dm
+xorg openbox lightdm
 
 # file manager
 ranger atool poppler-utils highlight mediainfo caca-utils w3m
@@ -13,20 +13,19 @@ rar unrar zip unzip p7zip-full p7zip-rar bzip2 arj lzma ntfs-3g
 # file-roller unace
 
 # appearance
-conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklight
+conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklight redshift
 # redshift libgl1-mesa-dri-experimental
 
 # term
-rxvt-unicode zsh-beta command-not-found 
+rxvt-unicode zsh command-not-found 
 
 # misc
-firmware-linux dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted laptop-mode-tools clipit fortune-mod fortunes compton bleachbit nautilus-dropbox
+rofi dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes compton bleachbit nautilus-dropbox
 
 # pmount wine gcalctool
 
 # browser
-icedtea-plugin
-# luakit conkeror iceweasel opera flashplugin-nonfree
+conkeror
 
 # im
 # pidgin pidgin-plugin-pack irssi xchat weechat
@@ -42,7 +41,7 @@ libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au
 # texlive-full texlive-lang-european latex-beamer
 
 # pdf
-# evince zathura
+evince
 
 # publishing
 # gucharmap pdfshuffler scribus
@@ -51,7 +50,8 @@ libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au
 fonts-inconsolata xfonts-terminus fonts-vlgothic ttf-liberation fonts-droid ttf-anonymous-pro fonts-comfortaa ttf-freefont ttf-mscorefonts-installer ttf-bitstream-vera ttf-dejavu
 
 # sound
-alsa-base alsa-utils
+pavucontrol pasystray
+#alsa-base alsa-utils
 
 # image viewer/wallpaper
 gpicview nitrogen scrot
@@ -61,8 +61,7 @@ gpicview nitrogen scrot
 # inkscape gimp shotwell
 
 # network manager
-# wicd-curses pppoeconf
-# network-manager-gnome network-manager-pptp-gnome network-manager-vpnc-gnome network-manager-openvpn-gnome
+network-manager-gnome network-manager-pptp-gnome network-manager-vpnc-gnome network-manager-openvpn-gnome
 
 # printing
 cups cups-pdf system-config-printer printer-driver-hpijs
@@ -71,7 +70,7 @@ cups cups-pdf system-config-printer printer-driver-hpijs
 # libsane simple-scan
 
 # ide/editor
-emacs24 geany
+emacs25 geany
 # codeblocks eclipse netbeans qtcreator
 
 # compiler/lib
@@ -79,11 +78,9 @@ build-essential ipython ipython3 pyflakes
 
 # version control
 git 
-# git-gui gitk git-cvs git-svn git-email mercurial subversion subversion-tools bzr bzrtools cvs
 
 # video player
-mplayer
-# vlc miro
+mplayer vlc
 
 # music player
 moc
@@ -96,13 +93,8 @@ moc
 # soundconverter audacity oggconvert lmms kid3-qt picard easytag 
 
 # games
-# zaz nexuiz openarena frozen-bubble hedgewars armagetronad gnubg glest
+# 0ad zaz nexuiz openarena frozen-bubble hedgewars armagetronad gnubg glest
 
-# redundant
-# brasero sox twolame vorbis-tools libcrystalhd3 lame faad gstreamer0.10-ffmpeg gstreamer0.10-plugins-bad gstreamer0.10-alsa gstreamer0.10-plugins-base gstreamer0.10-plugins-good gstreamer0.10-plugins-ugly 
-
-
-
-
-
-
+# drivers
+xserver-xorg-input-synaptics firmware-linux firmware-iwlwifi
+bumblebee-nvidia primus #dpkg --add-architecture i386 && apt-get install primus-libs:i386 && adduser $USER bumblebee

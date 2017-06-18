@@ -8,7 +8,7 @@
   <menu id="root-menu" label="Openbox 3">
     <item label="Terminal emulator">
       <action name="Execute">
-        <execute>urxvt</execute>
+        <execute>x-terminal-emulator</execute>
       </action>
     </item>
     <!-- <item label="Web browser"> -->
@@ -86,12 +86,19 @@
         <execute>systemctl suspend</execute>
       </action>
     </item>
-    <item label="Exit openbox">
-      <action name="Exit" />
+    <item label="Reboot">
+      <action name="Execute">
+        <execute>systemctl reboot</execute>
+      </action>
+    </item>
+    <item label="Halt">
+      <action name="Execute">
+        <execute>systemctl poweroff</execute>
+      </action>
     </item>
     <item label="Logout">
-      <action name="Execute">
-        <execute>lxsession-logout</execute>
+      <action name="Exit">
+	<prompt>no</prompt>
       </action>
     </item>
   </menu>

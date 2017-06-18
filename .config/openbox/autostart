@@ -1,0 +1,10 @@
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+#@nitrogen --restore &
+nm-applet &
+conky -q &
+tlp start &
+redshift &
+pasystray &
+clipit &
+emacs --daemon &
+
