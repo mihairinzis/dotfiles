@@ -5,11 +5,11 @@
 xorg openbox lightdm
 
 # file manager
-ranger atool poppler-utils highlight mediainfo caca-utils w3m
+xfe atool poppler-utils highlight mediainfo caca-utils w3m
 # nautilus seahorse-nautilus spacefm mc
 
 # archive
-rar unrar zip unzip p7zip-full p7zip-rar bzip2 arj lzma ntfs-3g 
+rar unrar zip unzip p7zip-full p7zip-rar bzip2 arj lzma ntfs-3g
 # file-roller unace
 
 # appearance
@@ -17,7 +17,7 @@ conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklig
 # redshift libgl1-mesa-dri-experimental
 
 # term
-rxvt-unicode zsh command-not-found 
+rxvt-unicode zsh command-not-found
 
 # misc
 rofi dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes compton bleachbit nautilus-dropbox
@@ -34,7 +34,7 @@ conkeror
 # transmission-gtk rtorrent aria2
 
 # office
-libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au mythes-ro hyphen-ro hyphen-en-us libreoffice-gtk libreoffice-pdfimport 
+libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au mythes-ro hyphen-ro hyphen-en-us libreoffice-gtk libreoffice-pdfimport
 # pstoedit abiword gnumeric openclipart
 
 # latex
@@ -77,24 +77,23 @@ emacs25 geany
 build-essential ipython ipython3 pyflakes
 
 # version control
-git 
+git
 
 # video player
 mplayer vlc
 
 # music player
 moc
-# mpd nmpcpp clementine 
+# mpd nmpcpp clementine
 
 # video editor
 # kdenlive cheese avidemux openshot
 
 # audio editor
-# soundconverter audacity oggconvert lmms kid3-qt picard easytag 
+# soundconverter audacity oggconvert lmms kid3-qt picard easytag
 
 # games
 # 0ad zaz nexuiz openarena frozen-bubble hedgewars armagetronad gnubg glest
 
 # drivers
-xserver-xorg-input-synaptics firmware-linux firmware-iwlwifi
-bumblebee-nvidia primus #dpkg --add-architecture i386 && apt-get install primus-libs:i386 && adduser $USER bumblebee
+xserver-xorg-input-synaptics firmware-linux firmware-iwlwifi bumblebee-nvidia primus #dpkg --add-architecture i386 && apt-get update && apt-get install primus-libs:i386 && adduser $USER bumblebee

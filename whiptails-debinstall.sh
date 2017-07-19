@@ -49,19 +49,18 @@ function deb_install {
     if [[ $EUID -ne 0 ]]; then
         echo "You must be a root user" 2>&1
         exit 1
-    else
-        packages_file="./packages"
-        if [ ! -f $packages_file ]; then
-            echo "Packages file is not present"
-            exit 1
-        fi
-        # apt-get update
-        packages=()
-        read_packages $packages_file $packages
-        whip_packages $packages
-        if [ $? -eq 0 ] ; then
-            install_packages $packages
-        fi
+    fi
+    packages_file="./packages"
+    if [ ! -f $packages_file ]; then
+        echo "Packages file is not present"
+        exit 1
+    fi
+    # apt-get update
+    packages=()
+    read_packages $packages_file $packages
+    whip_packages $packages
+    if [ $? -eq 0 ] ; then
+        install_packages $packages
     fi
 }
 
