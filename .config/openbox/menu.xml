@@ -69,6 +69,11 @@
       </item>
     </menu>
     <separator />
+    <item label="Record screen">
+      <action name="Execute">
+        <execute>x-terminal-emulator -e ffmpeg -video_size 1920x1080 -framerate 25 -f x11grab -i :0.0 screencast.mp4</execute>
+      </action>
+    </item>
     <item label="Reconfigure">
       <action name="Reconfigure" />
     </item>
