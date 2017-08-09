@@ -123,7 +123,7 @@ line_height = 3
 separator_height = 2
 
 # Padding between text and separator.
-padding = 6
+padding = 12
 
 # Horizontal padding.
 horizontal_padding = 6
@@ -149,14 +149,14 @@ browser = /usr/bin/firefox -new-tab
 
 # Align icons left/right/off
 icon_position = left
-max_icon_size = 80
+max_icon_size = 60
 
 # Paths to default icons.
 icon_folders = /usr/share/icons/Adwaita/16x16/mimetypes/:/usr/share/icons/Adwaita/48x48/status/:/usr/share/icons/Adwaita/16x16/devices/:/usr/share/icons/Adwaita/48x48/notifications/:/usr/share/icons/Adwaita/48x48/emblems/
 
 [frame]
 width = 1
-color = "#F0F0F0"
+color = "#DCDCCC"
 
 [shortcuts]
 
@@ -179,12 +179,20 @@ history = ctrl+grave
 # Context menu.
 context = ctrl+shift+period
 
-[urgency_normal]
-frame_color = "#1E2320"
+[urgency_low]
 foreground = "#dcdccc"
 background = "#3f3f3f"
-#background = "#2B313C"
+timeout = 4
+
+[urgency_normal]
+foreground = "#dcdccc"
+background = "#3f3f3f"
 timeout = 6
+
+[urgency_critical]
+foreground = "#dcdccc"
+background = "#3f3f3f"
+timeout = 8
 
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
