@@ -79,7 +79,8 @@ temp:${if_match ${acpitemp}>50}${color1}${else}${color0}$endif\
 ${acpitemp}C${color}, hog:${color0}${top name 1}${top cpu 1}%${color} | \
 #
 # RAM usage and most consuming process
-ram:${color0}$memperc%${color}, \
+ram:${if_match ${memperc}>90}${color1}${else}${color0}$endif\
+${memperc}%${color}, \
 hog:${color0}${top_mem name 1}${top_mem mem 1}%${color} | \
 #
 # Upload/download speed for network interfaces
