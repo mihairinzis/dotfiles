@@ -1,7 +1,7 @@
 #!/bin/bash
 
 function install_package {
-    apt-get --force-yes --yes install $package_string
+    apt --force-yes --yes --ignore-missing install $package_string
 }
 
 function install_packages {
