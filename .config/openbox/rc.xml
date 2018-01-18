@@ -631,7 +631,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     </keybind>
     <keybind key="W-w">
       <action name="Execute">
-        <command>gnome-www-browser</command>
+        <command>x-www-browser</command>
         <startupnotify>
           <enabled>yes</enabled>
           <name>Minefield Web Browser</name>

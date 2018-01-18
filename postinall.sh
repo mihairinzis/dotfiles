@@ -6,11 +6,13 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 
-whiptail --title "Packages" --checklist --separate-output "Pick the ones you need:" 20 45 15 \
+whiptail --title "Packages" --checklist --separate-output "Pick the ones you need:" 20 25 15 \
     "Chrome" "" off \
     "Firefox" "" off \
     "Youtube-Dl" "" off \
-    "Syncthing" "" off 2>results
+    "Syncthing" "" off \
+    "Docker" "" off \
+    "NodeJs" "" off 2>results
 
 to_install=()
 while read choice
@@ -19,7 +21,7 @@ do
         Chrome)
             curl -s https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
             echo "deb https://dl.google.com/linux/chrome/deb/ stable main" | tee /etc/apt/sources.list.d/google.list
-            to_install+=("google-chrome")
+            to_install+=("google-chrome-stable")
             ;;
         Firefox)
             wget -O FirefoxDev.tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US'
@@ -36,13 +38,28 @@ do
             echo "deb https://apt.syncthing.net/ syncthing stable" | tee /etc/apt/sources.list.d/syncthing.list
             to_install+=("syncthing")
             ;;
+        Docker)
+            curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | apt-key add -
+            add-apt-repository \
+                "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+                $(lsb_release -cs) \
+                stable"
+            to_install+=("apt-transport-https ca-certificates curl software-properties-common docker-ce")
+            ;;
+        NodeJs)
+            curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+            to_install+=("nodejs")
+            ;;
         *)
             ;;
     esac
 done < results
 
-for package in ${to_install[@]} ; do
-    package_string="$package_string $package"
-done
-package_string=`echo $package_string | tr -d '\"'`
-apt --force-yes --yes --ignore-missing install $package_string
+if [ ${#to_install[@]} -gt 0 ]; then
+    apt update
+    for package in ${to_install[@]} ; do
+        package_string="$package_string $package"
+    done
+    package_string=`echo $package_string | tr -d '\"'`
+    apt --force-yes --yes --ignore-missing install $package_string
+fi
