@@ -12,6 +12,7 @@ whiptail --title "Packages" --checklist --separate-output "Pick the ones you nee
     "Youtube-Dl" "" off \
     "Syncthing" "" off \
     "Docker" "" off \
+    "Fish" "" off \
     "NodeJs" "" off 2>results
 
 to_install=()
@@ -45,6 +46,11 @@ do
                 $(lsb_release -cs) \
                 stable"
             to_install+=("apt-transport-https ca-certificates curl software-properties-common docker-ce")
+            ;;
+        Fish)
+            apt --force-yes --yes install fish
+            chsh -s `which fish`
+            curl -L https://get.oh-my.fish | fish
             ;;
         NodeJs)
             curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
