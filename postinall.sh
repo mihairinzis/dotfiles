@@ -13,6 +13,7 @@ whiptail --title "Packages" --checklist --separate-output "Pick the ones you nee
     "Syncthing" "" off \
     "Docker" "" off \
     "Fish" "" off \
+    "Prezto" "" off \
     "NodeJs" "" off 2>results
 
 to_install=()
@@ -28,7 +29,7 @@ do
             wget -O FirefoxDev.tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US'
             tar xvjf FirefoxDev.tar.bz2 -C /opt
             rm FirefoxDev.tar.bz2
-            ln -s /opt/firefox/firefox /usr/bin/firefox
+            ln -fs /opt/firefox/firefox /usr/bin/firefox
             ;;
         Youtube-Dl)
             curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
@@ -51,6 +52,15 @@ do
             apt --force-yes --yes install fish
             chsh -s `which fish`
             curl -L https://get.oh-my.fish | fish
+            ;;
+        Prezto)
+            zsh
+            git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
+            setopt EXTENDED_GLOB
+            for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
+                ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
+            done
+            chsh -s /bin/zsh
             ;;
         NodeJs)
             curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
