@@ -38,36 +38,20 @@
       </action>
     </item>
     <separator/>
-    <menu id="scrot-menu" label="Scrot">
-      <item label="Scrot now">
-        <action name="Execute">
-          <execute>
-            scrot '%Y-%m-%d--%s_scrot.png'
-          </execute>
-        </action>
-      </item>
-      <item label="or in 5 secs...">
-        <action name="Execute">
-          <execute>
-            scrot -d 5 '%Y-%m-%d--%s_scrot.png'
-          </execute>
-        </action>
-      </item>
-      <item label="or in 10 secs...">
-        <action name="Execute">
-          <execute>
-            scrot -d 10 '%Y-%m-%d--%s_scrot.png'
-          </execute>
-        </action>
-      </item>
-      <item label="or selected area...">
-        <action name="Execute">
-          <execute>
-            scrot -s '%Y-%m-%d--%s_scrot.png'
-          </execute>
-        </action>
-      </item>
-    </menu>
+    <item label="Flameshot now">
+      <action name="Execute">
+        <execute>
+          flameshot gui
+        </execute>
+      </action>
+    </item>
+    <item label="Flameshot in 5 secs...">
+      <action name="Execute">
+        <execute>
+          flameshot gui -d 5000
+        </execute>
+      </action>
+    </item>
     <separator />
     <item label="Record screen">
       <action name="Execute">

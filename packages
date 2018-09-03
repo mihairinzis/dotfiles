@@ -54,7 +54,7 @@ pavucontrol pasystray
 #alsa-base alsa-utils
 
 # image viewer/wallpaper
-gpicview nitrogen scrot
+gpicview nitrogen flameshot
 # sxiv eog eog-plugins feh shutter
 
 # image editor

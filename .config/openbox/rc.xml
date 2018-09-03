@@ -612,7 +612,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     <keybind key="W-f">
       <keybind key="n">
         <action name="Execute">
-          <command>xfe</command>
+          <command>nautilus --no-desktop</command>
           <startupnotify>
             <enabled>yes</enabled>
             <name>File Manager</name>
