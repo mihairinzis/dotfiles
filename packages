@@ -4,6 +4,9 @@
 # x, openbox and dm
 xorg openbox lightdm
 
+#i3
+i3 i3blocks
+
 # file manager
 xfe atool poppler-utils highlight mediainfo caca-utils w3m
 # nautilus seahorse-nautilus spacefm mc

@@ -503,8 +503,12 @@ Copy the file to $HOME/.config/openbox/ instead. -->
       </action>
     </keybind>
     <keybind key="W-j">
-      <action name="ShowMenu">
-        <menu>client-list-combined-menu</menu>
+      <action name="Execute">
+        <command>rofi -combi-modi window,drun,run -show combi -modi combi</command>
+        <startupnotify>
+          <enabled>yes</enabled>
+          <name>rofi</name>
+        </startupnotify>
       </action>
     </keybind>
     <keybind key="W-h">
@@ -593,7 +597,7 @@ Copy the file to $HOME/.config/openbox/ instead. -->
     <!-- Keybindings for running applications -->
     <keybind key="W-p">
       <action name="Execute">
-        <command>rofi -show run</command>
+        <command>rofi -combi-modi window,drun,run -show combi -modi combi</command>
         <startupnotify>
           <enabled>yes</enabled>
           <name>rofi</name>
