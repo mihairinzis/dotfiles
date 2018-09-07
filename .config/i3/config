@@ -38,15 +38,23 @@ floating_modifier $mod
 # no title bar
 new_window 1pixel
 
+# mouse does not focus
+focus_follows_mouse no
+
 # start a terminal
 bindsym $mod+t exec i3-sensible-terminal
 bindsym $mod+e exec emacsclient -c
+bindsym $mod+b exec --no-startup-id sh ~/.config/scripts/stalonetray-bind.sh
+for_window [class="stalonetray"] floating enable
 
 # kill focused window
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
+
+# xkill window
+bindsym $mod+k kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 bindsym $mod+p exec "rofi -combi-modi window,drun,run -show combi -modi combi"
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -54,10 +62,10 @@ bindsym $mod+p exec "rofi -combi-modi window,drun,run -show combi -modi combi"
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -66,10 +74,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -132,7 +140,22 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+# lock screen
+bindsym $mod+l exec i3lock -f
+
+set $mode_session Session: l[o]gout [s]uspend [r]eboot p[oweroff]
+bindsym $mod+Shift+q mode "$mode_session"
+
+mode "$mode_session" {
+    bindsym o exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id i3lock && systemctl suspend, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym r exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    bindsym Escape mode "default"
+    bindsym Return mode "default"
+}
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -142,10 +165,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        #bindsym j resize shrink width 10 px or 10 ppt
+        #bindsym k resize grow height 10 px or 10 ppt
+        #bindsym l resize shrink height 10 px or 10 ppt
+        #bindsym semicolon resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -167,6 +190,7 @@ exec tlp start
 exec emacs --daemon
 exec syncthing -no-browser
 exec dunst
+exec --no-startup-id polybar example
 # exec pasystray
 exec --no-startup-id xsetroot -solid "#333333"
 # default apps workspace
@@ -176,10 +200,10 @@ assign [class="Rambbox"] 5
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
-bar {
-        position top
-        # status_command i3status
-        status_command i3blocks
-        tray_output DP-3
-        font pango:DejaVu Sans Mono 7
-}
+# bar {
+#         position top
+#         # status_command i3status
+#         status_command i3blocks
+#         tray_output DP-3
+#         font pango:DejaVu Sans Mono 7
+# }
