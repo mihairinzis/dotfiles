@@ -23,7 +23,7 @@ conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklig
 rxvt-unicode zsh command-not-found
 
 # misc
-rofi dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes compton bleachbit nautilus-dropbox
+rofi dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes fortunes-off compton bleachbit nautilus-dropbox
 
 # pmount wine gcalctool
 

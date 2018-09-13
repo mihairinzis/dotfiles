@@ -59,7 +59,7 @@ font-1 = unifont:fontformat=truetype:size=10:antialias=false;0
 
 modules-left = i3 cpu memory temperature filesystem wlan eth weather fortune
 modules-center =
-modules-right =  pulseaudio keymapmenu xkeyboard battery date powermenu
+modules-right =  pulseaudio keymapmenu xkeyboard battery date
 
 tray-position = right
 tray-padding = 2
@@ -81,7 +81,7 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 [variables]
-wlan-interface = wlp3s0
+wlan-interface = wlp4s0
 eth-interface = enp0s31f6
 
 [module/xwindow]
@@ -207,10 +207,19 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
+; format-prefix = " "
+; format-prefix-foreground = ${colors.foreground-alt}
+ramp-used-foreground = ${colors.foreground-alt}
 ; format-underline = #4bffdc
 label = %percentage_used%%
+format = <ramp-used> <label>
+ramp-used-0 = ▁
+ramp-used-1 = ▂
+ramp-used-2 = ▃
+ramp-used-3 = ▄
+ramp-used-4 = ▅
+ramp-used-5 = ▆
+ramp-used-6 = ▇
 
 [module/wlan]
 type = internal/network
@@ -383,10 +392,10 @@ exec = python3 ~/projects/dotfiles/.config/scripts/conky/openweathermap.py
 
 [module/fortune]
 type = custom/script
-interval = 10
+interval = 20
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-exec = fortune -a -n 50 -s | fold -w66 | tr '\n' ' '
+exec = fortune -o -n 80 -s | fold -w66 | tr '\n' ' '
 
 [settings]
 screenchange-reload = true
