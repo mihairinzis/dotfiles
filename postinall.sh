@@ -66,6 +66,11 @@ do
             curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
             to_install+=("nodejs")
             ;;
+        Flatpack)
+            apt --force-yes --yes install flatpack
+            flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+            flatpak install flathub org.gnu.emacs
+            ;;
         *)
             ;;
     esac

@@ -153,14 +153,14 @@ bindsym $mod+Shift+r restart
 # lock screen
 bindsym $mod+l exec i3lock -f
 
-set $mode_session Session: l[o]gout [s]uspend [r]eboot p[oweroff]
+set $mode_session Session: l[o]gout [s]uspend [r]eboot [p]oweroff
 bindsym $mod+Shift+q mode "$mode_session"
 
 mode "$mode_session" {
     bindsym o exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id i3lock && systemctl suspend, mode "default"
     bindsym r exec --no-startup-id systemctl reboot, mode "default"
-    bindsym r exec --no-startup-id systemctl poweroff -i, mode "default"
+    bindsym p exec --no-startup-id systemctl poweroff -i, mode "default"
 
     bindsym Escape mode "default"
     bindsym Return mode "default"
@@ -196,10 +196,12 @@ bindsym $mod+r mode "resize"
 exec redshift
 exec nm-applet
 exec tlp start
-exec emacs --daemon
+# exec emacs --daemon
+exec flatpak run org.gnu.emacs -fg-daemon
 exec syncthing -no-browser
 exec dunst
-exec --no-startup-id polybar example
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
 # exec pasystray
 exec --no-startup-id xsetroot -solid "#333333"
 # default apps workspace
