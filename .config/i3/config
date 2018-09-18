@@ -200,6 +200,7 @@ exec tlp start
 exec flatpak run org.gnu.emacs -fg-daemon
 exec syncthing -no-browser
 exec dunst
+exec clipit
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 # exec pasystray

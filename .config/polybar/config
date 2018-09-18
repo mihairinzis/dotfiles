@@ -266,7 +266,7 @@ type = internal/date
 interval = 5
 
 date =
-date-alt = " %Y-%m-%d"
+date-alt = " %A, %d %b %Y"
 
 time = %H:%M
 time-alt = %H:%M:%S
