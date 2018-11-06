@@ -5,16 +5,18 @@ if [[ $EUID -ne 0 ]]; then
     exit 1
 fi
 
-
 whiptail --title "Packages" --checklist --separate-output "Pick the ones you need:" 20 25 15 \
     "Chrome" "" off \
     "Firefox" "" off \
     "Youtube-Dl" "" off \
+    "Autorandr" "" off \
     "Syncthing" "" off \
     "Docker" "" off \
     "Fish" "" off \
     "Prezto" "" off \
-    "NodeJs" "" off 2>results
+    "NodeJs" "" off \
+    "Yarn" "" off \
+    "Flatpack" "" off 2>results
 
 to_install=()
 while read choice
@@ -32,8 +34,12 @@ do
             ln -fs /opt/firefox/firefox /usr/bin/firefox
             ;;
         Youtube-Dl)
-            curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
-            chmod a+rx /usr/local/bin/youtube-dl
+            apt --force-yes --yes install python3-pip
+            pip3 install --upgrade youtube_dl
+            ;;
+        Autorandr)
+            apt --force-yes --yes install python3-pip
+            pip3 install --upgrade autorandr
             ;;
         Syncthing)
             curl -s https://syncthing.net/release-key.txt | apt-key add -
@@ -65,6 +71,12 @@ do
         NodeJs)
             curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
             to_install+=("nodejs")
+            ;;
+        Yarn)
+            curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+            echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+            apt update && apt --force-yes --yes install yarn
+            yarn global add tern js-beautify eslint typescript tslint ts-server
             ;;
         Flatpack)
             apt --force-yes --yes install flatpack
