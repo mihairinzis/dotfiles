@@ -234,6 +234,7 @@ format-connected-prefix-foreground = ${colors.foreground-alt}
 
 format-disconnected = <label-disconnected>
 format-disconnected-prefix = ${self.format-connected-prefix}
+format-disconnected-prefix-foreground = ${colors.foreground-alt}
 ;format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}

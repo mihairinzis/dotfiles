@@ -73,6 +73,7 @@ values."
                                       ;; tide
                                       ;; ng2-mode
                                       ;; dired+
+                                      forge
                                       dired-du
                                       treemacs
                                       counsel-tramp
@@ -361,6 +362,7 @@ layers configuration. You are free to put any user code."
   (setq dired-dwim-target t)
   (setq delete-by-moving-to-trash nil)
   (setq dired-listing-switches "-alh")
+  (dired-async-mode t)
 
   (setq password-cache-expiry nil)
 
@@ -438,6 +440,43 @@ layers configuration. You are free to put any user code."
     (pcre-mode)
     )
 
+  (setq romanian-holidays
+      '((holiday-fixed 1 1 "Anul nou")
+        (holiday-fixed 1 2 "A doua zi de anul nou")
+        (holiday-greek-orthodox-easter)
+        (holiday-fixed 5 1 "Ziua muncii")
+        (holiday-fixed 5 31 "Prima zi de Rusalii")
+        (holiday-fixed 6 1 "A doua zi de Rusalii")
+        (holiday-fixed 8 15 "Adormirea Maicii Domnului")
+        (holiday-fixed 11 30 "Sfantul apostol Andrei")
+        (holiday-fixed 12 1 "Ziua nationala")
+        (holiday-fixed 12 25 "Prima zi de Craciun")
+        (holiday-fixed 12 26 "A doua zi de Craciun")
+        ))
+
+  (setq calendar-holidays
+        (append romanian-holidays
+                ;; holiday-general-holidays
+                ;; holiday-other-holidays
+                ;; holiday-local-holidays
+                ))
+
+  (setq calendar-location-name "Cluj-Napca, RO"
+        calendar-latitude 46
+        calendar-longitude 23
+        calendar-date-style 'european
+        calendar-mark-holidays-flag t
+        calendar-week-start-day 1
+        calendar-mark-diary-entries-flag nil
+        calendar-day-name-array
+        ["duminică" "luni" "marți" "miercuri" "joi"
+         "vineri" "sâmbătă"]
+        calendar-month-name-array
+        ["ianuarie" "februarie" "martie" "aprilie" "mai"
+         "iunie" "iulie" "august" "septembrie"
+         "octombie" "noiembrie" "decembrie"])
+
+
   ;; Global keys
   (global-set-key (kbd "M-SPC") 'cycle-spacing)
   (global-set-key (kbd "C-c c") 'comment-or-uncomment-line-or-region)
@@ -461,7 +500,7 @@ layers configuration. You are free to put any user code."
  '(evil-want-Y-yank-to-eol nil)
  '(package-selected-packages
    (quote
-    (ansible treepy graphql faff-theme ht org-mime counsel-tramp ghub let-alist all-the-icons memoize font-lock+ dired-icon treemacs pfuture bookmark+ org-category-capture dired-du dired+ restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well dockerfile-mode docker tablist docker-tramp helm-flx helm-company flyspell-correct-helm ace-jump-helm-line yaml-mode ob-elixir yapfify winum wgrep uuidgen unfill smex py-isort spinner org-projectile log4e gntp ng2-mode mwim lorem-ipsum livid-mode json-snatcher json-reformat fsm insert-shebang hl-todo parent-mode git-gutter-fringe+ fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-ivy pos-tip flycheck-credo flx evil-visual-mark-mode evil-unimpaired evil-magit evil-lisp-state evil-indent-plus goto-chg undo-tree diminish web-completion-data dash-functional tern color-identifiers-mode bind-map anzu pythonic f pkg-info epl link-hint dumb-jump typescript-mode ivy-hydra csv-mode restart-emacs git-link multiple-cursors async ranger evil-ediff swiper flyspell-correct avy pug-mode auto-compile packed auto-complete simple-httpd orgit org flycheck-mix company-shell yasnippet skewer-mode ws-butler request git-gutter-fringe eshell-z counsel-projectile tide hydra skype meghanada alchemist counsel alert xterm-color spaceline org-download help-fns+ evil-mc column-enforce-mode iedit highlight elixir-mode projectile with-editor ivy persp-mode live-py-mode hide-comnt eyebrowse helm-core magit-popup dired-filetype-face emacs-eclim web-mode web-beautify w3m toc-org tagedit sql-indent smeargle slim-mode shell-pop scss-mode sass-mode rainbow-mode rainbow-identifiers pyvenv pytest pyenv-mode pip-requirements org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit less-css-mode json-mode js2-refactor js2-mode js-doc jade-mode jabber hy-mode htmlize helm-pydoc helm-pt helm-gitignore helm-flyspell helm-emms helm-css-scss helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-commit gh-md flycheck-pos-tip flycheck fish-mode evil-org eshell-prompt-extras esh-help emms-mode-line-cycle emms emmet-mode diff-hl cython-mode company-web company-tern company-statistics company-quickhelp company-auctex company-anaconda company coffee-mode auto-yasnippet auctex anaconda-mode ac-ispell window-numbering volatile-highlights vi-tilde-fringe spray smooth-scrolling smartparens rainbow-delimiters powerline popwin popup pcre2el paradox page-break-lines open-junk-file neotree move-text macrostep linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-descbinds helm-ag helm google-translate golden-ratio flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-matchit evil-jumper evil-indent-textobject evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu elisp-slime-nav define-word clean-aindent-mode buffer-move auto-highlight-symbol auto-dictionary aggressive-indent adaptive-wrap ace-window ace-link evil-leader evil which-key quelpa package-build use-package bind-key s dash spacemacs-theme)))
+    (forge dap-mode lsp-ui company-lsp lsp-java exwm ansible treepy graphql faff-theme ht org-mime counsel-tramp ghub let-alist all-the-icons memoize font-lock+ dired-icon treemacs pfuture bookmark+ org-category-capture dired-du dired+ restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well dockerfile-mode docker tablist docker-tramp helm-flx helm-company flyspell-correct-helm ace-jump-helm-line yaml-mode ob-elixir yapfify winum wgrep uuidgen unfill smex py-isort spinner org-projectile log4e gntp ng2-mode mwim lorem-ipsum livid-mode json-snatcher json-reformat fsm insert-shebang hl-todo parent-mode git-gutter-fringe+ fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-ivy pos-tip flycheck-credo flx evil-visual-mark-mode evil-unimpaired evil-magit evil-lisp-state evil-indent-plus goto-chg undo-tree diminish web-completion-data dash-functional tern color-identifiers-mode bind-map anzu pythonic f pkg-info epl link-hint dumb-jump typescript-mode ivy-hydra csv-mode restart-emacs git-link multiple-cursors async ranger evil-ediff swiper flyspell-correct avy pug-mode auto-compile packed auto-complete simple-httpd orgit org flycheck-mix company-shell yasnippet skewer-mode ws-butler request git-gutter-fringe eshell-z counsel-projectile tide hydra skype meghanada alchemist counsel alert xterm-color spaceline org-download help-fns+ evil-mc column-enforce-mode iedit highlight elixir-mode projectile with-editor ivy persp-mode live-py-mode hide-comnt eyebrowse helm-core magit-popup dired-filetype-face emacs-eclim web-mode web-beautify w3m toc-org tagedit sql-indent smeargle slim-mode shell-pop scss-mode sass-mode rainbow-mode rainbow-identifiers pyvenv pytest pyenv-mode pip-requirements org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit less-css-mode json-mode js2-refactor js2-mode js-doc jade-mode jabber hy-mode htmlize helm-pydoc helm-pt helm-gitignore helm-flyspell helm-emms helm-css-scss helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-commit gh-md flycheck-pos-tip flycheck fish-mode evil-org eshell-prompt-extras esh-help emms-mode-line-cycle emms emmet-mode diff-hl cython-mode company-web company-tern company-statistics company-quickhelp company-auctex company-anaconda company coffee-mode auto-yasnippet auctex anaconda-mode ac-ispell window-numbering volatile-highlights vi-tilde-fringe spray smooth-scrolling smartparens rainbow-delimiters powerline popwin popup pcre2el paradox page-break-lines open-junk-file neotree move-text macrostep linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-descbinds helm-ag helm google-translate golden-ratio flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-matchit evil-jumper evil-indent-textobject evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu elisp-slime-nav define-word clean-aindent-mode buffer-move auto-highlight-symbol auto-dictionary aggressive-indent adaptive-wrap ace-window ace-link evil-leader evil which-key quelpa package-build use-package bind-key s dash spacemacs-theme)))
  '(paradox-github-token t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
