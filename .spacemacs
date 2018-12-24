@@ -75,7 +75,7 @@ values."
                                       ;; dired+
                                       forge
                                       dired-du
-                                      treemacs
+                                      ;; treemacs
                                       counsel-tramp
                                       docker-tramp)
    ;; A list of packages and/or extensions that will not be install and loaded.

@@ -184,7 +184,7 @@ exec redshift
 exec nm-applet
 exec tlp start
 # exec emacs --daemon
-exec flatpak run org.gnu.emacs -fg-daemon
+# exec flatpak run org.gnu.emacs -fg-daemon
 exec syncthing -no-browser
 exec dunst
 exec clipit
