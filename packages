@@ -20,10 +20,10 @@ conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklig
 # redshift libgl1-mesa-dri-experimental
 
 # term
-rxvt-unicode zsh command-not-found
+rxvt-unicode zsh command-not-found xclip
 
 # misc
-rofi dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes fortunes-off compton bleachbit nautilus-dropbox
+rofi dunst stalonetray curl ack-grep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes fortunes-off compton bleachbit nautilus-dropbox gnupg2
 
 # pmount wine gcalctool
 
