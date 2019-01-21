@@ -5,6 +5,7 @@ general {
 }
 
 order += "cpu_usage"
+order += "cpu_temperature 0"
 order += "disk /"
 order += "disk /home"
 order += "wireless _first_"
@@ -13,7 +14,6 @@ order += "load"
 # order += "run_watch DHCP"
 order += "volume master"
 order += "battery 0"
-# order += "cpu_temperature 0"
 order += "tztime local"
 
 cpu_usage {
@@ -77,8 +77,8 @@ load {
 }
 
 cpu_temperature 0 {
-        format = "T: %degrees °C"
-        path = "/sys/devices/platform/coretemp.0/temp1_input"
+        format = " %degrees°C"
+        path = "/sys/class/thermal/thermal_zone*/temp"
 }
 
 
