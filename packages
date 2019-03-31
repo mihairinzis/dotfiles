@@ -50,7 +50,7 @@ evince
 # gucharmap pdfshuffler scribus
 
 # font
-fonts-inconsolata xfonts-terminus fonts-vlgothic ttf-liberation fonts-droid ttf-anonymous-pro fonts-comfortaa ttf-freefont ttf-mscorefonts-installer ttf-bitstream-vera ttf-dejavu
+fonts-inconsolata fonts-font-awesome
 
 # sound
 pavucontrol pasystray
