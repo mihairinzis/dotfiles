@@ -31,9 +31,11 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     python
+     typescript
+     selectric
+     ;; python
      yaml
-     csv
+     ;; csv
      ;; elixir
      ;; python
      ;; typescript
@@ -54,11 +56,12 @@ values."
      javascript
      ;; jabber
      shell-scripts
-     latex
+     ;; latex
      docker
      restclient
-     sql
-     ;; ivy
+     (ibuffer :variables ibuffer-group-buffers-by 'projects)
+     ;; sql
+     ivy
      ;; java
      ;; (ranger :variables ranger-show-preview t)
      ;; spacemacs-ivy
