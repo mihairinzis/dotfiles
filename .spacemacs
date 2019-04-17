@@ -62,11 +62,12 @@ This function should only modify configuration layer settings."
      ;; jabber
      shell-scripts
      ;; latex
-     restclient
+     (restclient :variables restclient-use-org t)
      (ibuffer :variables ibuffer-group-buffers-by 'projects)
      ;; sql
      ivy
-     java
+     ;; java
+     prettier
      ;; (ranger :variables ranger-show-preview t)
      ;; spacemacs-ivy
      )
@@ -82,9 +83,7 @@ This function should only modify configuration layer settings."
                                       forge
                                       dired-du
                                       ;; treemacs
-                                      counsel-tramp
-                                      all-the-icons
-                                      prettier-js)
+                                      counsel-tramp)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
 
@@ -105,7 +104,26 @@ It should only modify the values of Spacemacs settings."
   ;; This setq-default sexp is an exhaustive list of all the supported
   ;; spacemacs settings.
   (setq-default
-   ;; If non nil ELPA repositories are contacted via HTTPS whenever it's
+   ;; If non-nil then enable support for the portable dumper. You'll need
+   ;; to compile Emacs 27 from source following the instructions in file
+   ;; EXPERIMENTAL.org at to root of the git repository.
+   ;; (default nil)
+   dotspacemacs-enable-emacs-pdumper nil
+
+   ;; File path pointing to emacs 27.1 executable compiled with support
+   ;; for the portable dumper (this is currently the branch pdumper).
+   ;; (default "emacs-27.0.50")
+   dotspacemacs-emacs-pdumper-executable-file "emacs-27.0.50"
+
+   ;; Name of the Spacemacs dump file. This is the file will be created by the
+   ;; portable dumper in the cache directory under dumps sub-directory.
+   ;; To load it when starting Emacs add the parameter `--dump-file'
+   ;; when invoking Emacs 27.1 executable on the command line, for instance:
+   ;;   ./emacs --dump-file=~/.emacs.d/.cache/dumps/spacemacs.pdmp
+   ;; (default spacemacs.pdmp)
+   dotspacemacs-emacs-dumper-dump-file "spacemacs.pdmp"
+
+   ;; If non-nil ELPA repositories are contacted via HTTPS whenever it's
    ;; possible. Set it to nil if you have no way to use HTTPS in your
    ;; environment, otherwise it is strongly recommended to let it set to t.
    ;; This variable has no effect if Emacs is launched with the parameter
@@ -183,9 +201,7 @@ It should only modify the values of Spacemacs settings."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(zenburn
-                         spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(zenburn)
 
    ;; Set the theme for the Spaceline. Supported themes are `spacemacs',
    ;; `all-the-icons', `custom', `doom', `vim-powerline' and `vanilla'. The
@@ -194,7 +210,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(spacemacs :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(vim-powerline :separator wave :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -618,48 +634,7 @@ layers configuration. You are free to put any user code."
   ;; (add-hook 'java-mode-hook #'lsp)
 
   ;; (forge-pull "2019-03-01")
+  )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("eae43024404a1e3c4ea853a9cf7f6f2ad5f091d17234ec3478a23591f25802eb" default)))
- '(evil-want-Y-yank-to-eol nil)
- '(package-selected-packages
-   (quote
-    (prodigy selectric-mode closql emacsql-sqlite transient lv emacsql forge dap-mode lsp-ui company-lsp lsp-java exwm ansible treepy graphql faff-theme ht org-mime counsel-tramp ghub let-alist all-the-icons memoize font-lock+ dired-icon treemacs pfuture bookmark+ org-category-capture dired-du dired+ restclient-helm ob-restclient ob-http company-restclient restclient know-your-http-well dockerfile-mode docker tablist docker-tramp helm-flx helm-company flyspell-correct-helm ace-jump-helm-line yaml-mode ob-elixir yapfify winum wgrep uuidgen unfill smex py-isort spinner org-projectile log4e gntp ng2-mode mwim lorem-ipsum livid-mode json-snatcher json-reformat fsm insert-shebang hl-todo parent-mode git-gutter-fringe+ fringe-helper git-gutter+ git-gutter fuzzy flyspell-correct-ivy pos-tip flycheck-credo flx evil-visual-mark-mode evil-unimpaired evil-magit evil-lisp-state evil-indent-plus goto-chg undo-tree diminish web-completion-data dash-functional tern color-identifiers-mode bind-map anzu pythonic f pkg-info epl link-hint dumb-jump typescript-mode ivy-hydra csv-mode restart-emacs git-link multiple-cursors async ranger evil-ediff swiper flyspell-correct avy pug-mode auto-compile packed auto-complete simple-httpd orgit org flycheck-mix company-shell yasnippet skewer-mode ws-butler request git-gutter-fringe eshell-z counsel-projectile tide hydra skype meghanada alchemist counsel alert xterm-color spaceline org-download help-fns+ evil-mc column-enforce-mode iedit highlight elixir-mode projectile with-editor ivy persp-mode live-py-mode hide-comnt eyebrowse helm-core magit-popup dired-filetype-face emacs-eclim web-mode web-beautify w3m toc-org tagedit sql-indent smeargle slim-mode shell-pop scss-mode sass-mode rainbow-mode rainbow-identifiers pyvenv pytest pyenv-mode pip-requirements org-repo-todo org-present org-pomodoro org-plus-contrib org-bullets multi-term mmm-mode markdown-toc markdown-mode magit-gitflow magit less-css-mode json-mode js2-refactor js2-mode js-doc jade-mode jabber hy-mode htmlize helm-pydoc helm-pt helm-gitignore helm-flyspell helm-emms helm-css-scss helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-commit gh-md flycheck-pos-tip flycheck fish-mode evil-org eshell-prompt-extras esh-help emms-mode-line-cycle emms emmet-mode diff-hl cython-mode company-web company-tern company-statistics company-quickhelp company-auctex company-anaconda company coffee-mode auto-yasnippet auctex anaconda-mode ac-ispell window-numbering volatile-highlights vi-tilde-fringe spray smooth-scrolling smartparens rainbow-delimiters powerline popwin popup pcre2el paradox page-break-lines open-junk-file neotree move-text macrostep linum-relative leuven-theme info+ indent-guide ido-vertical-mode hungry-delete highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-descbinds helm-ag helm google-translate golden-ratio flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-matchit evil-jumper evil-indent-textobject evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu elisp-slime-nav define-word clean-aindent-mode buffer-move auto-highlight-symbol auto-dictionary aggressive-indent adaptive-wrap ace-window ace-link evil-leader evil which-key quelpa package-build use-package bind-key s dash spacemacs-theme)))
- '(paradox-github-token t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#DCDCCC" :background "#3F3F3F"))))
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil))))))
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("eae43024404a1e3c4ea853a9cf7f6f2ad5f091d17234ec3478a23591f25802eb" default)))
- '(evil-want-Y-yank-to-eol nil)
- '(package-selected-packages
-   (quote
-    (all-the-icons memoize typescript-mode magit-popup skewer-mode simple-httpd json-mode json-snatcher json-reformat multiple-cursors js2-mode haml-mode gitignore-mode fringe-helper git-gutter+ git-gutter markdown-mode ghub closql emacsql-sqlite emacsql treepy graphql pos-tip transient with-editor web-completion-data dash-functional tern know-your-http-well auto-complete tablist git-commit org-category-capture alert log4e gntp yasnippet flycheck jinja2-mode company-ansible ansible-doc ansible wgrep smex ivy-hydra counsel-projectile ibuffer-projectile dash lv restclient lsp-java lsp-mode ht company org-plus-contrib prettier-js swiper avy counsel ivy projectile magit hydra helm helm-core org-jira zenburn-theme yaml-mode xterm-color ws-butler winum which-key web-mode web-beautify w3m volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tide tagedit spaceline smeargle slim-mode shell-pop selectric-mode scss-mode sass-mode restclient-helm restart-emacs rainbow-mode rainbow-identifiers rainbow-delimiters pug-mode popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-mime org-download org-bullets open-junk-file ob-restclient ob-http neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum livid-mode linum-relative link-hint less-css-mode js2-refactor js-doc insert-shebang indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy forge flycheck-pos-tip flx-ido fish-mode fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elisp-slime-nav dumb-jump dockerfile-mode docker dired-filetype-face dired-du diminish diff-hl define-word counsel-tramp company-web company-tern company-statistics company-shell company-restclient column-enforce-mode color-identifiers-mode coffee-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
- '(paradox-github-token t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((t (:foreground "#DCDCCC" :background "#3F3F3F"))))
- '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
- '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))
