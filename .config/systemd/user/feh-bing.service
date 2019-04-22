@@ -1,0 +1,8 @@
+[Unit]
+Description=Downloads and sets a wallpaper
+
+[Service]
+ExecStart=/usr/bin/python3 /home/mihai/.config/scripts/feh-bing.py
+
+[Install]
+WantedBy=default.target

@@ -191,8 +191,9 @@ exec --no-startup-id autorandr --change
 # exec pasystray
 exec --no-startup-id xsetroot -solid "#333333"
 # compton
-exec --no-startup-id "compton"
-exec --no-startup-id "variety"
+# exec --no-startup-id "compton"
+# exec --no-startup-id "variety"
+
 # default apps workspace
 assign [class="chrome"] 1
 assign [class="Firefox"] 1
@@ -229,7 +230,7 @@ smart_borders on
 
 # Set inner/outer gaps
 gaps inner 4
-gaps outer 0
+gaps outer 4
 
 # Gaps mode
 set $mode_gaps Gaps: (o) outer, (i) inner

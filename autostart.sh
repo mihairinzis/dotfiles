@@ -1,20 +1,13 @@
 #!/bin/bash
 
 whiptail --title "Enable Services" --checklist --separate-output "Pick the ones you need:" 20 25 15 \
-    "Emacs" "" off \
     "Redshift" "" off \
     "Syncthing" "" off \
-    "Autorandr" "" off \
-    "Syncthing" "" off \
-    "Dunst" "" off 2>results
+    "Feh-Bing" "" off 2>results
 
 while read choice
 do
     case $choice in
-        Emacs)
-            systemctl --user enable emacs
-            systemctl --user start emacs
-            ;;
         Redshit)
             systemctl --user enable redshift
             systemctl --user start redshift
@@ -23,9 +16,10 @@ do
             systemctl --user enable syncthing
             systemctl --user start syncthing
             ;;
-        Dunst)
-            systemctl --user enable dunst
-            systemctl --user start dunst
+        Feh-Bing)
+            systemctl --user enable feh-bing.service
+            systemctl --user start feh-bing.service
+            systemctl --user enable feh-bing.timer
             ;;
         *)
             ;;
