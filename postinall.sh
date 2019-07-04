@@ -14,6 +14,15 @@ whiptail --title "Packages" --checklist --separate-output "Pick the ones you nee
          "Flatpack" "" off 2>results
 
 to_install=()
+
+# install common dependencies
+apt install -y \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common
+
 while read choice
 do
     case $choice in
@@ -47,7 +56,7 @@ do
                 "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
                 $(lsb_release -cs) \
                 stable"
-            to_install+=("apt-transport-https ca-certificates curl software-properties-common docker-ce")
+            to_install+=("docker-ce docker-ce-cli containerd.io")
             ;;
         Prezto)
             zsh
