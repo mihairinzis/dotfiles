@@ -38,6 +38,7 @@ floating_modifier $mod
 
 # no title bar
 new_window 1pixel
+default_border pixel 3
 
 # mouse does not focus
 focus_follows_mouse no
@@ -188,7 +189,8 @@ exec tlp start
 exec --no-startup-id autorandr --change
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-# exec pasystray
+exec pasystray
+exec --no-startup-id xfce4-clipman
 exec --no-startup-id xsetroot -solid "#333333"
 # compton
 # exec --no-startup-id "compton"

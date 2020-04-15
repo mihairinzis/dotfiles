@@ -16,7 +16,7 @@ whiptail --title "Packages" --checklist --separate-output "Pick the ones you nee
 to_install=()
 
 # install common dependencies
-apt install -y \
+sudo apt install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -33,7 +33,7 @@ do
             ;;
         Firefox)
             wget -O FirefoxDev.tar.bz2 'https://download.mozilla.org/?product=firefox-devedition-latest-ssl&os=linux64&lang=en-US'
-            tar xvjf FirefoxDev.tar.bz2 -C /opt
+            sudo tar xvjf FirefoxDev.tar.bz2 -C /opt
             rm FirefoxDev.tar.bz2
             sudo ln -fs /opt/firefox/firefox /usr/bin/firefox
             ;;
@@ -72,7 +72,7 @@ do
             curl -L https://github.com/bbatsov/prelude/raw/master/utils/installer.sh | sh
             ;;
         NodeJs)
-            curl -sL https://deb.nodesource.com/setup_9.x | sudo -E bash -
+            curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
             to_install+=("nodejs")
             ;;
         Yarn)
