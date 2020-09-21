@@ -2,10 +2,10 @@
 # remove comments?
 
 # x, openbox and dm
-xorg openbox lightdm
+xorg lightdm
 
 #i3
-i3 i3blocks
+i3
 
 # file manager
 xfe atool poppler-utils highlight mediainfo caca-utils w3m
@@ -20,7 +20,7 @@ conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklig
 # redshift libgl1-mesa-dri-experimental
 
 # term
-rxvt-unicode zsh command-not-found xclip
+xfce4-terminal zsh command-not-found xclip
 
 # misc
 rofi dunst stalonetray curl ack-grep ripgrep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes fortunes-off compton bleachbit nautilus-dropbox gnupg2 pandoc
@@ -50,7 +50,7 @@ evince
 # gucharmap pdfshuffler scribus
 
 # font
-fonts-inconsolata fonts-font-awesome
+fonts-firacode fonts-font-awesome
 
 # sound
 pavucontrol pasystray
