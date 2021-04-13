@@ -181,6 +181,12 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+mode "CAPSLOCK" {
+    bindsym Caps_Lock mode "default"
+}
+
+bindsym Caps_Lock mode "CAPSLOCK"
+
 # autostart apps
 exec nm-applet
 exec tlp start
