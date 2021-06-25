@@ -10,16 +10,15 @@
 (use-package undo-tree :defer 5 :config (global-undo-tree-mode 1))
 
 (use-package ivy :config (ivy-mode t))
-
 (use-package counsel
   :config (counsel-mode)
   :bind (("C-x b" . counsel-switch-buffer)))
 (use-package counsel-tramp)
+(use-package swiper :bind (("C-s" . counsel-grep-or-swiper)))
+(use-package marginalia :init (marginalia-mode))
 
 (use-package easy-kill)
 (use-package move-text :config (move-text-default-bindings))
-
-(use-package swiper :bind (("C-s" . counsel-grep-or-swiper)))
 
 (use-package which-key :config (add-hook 'after-init-hook 'which-key-mode))
 
@@ -32,10 +31,18 @@
 (use-package zenburn-theme :config (load-theme 'zenburn t))
 (use-package doom-modeline :init (doom-modeline-mode 1))
 
+(use-package diredfl :config (diredfl-global-mode 1))
 (use-package all-the-icons)
 (use-package all-the-icons-dired)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode +1)))
+(use-package consult-dir
+  :ensure t
+  :bind (("C-x C-d" . consult-dir)
+         :map minibuffer-local-completion-map
+         ("C-x C-d" . consult-dir)
+         ("C-x C-j" . consult-dir-jump-file)))
+;; (use-package dired-subtree)
 
 (use-package dashboard :config (dashboard-setup-startup-hook))
 (setq dashboard-items '((recents  . 5) (bookmarks . 5) (projects . 5)))
@@ -43,14 +50,11 @@
 (use-package projectile :diminish projectile-mode :config (projectile-mode))
 
 (use-package crux
-  :bind
-  (("C-a" . crux-move-beginning-of-line)
-   ("C-c d" . crux-duplicate-current-line-or-region)
-   ("C-c n" . crux-cleanup-buffer-or-region)))
+  :bind (("C-a" . crux-move-beginning-of-line)
+	 ("C-c d" . crux-duplicate-current-line-or-region)
+	 ("C-c n" . crux-cleanup-buffer-or-region)))
 
 (use-package company
-  :ensure t
-  :defer t
   :init (global-company-mode)
   :config
   (progn
@@ -63,6 +67,9 @@
     (setq company-dabbrev-downcase nil))
   :diminish company-mode)
 
+(use-package company-box
+  :hook (company-mode . company-box-mode))
+
 (use-package flycheck :init (global-flycheck-mode))
 
 (use-package smartparens
@@ -74,10 +81,29 @@
     (smartparens-global-mode 1)
     (show-paren-mode t)))
 
-(use-package lsp-mode)
-(use-package lsp-ui)
+(use-package treemacs)
+(use-package json-mode)
 
-(use-package typescript-mode :init (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode)))
+;; npm install -g @angular/language-service@next typescript @angular/language-server vscode-html-languageserver-bin
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook (
+         (html-mode . lsp)
+	 (typescript-mode . lsp)
+         (lsp-mode . lsp-enable-which-key-integration))
+  :config
+  (progn
+    (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+    (setq js-indent-level 2)))
+(use-package lsp-ui)
+(use-package lsp-treemacs :init (lsp-treemacs-sync-mode 1))
+(use-package lsp-ivy)
+(use-package typescript-mode
+  :init
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+  (setq typescript-indent-level 2))
+
 
 ;; ;; LSP for JavaScript and TypeScript
 ;; (use-package lsp-javascript-typescript
@@ -86,12 +112,18 @@
 ;;   (add-to-list 'js-mode-hook #'lsp-javascript-typescript-enable)
 ;;   (add-to-list 'typescript-mode-hook #'lsp-javascript-typescript-enable))
 
+(use-package multiple-cursors
+  :bind (("C-c SPC" . set-rectangular-region-anchor)
+         ("C->" . mc/mark-next-like-this)
+         ("C-<" . mc/mark-previous-like-this)
+         ("C-c C->" . mc/mark-all-like-this)))
+
 ;; Appearance
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
 (linum-mode 1)
-(setq-default cursor-type 'bar)
+;; (setq-default cursor-type 'bar)
 (show-paren-mode 1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
@@ -122,6 +154,7 @@
 (setq gc-cons-threshold 100000000)
 (setq read-process-output-max (* 1024 1024))
 (setq c-hungry-delete-key t)
+(setq make-backup-files nil)
 
 ;; Defuns and keymap
 (defun comment-or-uncomment-line-or-region ()
@@ -143,21 +176,24 @@
 (setq dired-dwim-target t)
 (require 'dired-x)
 
+(use-package disk-usage)
+
 ;; ediff
 (require 'ediff)
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
 
 
-(setq hippie-expand-try-functions-list '(try-expand-dabbrev
-					 try-expand-dabbrev-all-buffers
-					 try-expand-dabbrev-from-kill
-					 try-complete-file-name-partially
-					 try-complete-file-name
-					 try-expand-all-abbrevs
-					 try-expand-list
-					 try-expand-line
-					 try-complete-lisp-symbol-partially
-					 try-complete-lisp-symbol))
+(setq hippie-expand-try-functions-list
+      '(try-expand-dabbrev
+	try-expand-dabbrev-all-buffers
+	try-expand-dabbrev-from-kill
+	try-complete-file-name-partially
+	try-complete-file-name
+	try-expand-all-abbrevs
+	try-expand-list
+	try-expand-line
+	try-complete-lisp-symbol-partially
+	try-complete-lisp-symbol))
 
 (setq tab-always-indent 'complete)
 (global-set-key [remap kill-ring-save] 'easy-kill)
@@ -190,7 +226,7 @@
   (interactive)
   (let* ((dl-command "youtube-dl")
 	 (video-filename "--output ~/'%(title)s.%(ext)s'")
-	 (format " -f best")
+	 (format " -f 303")
 	 (url (concat "'" (current-kill 0 t) "'")))
     (async-shell-command (concat dl-command " " video-filename format " " url))))
 
@@ -203,6 +239,15 @@
 	 (url (concat "'" (current-kill 0 t) "'")))
     (async-shell-command (concat dl-command " " video-filename " " format " " format-extension " " url))))
 
+(defun ediff-copy-both-to-C ()
+  (interactive)
+  (ediff-copy-diff ediff-current-difference nil 'C nil
+		   (concat
+		    (ediff-get-region-contents ediff-current-difference 'A ediff-control-buffer)
+		    (ediff-get-region-contents ediff-current-difference 'B ediff-control-buffer))))
+(defun add-d-to-ediff-mode-map () (define-key ediff-mode-map "d" 'ediff-copy-both-to-C))
+(add-hook 'ediff-keymap-setup-hook 'add-d-to-ediff-mode-map)
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -210,7 +255,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(counsel-tramp counsel smartparens lsp-ui lsp-mode flycheck anzu move-text easy-kill browse-kill-ring company smart-mode-line swiper crux use-package)))
+   '(consult-dir disk-usage diredfl dired-subtree dired-rainbow multiple-cursors lsp-ivy eslint yasnippet company-box lsp-treemacs json-mode treemacs eglot symon counsel-tramp counsel smartparens lsp-ui lsp-mode flycheck anzu move-text easy-kill browse-kill-ring company smart-mode-line swiper crux use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
