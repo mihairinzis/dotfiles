@@ -1,60 +1,105 @@
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+(setq package-enable-at-startup nil)
+(straight-use-package 'use-package)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package)
-  (eval-when-compile (require 'use-package)))
-(setq use-package-always-ensure t)
+(use-package undo-tree
+  :straight t
+  :defer 5
+  :config (global-undo-tree-mode 1))
 
-(use-package undo-tree :defer 5 :config (global-undo-tree-mode 1))
-
-(use-package ivy :config (ivy-mode t))
+(use-package ivy
+  :straight t
+  :config (ivy-mode t))
 (use-package counsel
+  :straight t
   :config (counsel-mode)
   :bind (("C-x b" . counsel-switch-buffer)))
-(use-package counsel-tramp)
-(use-package swiper :bind (("C-s" . counsel-grep-or-swiper)))
-(use-package marginalia :init (marginalia-mode))
+(use-package counsel-tramp
+  :straight t)
+(use-package swiper
+  :straight t
+  :bind (("C-s" . counsel-grep-or-swiper)))
+(use-package marginalia
+  :straight t
+  :init (marginalia-mode))
 
-(use-package easy-kill)
-(use-package move-text :config (move-text-default-bindings))
+(use-package easy-kill
+  :straight t)
+(use-package move-text
+  :straight t
+  :config (move-text-default-bindings))
 
-(use-package which-key :config (add-hook 'after-init-hook 'which-key-mode))
+(use-package which-key
+  :straight t
+  :config (add-hook 'after-init-hook 'which-key-mode))
 
-(use-package browse-kill-ring)
+(use-package browse-kill-ring
+  :straight t)
 
-(use-package magit :bind ("C-x g" . magit-status))
+(use-package magit
+  :straight t
+  :bind ("C-x g" . magit-status))
 
-(use-package expand-region :bind ("C-=" . er/expand-region))
+(use-package expand-region
+  :straight t
+  :bind ("C-=" . er/expand-region))
 
-(use-package zenburn-theme :config (load-theme 'zenburn t))
-(use-package doom-modeline :init (doom-modeline-mode 1))
+(use-package zenburn-theme
+  :straight t
+  :config (load-theme 'zenburn t))
+(use-package doom-modeline
+  :straight t
+  :init (doom-modeline-mode 1))
 
-(use-package diredfl :config (diredfl-global-mode 1))
-(use-package all-the-icons)
-(use-package all-the-icons-dired)
+(use-package diredfl
+  :straight t
+  :config (diredfl-global-mode 1))
+(use-package all-the-icons
+  :straight t)
+(use-package all-the-icons-dired
+  :straight t)
 (add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
 (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode +1)))
 (use-package consult-dir
-  :ensure t
+  :straight t
   :bind (("C-x C-d" . consult-dir)
          :map minibuffer-local-completion-map
          ("C-x C-d" . consult-dir)
          ("C-x C-j" . consult-dir-jump-file)))
 ;; (use-package dired-subtree)
+(setq dired-listing-switches "-alh")
 
-(use-package dashboard :config (dashboard-setup-startup-hook))
-(setq dashboard-items '((recents  . 5) (bookmarks . 5) (projects . 5)))
+(use-package dashboard
+  :straight t
+  :config (dashboard-setup-startup-hook))
+(use-package dashboard-hackernews
+  :straight t)
+(setq dashboard-items '((recents  . 5) (bookmarks . 5) (projects . 5) (hackernews . 10)))
 
-(use-package projectile :diminish projectile-mode :config (projectile-mode))
+(use-package projectile
+  :straight t
+  :diminish projectile-mode
+  :config (projectile-mode))
 
 (use-package crux
+  :straight t
   :bind (("C-a" . crux-move-beginning-of-line)
 	 ("C-c d" . crux-duplicate-current-line-or-region)
 	 ("C-c n" . crux-cleanup-buffer-or-region)))
 
 (use-package company
+  :straight t
   :init (global-company-mode)
   :config
   (progn
@@ -68,12 +113,15 @@
   :diminish company-mode)
 
 (use-package company-box
+  :straight t
   :hook (company-mode . company-box-mode))
 
-(use-package flycheck :init (global-flycheck-mode))
+(use-package flycheck
+  :straight t
+  :init (global-flycheck-mode))
 
 (use-package smartparens
-  :ensure t
+  :straight t
   :diminish smartparens-mode
   :config
   (progn
@@ -81,11 +129,14 @@
     (smartparens-global-mode 1)
     (show-paren-mode t)))
 
-(use-package treemacs)
-(use-package json-mode)
+(use-package treemacs
+  :straight t)
+(use-package json-mode
+  :straight t)
 
 ;; npm install -g @angular/language-service@next typescript @angular/language-server vscode-html-languageserver-bin
 (use-package lsp-mode
+  :straight t
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook (
@@ -96,10 +147,15 @@
   (progn
     (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
     (setq js-indent-level 2)))
-(use-package lsp-ui)
-(use-package lsp-treemacs :init (lsp-treemacs-sync-mode 1))
-(use-package lsp-ivy)
+(use-package lsp-ui
+  :straight t)
+(use-package lsp-treemacs
+  :straight t
+  :init (lsp-treemacs-sync-mode 1))
+(use-package lsp-ivy
+  :straight t)
 (use-package typescript-mode
+  :straight t
   :init
   (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
   (setq typescript-indent-level 2))
@@ -113,6 +169,7 @@
 ;;   (add-to-list 'typescript-mode-hook #'lsp-javascript-typescript-enable))
 
 (use-package multiple-cursors
+  :straight t
   :bind (("C-c SPC" . set-rectangular-region-anchor)
          ("C->" . mc/mark-next-like-this)
          ("C-<" . mc/mark-previous-like-this)
@@ -131,7 +188,7 @@
 ;; Font
 (cond
  ((find-font (font-spec :name "Firacode"))
-  (set-frame-font "Firacode-10"))
+  (set-frame-font "Firacode-12"))
  ((find-font (font-spec :name "Hack"))
   (set-frame-font "Hack-11"))
  ((find-font (font-spec :name "inconsolata"))
@@ -176,7 +233,8 @@
 (setq dired-dwim-target t)
 (require 'dired-x)
 
-(use-package disk-usage)
+(use-package disk-usage
+  :straight t)
 
 ;; ediff
 (require 'ediff)
