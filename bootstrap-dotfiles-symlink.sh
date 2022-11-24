@@ -1,6 +1,6 @@
 #!/bin/bash
 
-ignore=('..' '.' '.git' '.config' '.emacs.d' '.gnupg')
+ignore=('..' '.' '.git' '.config' '.gnupg')
 home_dirs=('.config' '.gnupg')
 
 function symfile {

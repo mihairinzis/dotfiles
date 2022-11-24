@@ -1,102 +1,48 @@
-# add no-install-recommends option
-# remove comments?
+# packages
+sudo apt install --no-install-recommends xorg i3 lightdm git rofi network-manager-gnome xfce4-terminal firefox-esr zip unzip zsh arandr autorandr redshift dunst ripgrep preload btop tlp fortune-mod fortunes diodon curl pasystray pipewire pavucontrol-qt playerctl polybar firmware-linux-nonfree cbatticon feh git-flow filezilla flameshot feh fd-find
 
-# x, openbox and dm
-xorg lightdm
+# check if still necessary
+sudo apt install libspa-0.2-bluetooth
+sudo apt install --no-install-recommends blueman
 
-#i3
-i3
+# oh-my-zsh
+sh -c "$(wget https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -O -)"
 
-# file manager
-xfe atool poppler-utils highlight mediainfo caca-utils w3m
-# nautilus seahorse-nautilus spacefm mc
+# docker
+curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+  $(lsb_release -cs) \
+  stable"
+sudo apt install docker docker-compose
 
-# archive
-rar unrar zip unzip p7zip-full p7zip-rar bzip2 arj lzma ntfs-3g
-# file-roller unace
+# latest git-delta
+curl -s https://api.github.com/repos/dandavison/delta/releases/latest \
+  | grep "git-delta_.*_amd64.deb" \
+  | cut -d : -f 2,3 \
+  | tr -d \" \
+  | wget -qi -
 
-# appearance
-conky-all lm-sensors unclutter arandr lxappearance gtk2-engines-murrine xbacklight redshift papirus-icon-theme
-# redshift libgl1-mesa-dri-experimental
+# latest insomnia
+wget -O latest_insomnia.deb https://updates.insomnia.rest/downloads/ubuntu/latest
 
-# term
-xfce4-terminal zsh command-not-found xclip
+# rtx
+curl https://rtx.pub/install.sh | sh
+rtx install java@20
+rtx global java@20
+rtx install nodejs@18
+rtx global nodejs@18
+# add to .zshrc
+eval "$(/$HOME/.local/share/rtx/bin/rtx activate -s zsh)"
+eval "$(/$HOME/.local/share/rtx/bin/rtx hook-env)"
 
-# misc
-rofi dunst stalonetray curl ack-grep ripgrep preload suckless-tools htop dpkg gparted tlp laptop-mode-tools clipit fortune-mod fortunes fortunes-off compton bleachbit nautilus-dropbox gnupg2 pandoc
 
-# pmount wine gcalctool
+# tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
 
-# browser
-conkeror
-
-# im
-# pidgin pidgin-plugin-pack irssi xchat weechat
-
-# torrent
-# transmission-gtk rtorrent aria2
-
-# office
-libreoffice libreoffice-l10n-ro hunspell hunspell-ro hunspell-en-us mythes-en-au mythes-ro hyphen-ro hyphen-en-us libreoffice-gtk libreoffice-pdfimport
-# pstoedit abiword gnumeric openclipart
-
-# latex
-# texlive-full texlive-lang-european latex-beamer
-
-# pdf
-evince
-
-# publishing
-# gucharmap pdfshuffler scribus
+# ssh-keygen -t ed25519 -C "m.rinzis@gmail.com"
 
 # font
-fonts-firacode fonts-font-awesome
-
-# sound
-pavucontrol pasystray
-#alsa-base alsa-utils
-
-# image viewer/wallpaper
-gpicview nitrogen flameshot
-# sxiv eog eog-plugins feh shutter
-
-# image editor
-# inkscape gimp shotwell
-
-# network manager
-network-manager-gnome network-manager-pptp-gnome network-manager-vpnc-gnome network-manager-openvpn-gnome
+fonts-firacode fonts-font-awesome fonts-hack
 
 # printing
 cups cups-pdf system-config-printer printer-driver-hpijs
-
-# scanner
-# libsane simple-scan
-
-# ide/editor
-emacs25 geany
-# codeblocks eclipse netbeans qtcreator
-
-# compiler/lib
-build-essential ipython ipython3 pyflakes
-
-# version control
-git
-
-# video player
-mplayer vlc
-
-# music player
-moc
-# mpd nmpcpp clementine
-
-# video editor
-# kdenlive cheese avidemux openshot
-
-# audio editor
-# soundconverter audacity oggconvert lmms kid3-qt picard easytag
-
-# games
-# 0ad zaz nexuiz openarena frozen-bubble hedgewars armagetronad gnubg glest
-
-# drivers
-xserver-xorg-input-synaptics firmware-linux firmware-iwlwifi bumblebee-nvidia primus #dpkg --add-architecture i386 && apt-get update && apt-get install primus-libs:i386 && adduser $USER bumblebee
