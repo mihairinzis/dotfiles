@@ -1,16 +1,12 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package)
-  (eval-when-compile (require 'use-package)))
+(require 'use-package)
 (setq use-package-always-ensure t)
 
 (use-package exec-path-from-shell
   :custom
   (exec-path-from-shell-variables '("PATH"
-                                    "MANPATH"))
+				    "MANPATH"))
   :config (exec-path-from-shell-initialize))
 
 (use-package gcmh
@@ -36,29 +32,21 @@
   (setq vertico-cycle t))
 
 (use-package corfu
-  :config
-  ;;(corfu-popupinfo-mode)
-  (global-corfu-mode)
   :custom
-  (setq corfu-auto t
-	corfu-quit-no-match 'separator))
-;; Part of corfu
-;; (use-package corfu-popupinfo
-;;   :after corfu
-;;   :hook (corfu-mode . corfu-popupinfo-mode)
-;;   :custom
-;;   (corfu-popupinfo-delay '(0.25 . 0.1))
-;;   (corfu-popupinfo-hide nil)
-;;   :config
-;;   (corfu-popupinfo-mode))
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-separator ?\s)          ;; Orderless field separator
+  (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+  (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  (corfu-scroll-margin 5)        ;; Use scroll margin
+  ;; (corfu-popupinfo-mode)
+  :init
+  (global-corfu-mode))
 
-;; Make corfu popup come up in terminal overlay
-(use-package corfu-terminal
-  :if (not (display-graphic-p))
-  :config
-  (corfu-terminal-mode))
-
-;; Pretty icons for corfu
+;; ;; Pretty icons for corfu
 (use-package kind-icon
   :if (display-graphic-p)
   :after corfu
@@ -69,16 +57,16 @@
 (use-package consult
   :bind (;; ("C-x b" . consult-buffer)
 	 ("M-y" . consult-yank-pop) ;; orig. yank-pop
-         ("C-s" . consult-line)     ;; orig. isearch
-         )
+	 ("C-s" . consult-line)     ;; orig. isearch
+	 )
   )
 
 ;; Orderless: powerful completion style
 (use-package orderless
   :config
   (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles partial-completion)))))
+	completion-category-defaults nil
+	completion-category-overrides '((file (styles partial-completion)))))
 
 (use-package prescient
   :config
@@ -86,12 +74,6 @@
   (prescient-persist-mode))
 
 (use-package yaml-mode)
-
-;; (use-package selectrum
-;;   :init
-;;   (selectrum-mode)
-;;   :custom
-;;   (completion-styles '(flex substring partial-completion)))
 
 ;; (use-package counsel
 ;;   :config (counsel-mode)
@@ -110,9 +92,9 @@
   (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
   :config
   (add-to-list 'display-buffer-alist
-               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
-                 nil
-                 (window-parameters (mode-line-format . none)))))
+	       '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+		 nil
+		 (window-parameters (mode-line-format . none)))))
 
 (use-package embark-consult
   :hook (embark-collect-mode . consult-preview-at-point-mode))
@@ -166,9 +148,9 @@
 ;; (add-hook 'dired-mode-hook (lambda () (dired-hide-details-mode +1)))
 (use-package consult-dir
   :bind (("C-x C-d" . consult-dir)
-         :map minibuffer-local-completion-map
-         ("C-x C-d" . consult-dir)
-         ("C-x C-j" . consult-dir-jump-file)))
+	 :map minibuffer-local-completion-map
+	 ("C-x C-d" . consult-dir)
+	 ("C-x C-j" . consult-dir-jump-file)))
 
 (use-package bufler
   :bind
@@ -187,7 +169,7 @@
       TeX-source-correlate-start-server t)
 
 (add-hook 'TeX-after-compilation-finished-functions
-          #'TeX-revert-document-buffer)
+	  #'TeX-revert-document-buffer)
 
 (use-package dashboard
   :config
@@ -207,15 +189,15 @@
 
 (use-package git-gutter-fringe
   :hook ((prog-mode     . git-gutter-mode)
-         (org-mode      . git-gutter-mode)
-         (markdown-mode . git-gutter-mode)
-         (latex-mode    . git-gutter-mode)))
+	 (org-mode      . git-gutter-mode)
+	 (markdown-mode . git-gutter-mode)
+	 (latex-mode    . git-gutter-mode)))
 
 ;;(use-package projectile :diminish projectile-mode :config (projectile-mode))
 
 (use-package crux
   :bind (("C-a" . crux-move-beginning-of-line)
-	 ("C-c d" . crux-duplicate-current-line-or-region)
+	 ("C-c d" . duplicate-dwim)
 	 ("C-c n" . crux-cleanup-buffer-or-region)))
 
 ;; (use-package company
@@ -226,8 +208,8 @@
 ;;     (bind-key [remap completion-at-point] #'company-complete company-mode-map)
 
 ;;     (setq company-tooltip-align-annotations t
-;; 	  ;; Easy navigation to candidates with M-<n>
-;; 	  company-show-numbers t)
+;;        ;; Easy navigation to candidates with M-<n>
+;;        company-show-numbers t)
 ;;       (global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 ;;     (setq company-dabbrev-downcase nil))
 ;;   :diminish company-mode)
@@ -257,7 +239,7 @@
 ;;   (setq lsp-keymap-prefix "C-c l")
 ;;   :hook (
 ;;          (html-mode . lsp)
-;; 	 (typescript-mode . lsp)
+;;       (typescript-mode . lsp)
 ;;          (lsp-mode . lsp-enable-which-key-integration))
 ;;   :config
 ;;   (progn
@@ -364,35 +346,35 @@
 (use-package emmet-mode
   :defer
   :hook ((css-mode  . emmet-mode)
-         (html-mode . emmet-mode)
-         (web-mode  . emmet-mode)
-         (sass-mode . emmet-mode)
-         (scss-mode . emmet-mode)
-         (web-mode  . emmet-mode)))
+	 (html-mode . emmet-mode)
+	 (web-mode  . emmet-mode)
+	 (sass-mode . emmet-mode)
+	 (scss-mode . emmet-mode)
+	 (web-mode  . emmet-mode)))
 (use-package auto-rename-tag)
 (use-package web-mode
   :mode (("\\.html?\\'" . web-mode)
-         ("\\.tsx\\'" . web-mode)
-         ("\\.js[x]?\\'" . web-mode))
+	 ("\\.tsx\\'" . web-mode)
+	 ("\\.js[x]?\\'" . web-mode))
   :config
   (setq web-mode-markup-indent-offset 2
-        web-mode-enable-auto-indentation nil
-        web-mode-css-indent-offset 2
-        web-mode-code-indent-offset 2
-        web-mode-block-padding 2
-        web-mode-comment-style 2
-        web-mode-enable-css-colorization t
-        web-mode-enable-auto-pairing t
-        web-mode-enable-comment-keywords t
-        web-mode-enable-current-element-highlight t
-        web-mode-enable-current-column-highlight t
-        web-mode-content-types-alist  '(("django" . "\\.tpl\\'"))
-        web-mode-content-types-alist  '(("jsx" . "\\.js[x]?\\'"))))
+	web-mode-enable-auto-indentation nil
+	web-mode-css-indent-offset 2
+	web-mode-code-indent-offset 2
+	web-mode-block-padding 2
+	web-mode-comment-style 2
+	web-mode-enable-css-colorization t
+	web-mode-enable-auto-pairing t
+	web-mode-enable-comment-keywords t
+	web-mode-enable-current-element-highlight t
+	web-mode-enable-current-column-highlight t
+	web-mode-content-types-alist  '(("django" . "\\.tpl\\'"))
+	web-mode-content-types-alist  '(("jsx" . "\\.js[x]?\\'"))))
 
 (add-hook 'web-mode-hook  'auto-rename-tag-mode)
 (add-hook 'web-mode-hook 'lsp-deferred
-          (lambda () (pcase (file-name-extension buffer-file-name)
-                       ("tsx" ('lsp-deferred)))))
+	  (lambda () (pcase (file-name-extension buffer-file-name)
+		       ("tsx" ('lsp-deferred)))))
 
 ;; ;; LSP for JavaScript and TypeScript
 ;; (use-package lsp-javascript-typescript
@@ -403,9 +385,9 @@
 
 (use-package multiple-cursors
   :bind (("C-c SPC" . set-rectangular-region-anchor)
-         ("C->" . mc/mark-next-like-this)
-         ("C-<" . mc/mark-previous-like-this)
-         ("C-c C->" . mc/mark-all-like-this)))
+	 ("C->" . mc/mark-next-like-this)
+	 ("C-<" . mc/mark-previous-like-this)
+	 ("C-c C->" . mc/mark-all-like-this)))
 
 (use-package highlight-indent-guides
   :config
@@ -416,8 +398,8 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (scroll-bar-mode -1)
-(linum-mode 1)
-;; (setq-default cursor-type 'bar)
+(pixel-scroll-precision-mode t)
+(setq vc-follow-symlinks nil)
 (show-paren-mode 1)
 (fset 'yes-or-no-p 'y-or-n-p)
 (windmove-default-keybindings)
@@ -453,6 +435,11 @@
 (setq use-dialog-box nil)
 (setq show-trailing-whitespace t)
 (setq undo-limit 100000000)
+(setq show-paren-context-when-offscreen t)
+(setq warning-minimum-level :error)
+
+(use-package hungry-delete
+  :config (global-hungry-delete-mode))
 
 ;; Defuns and keymap
 ;; (defun comment-or-uncomment-line-or-region ()
@@ -463,7 +450,7 @@
 ;;     (comment-or-uncomment-region (line-beginning-position) (line-end-position))
 ;;     ))
 ;; Global keys
-(global-set-key (kbd "M-SPC") 'cycle-spacing)
+;; (global-set-key (kbd "M-SPC") 'cycle-spacing)
 (global-set-key (kbd "C-c c") 'comment-or-uncomment-line-or-region)
 
 ;; dired
@@ -482,16 +469,12 @@
   (dirvish-attributes '(nerd-icons file-size collapse subtree-state vc-state git-msg))
   :config
   (dirvish-peek-mode)
-  ;; <<dired-drag-and-drop>>
-  ;; <<dired-listing-flags>>
-  ;; <<dired-files-and-dirs>>
-  ;; <<dirvish-exa-offload>>
   (setq dired-dwim-target         t
-        dired-recursive-copies    'always
-        dired-recursive-deletes   'top
-        dirvish-preview-dispatchers (cl-substitute 'pdf-preface 'pdf dirvish-preview-dispatchers)
+	dired-recursive-copies    'always
+	dired-recursive-deletes   'top
+	dirvish-preview-dispatchers (cl-substitute 'pdf-preface 'pdf dirvish-preview-dispatchers)
 	dired-listing-switches
-        "-l --almost-all --human-readable --group-directories-first --no-group")
+	"-l --almost-all --human-readable --group-directories-first --no-group")
   :bind ; Bind `dirvish|dirvish-side|dirvish-dwim' as you see fit
   (("C-c f" . dirvish-fd)
    :map dirvish-mode-map ; Dirvish inherits `dired-mode-map'
@@ -562,8 +545,8 @@
 ;;             (setq show-trailing-whitespace)))
 
 ;; (projectile-register-project-type 'gradle '("build.gradle")
-;; 				  :project-file "build.gradle"
-;; 				  :compile "chmod +x gradlew && ./gradlew clean && ./gradlew build")
+;;				  :project-file "build.gradle"
+;;				  :compile "chmod +x gradlew && ./gradlew clean && ./gradlew build")
 
 (defun download-video()
   (interactive)
@@ -599,7 +582,21 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(gcmh embark git-gutter-fringe bufler dirvish editorconfig evil-nerd-commenter magit-gitflow exec-path-from-shell nerd-icons-completion nerd-icons-dired jinx tabspaces pdf-tools magit-delta docker tree-sitter-langs tree-sitter lsp-tailwindcss yaml-mode emmet-mode auto-rename-tag web-mode flyspell highlight-indent-guides centaur-tabs dimmer eglot-java prescient consult-tramp consult-dir disk-usage diredfl dired-subtree dired-rainbow multiple-cursors lsp-ivy eslint yasnippet company-box lsp-treemacs json-mode treemacs eglot symon counsel-tramp counsel smartparens lsp-ui lsp-mode flycheck anzu move-text easy-kill browse-kill-ring company smart-mode-line swiper crux use-package))
+   '(hungry-delete eglot gcmh embark git-gutter-fringe bufler dirvish
+		   editorconfig evil-nerd-commenter magit-gitflow
+		   exec-path-from-shell nerd-icons-completion
+		   nerd-icons-dired jinx tabspaces pdf-tools
+		   magit-delta docker tree-sitter-langs tree-sitter
+		   lsp-tailwindcss yaml-mode emmet-mode
+		   auto-rename-tag web-mode flyspell
+		   highlight-indent-guides centaur-tabs dimmer
+		   eglot-java prescient consult-dir
+		   disk-usage diredfl dired-subtree dired-rainbow
+		   multiple-cursors lsp-ivy eslint yasnippet
+		   company-box lsp-treemacs json-mode treemacs symon
+		   counsel-tramp counsel smartparens lsp-ui lsp-mode
+		   flycheck anzu move-text easy-kill browse-kill-ring
+		   company smart-mode-line swiper crux use-package))
  '(safe-local-variable-values
    '((vc-prepare-patches-separately)
      (diff-add-log-use-relative-names . t)
