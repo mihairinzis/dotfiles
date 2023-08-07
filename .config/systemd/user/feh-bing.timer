@@ -1,9 +1,0 @@
-[Unit]
-Description=Run feh-bing with delay
-
-[Timer]
-OnBootSec=1min
-Unit=feh-bing.service
-
-[Install]
-WantedBy=timers.target

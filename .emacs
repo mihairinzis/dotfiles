@@ -1,7 +1,83 @@
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; (require 'package)
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (require 'use-package)
 (setq use-package-always-ensure t)
+
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 6))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;; Completion
+(setq enable-recursive-minibuffers t)
+(setq completion-cycle-threshold 1)
+(setq completions-detailed t)
+(setq tab-always-indent 'complete)
+(setq completion-styles '(basic initials substring))
+(setq completion-auto-help 'always)
+(setq completions-max-height 20)
+(setq completions-detailed t)
+(setq completions-format 'one-column)
+(setq completions-group t)
+(setq completion-auto-select 'second-tab)
+
+;; Appearance
+(menu-bar-mode -1)
+(tool-bar-mode -1)
+(scroll-bar-mode -1)
+(pixel-scroll-precision-mode t)
+(setq vc-follow-symlinks nil)
+(show-paren-mode 1)
+(fset 'yes-or-no-p 'y-or-n-p)
+(windmove-default-keybindings)
+(setq inhibit-startup-screen t)
+;; Font
+(cond
+ ((find-font (font-spec :name "Firacode"))
+  (set-frame-font "Firacode-12"))
+ ((find-font (font-spec :name "Hack"))
+  (set-frame-font "Hack-11"))
+ ((find-font (font-spec :name "inconsolata"))
+  (set-frame-font "inconsolata-13"))
+ ((find-font (font-spec :name "Noto Sans"))
+  (set-frame-font "Noto Sans-12"))
+ ((find-font (font-spec :name "DejaVu Sans Mono"))
+  (set-frame-font "DejaVu Sans Mono-12")))
+
+
+;; Misc
+(global-auto-revert-mode t)
+(setq auto-revert-verbose nil)
+(which-function-mode t)
+(global-subword-mode t)
+(setq password-cache-expiry nil)
+(add-to-list 'write-file-functions 'delete-trailing-whitespace)
+(global-font-lock-mode t)
+(delete-selection-mode t)
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024))
+(setq c-hungry-delete-key t)
+(setq make-backup-files nil)
+(save-place-mode 1)
+(setq use-dialog-box nil)
+(setq show-trailing-whitespace t)
+(setq undo-limit 100000000)
+(setq show-paren-context-when-offscreen t)
+(setq warning-minimum-level :error)
+
+(use-package hungry-delete
+  :config (global-hungry-delete-mode))
 
 (use-package exec-path-from-shell
   :custom
@@ -55,7 +131,7 @@
 
 ;; Consult: Misc. enhanced commands
 (use-package consult
-  :bind (;; ("C-x b" . consult-buffer)
+  :bind (("C-x b" . consult-buffer)
 	 ("M-y" . consult-yank-pop) ;; orig. yank-pop
 	 ("C-s" . consult-line)     ;; orig. isearch
 	 )
@@ -74,6 +150,10 @@
   (prescient-persist-mode))
 
 (use-package yaml-mode)
+
+(use-package nix-mode :mode "\\.nix\\'")
+
+(use-package direnv :config (direnv-mode))
 
 ;; (use-package counsel
 ;;   :config (counsel-mode)
@@ -109,14 +189,11 @@
 (use-package magit :bind ("C-x g" . magit-status))
 (use-package magit-delta
   :hook (magit-mode . magit-delta-mode))
-(use-package magit-gitflow
-  :defer t
-  :after magit
-  :hook (magit-mode . turn-on-magit-gitflow))
 
 (use-package expand-region :bind ("C-=" . er/expand-region))
 
 (use-package zenburn-theme :config (load-theme 'zenburn t))
+;; (load-theme 'modus-operandi t)
 (use-package doom-modeline
   :config
   (setq doom-modeline-height 30
@@ -133,6 +210,14 @@
   :defer t
   :diminish editorconfig-mode
   :init (editorconfig-mode t))
+
+;; (tramp-set-completion-function "ssh"
+;;  '((tramp-parse-sconfig "/etc/ssh_config")
+;;    (tramp-parse-sconfig "~/.ssh/config")))
+
+(use-package dired-rsync-transient
+  :bind (:map dired-mode-map
+              ("C-c C-x" . dired-rsync-transient)))
 
 ;; (use-package diredfl :config (diredfl-global-mode 1))
 
@@ -152,10 +237,10 @@
 	 ("C-x C-d" . consult-dir)
 	 ("C-x C-j" . consult-dir-jump-file)))
 
-(use-package bufler
-  :bind
-  ("C-x b" . bufler-switch-buffer)
-  ("C-x C-b" . bufler-list))
+;; (use-package bufler
+;;   :bind
+;;   ("C-x b" . bufler-switch-buffer)
+;;   ("C-x C-b" . bufler-list))
 
 (use-package pdf-tools
   :config
@@ -322,6 +407,12 @@
 
 (use-package tree-sitter-langs :after tree-sitter)
 
+(use-package treesit-auto
+  :config
+  (global-treesit-auto-mode)
+  (setq treesit-auto-install 'prompt)
+  )
+
 (use-package eglot
   :custom
   (eglot-autoshutdown t)
@@ -334,7 +425,15 @@
   (put 'eglot-error 'flymake-overlay-control nil)
   (put 'eglot-warning 'flymake-overlay-control nil)
   (advice-add 'eglot--apply-workspace-edit :after #'me/project-save)
-  (advice-add 'project-kill-buffers :before #'me/eglot-shutdown-project))
+  (advice-add 'project-kill-buffers :before #'me/eglot-shutdown-project)
+
+  (add-to-list 'eglot-server-programs
+               '(html-mode "node"
+			   "/home/mihai/.npm-global/lib/node_modules/@angular/language-server"
+			   "--ngProbeLocations node_modules"
+			   "--tsProbeLocations node_modules"
+			   "--stdio"))
+  )
 
 (use-package eglot-java)
 
@@ -393,53 +492,6 @@
   :config
   (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
   (setq highlight-indent-guides-method 'character))
-
-;; Appearance
-(menu-bar-mode -1)
-(tool-bar-mode -1)
-(scroll-bar-mode -1)
-(pixel-scroll-precision-mode t)
-(setq vc-follow-symlinks nil)
-(show-paren-mode 1)
-(fset 'yes-or-no-p 'y-or-n-p)
-(windmove-default-keybindings)
-(setq inhibit-startup-screen t)
-;; Font
-(cond
- ((find-font (font-spec :name "Firacode"))
-  (set-frame-font "Firacode-12"))
- ((find-font (font-spec :name "Hack"))
-  (set-frame-font "Hack-11"))
- ((find-font (font-spec :name "inconsolata"))
-  (set-frame-font "inconsolata-13"))
- ((find-font (font-spec :name "Noto Sans"))
-  (set-frame-font "Noto Sans-12"))
- ((find-font (font-spec :name "DejaVu Sans Mono"))
-  (set-frame-font "DejaVu Sans Mono-12")))
-
-
-;; Misc
-(global-auto-revert-mode t)
-(setq auto-revert-verbose nil)
-(which-function-mode t)
-(global-subword-mode t)
-(setq password-cache-expiry nil)
-(add-to-list 'write-file-functions 'delete-trailing-whitespace)
-(global-font-lock-mode t)
-(delete-selection-mode t)
-(setq gc-cons-threshold 100000000)
-(setq read-process-output-max (* 1024 1024))
-(setq c-hungry-delete-key t)
-(setq make-backup-files nil)
-(save-place-mode 1)
-(setq use-dialog-box nil)
-(setq show-trailing-whitespace t)
-(setq undo-limit 100000000)
-(setq show-paren-context-when-offscreen t)
-(setq warning-minimum-level :error)
-
-(use-package hungry-delete
-  :config (global-hungry-delete-mode))
 
 ;; Defuns and keymap
 ;; (defun comment-or-uncomment-line-or-region ()
@@ -582,28 +634,15 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(hungry-delete eglot gcmh embark git-gutter-fringe bufler dirvish
-		   editorconfig evil-nerd-commenter magit-gitflow
-		   exec-path-from-shell nerd-icons-completion
-		   nerd-icons-dired jinx tabspaces pdf-tools
-		   magit-delta docker tree-sitter-langs tree-sitter
-		   lsp-tailwindcss yaml-mode emmet-mode
-		   auto-rename-tag web-mode flyspell
-		   highlight-indent-guides centaur-tabs dimmer
-		   eglot-java prescient consult-dir
-		   disk-usage diredfl dired-subtree dired-rainbow
-		   multiple-cursors lsp-ivy eslint yasnippet
-		   company-box lsp-treemacs json-mode treemacs symon
-		   counsel-tramp counsel smartparens lsp-ui lsp-mode
-		   flycheck anzu move-text easy-kill browse-kill-ring
-		   company smart-mode-line swiper crux use-package))
+   '(dired-rsync-transient direnv nix-mode hungry-delete eglot gcmh embark git-gutter-fringe bufler dirvish editorconfig evil-nerd-commenter magit-gitflow exec-path-from-shell nerd-icons-completion nerd-icons-dired jinx tabspaces pdf-tools magit-delta docker tree-sitter-langs tree-sitter lsp-tailwindcss yaml-mode emmet-mode auto-rename-tag web-mode flyspell highlight-indent-guides centaur-tabs dimmer eglot-java prescient consult-dir disk-usage diredfl dired-subtree dired-rainbow multiple-cursors lsp-ivy eslint yasnippet company-box lsp-treemacs json-mode treemacs symon counsel-tramp counsel smartparens lsp-ui lsp-mode flycheck anzu move-text easy-kill browse-kill-ring company smart-mode-line swiper crux use-package))
  '(safe-local-variable-values
    '((vc-prepare-patches-separately)
      (diff-add-log-use-relative-names . t)
-     (vc-git-annotate-switches . "-w"))))
+     (vc-git-annotate-switches . "-w")))
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Iosevka" :foundry "UKWN" :slant normal :weight regular :height 128 :width normal)))))

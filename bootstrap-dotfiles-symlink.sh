@@ -1,7 +1,7 @@
 #!/bin/bash
 
-ignore=('..' '.' '.git' '.config' '.gnupg')
-home_dirs=('.config' '.gnupg')
+ignore=('..' '.' '.git' '.config')
+home_dirs=('.config')
 
 function symfile {
     ACTUAL="$(pwd)/$file"

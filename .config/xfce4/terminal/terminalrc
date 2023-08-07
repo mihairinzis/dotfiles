@@ -55,4 +55,5 @@ TabActivityColor=#dc322f
 ColorBold=#93a1a1
 MiscRightClickAction=TERMINAL_RIGHT_CLICK_ACTION_CONTEXT_MENU
 ScrollingUnlimited=TRUE
+FontName=Iosevka Light Expanded 12
 
